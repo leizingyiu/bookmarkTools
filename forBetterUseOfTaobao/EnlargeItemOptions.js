@@ -14,5 +14,6 @@ var size=100;/*size in px*/
 			}
 		}
 	}
+	document.getElementById("J_ImgBooth").style.width = "100%";
 	void 0;
 })();

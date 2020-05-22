@@ -7,6 +7,7 @@ p{text-align:center;line-height:2em;position: absolute; top: 50%;left:50%; trans
 
 <p>先将<a id="getVideoBtn" class="use">提取视频</a>拖到书签栏<br>再然后去要提取视频的页面，点击刚才拖上去的书签，就可以啦~<br> /*来关注我微博 @leizingyiu 呀，虽然不怎么更新😀*/</p>
 <script src="/myFunctions/openWin.js"></script>
+<script src="/myFunctions/clickAndDrag(obj,dragUrl,clickUrl).js"></script>
 
 <script id="getVideoScript">
 javascript:
@@ -14,33 +15,9 @@ javascript:
 </script>
 
 <script>
-clickAndDrag(document.getElementById("getVideoBtn"),document.getElementById('getVideoScript').innerHTML.replace("\/\/pauseDaScript", ""), "getVideo.js");
-    function clickAndDrag(obj, dragUrl, clickUrl) {
-        obj.draggable = "true";
-        var nonHref = "javascript:void 0;"
-        obj.href = nonHref;
-        var flag = 0;
-        var runIndex = Math.floor(Math.random() * 10000);
-        obj.addEventListener("mouseover", function() {
-            this.href = dragUrl;
-        }, false);
-        obj.addEventListener("mouseout", function() {
-            this.href = nonHref;
-        }, false);
-        obj.addEventListener("mousedown", function() {
-            flag = 0;
-        }, false)
-        obj.addEventListener("mousemove", function() {
-            flag = 1;
-        }, false)
-        obj.addEventListener("mouseup", function() {
-            obj.href = nonHref;
-            if (flag === 0) {
-                openWin(clickUrl);
-            }
-        }, false)
-    }
-
-  console.log("来关注我微博 @leizingyiu 呀，虽然不怎么更新😀")
+clickAndDrag(document.getElementById("getVideoBtn"),
+             document.getElementById('getVideoScript').innerHTML.replace("\/\/pauseDaScript", ""), 
+             "getVideo.js");
+console.log("来关注我微博 @leizingyiu 呀，虽然不怎么更新😀")
 
 </script>

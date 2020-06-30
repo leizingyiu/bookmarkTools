@@ -1,0 +1,27 @@
+<style>
+p{text-align:center;line-height:2em;position: absolute; top: 50%;left:50%; transform: translate(-50%,-50%);}
+#huabanImageBtn{text-decoration:none;color:#313335;border:solid 0.2em #5c5d5e;    border-style: dashed;    border-radius: 5px;padding:5px;margin:10px;transition: all 0.5s}
+.cantUse{ opacity: 0.5; font-size:0.7em;cursor:wait; }
+.use{cursor:move;}
+</style>
+
+<p>将<a id="huabanImageBtn" class="use">refreshHuabanImg</a>拖到书签栏<br>
+在花瓣页面点击使用。
+可以搭配“获取图片”使用。
+</p>
+
+<script src="/myFunctions/openWin.js"></script>
+<script src="/myFunctions/clickAndDrag(obj,dragUrl,clickUrl).js"></script>
+
+<script id="huabanImageScript">
+javascript:
+//pauseDaScript  (function(){img=document.getElementsByTagName("img");for(i=0;i<img.length;i++){img[i].src=img[i].src.replace(/_fw\d*\/format\/.*/g,"")}})()
+</script>
+
+<script>
+clickAndDrag(document.getElementById("huabanImageBtn"),
+             document.getElementById('huabanImageScript').innerHTML.replace("\/\/pauseDaScript", ""), 
+             "refreshHuabanImage.js");
+console.log("来关注我微博 @leizingyiu 呀，虽然不怎么更新😀")
+
+</script>

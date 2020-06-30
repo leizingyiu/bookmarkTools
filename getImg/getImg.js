@@ -1,6 +1,6 @@
-javascript: /*获取图片书签by leizingyiu；@20200701-01:06:55*/
+javascript: /*获取图片书签by leizingyiu；*/
     (function () {
-
+        console.log("获取图片书签by leizingyiu @20200701-01:31:20");
         var mySrc = '';
         var mySrcList = [];
         var imgSrcList = [];
@@ -20,7 +20,7 @@ javascript: /*获取图片书签by leizingyiu；@20200701-01:06:55*/
                 'reg': /(\S+)(jpg|png|jpeg|gif)(.+)/gi,
                 'result': '$1$2'
             }
-        }
+        };
         for (var i = 0; i < replaceWhiteList.length; i++) {
             if (window.location.href.indexOf(replaceWhiteList[i]) != -1) {
                 replaceBoo = false
@@ -70,7 +70,7 @@ javascript: /*获取图片书签by leizingyiu；@20200701-01:06:55*/
                 if (regData.test(result[result.length - 1]) != true && replaceBoo) {
                     result[result.length - 1] = result[result.length - 1].replace(reg, "$1$2")
                 }
-                result[result.length - 1] = regReplaceForSomeWeb(result[result.length - 1], replaceSomeWeb)
+                result[result.length - 1] = regReplaceForSomeWeb(result[result.length - 1], replaceSomeWeb);
                 console.log(result[result.length - 1])
             }
             return result
@@ -89,7 +89,7 @@ javascript: /*获取图片书签by leizingyiu；@20200701-01:06:55*/
             for (var i = 0; i < obj.childElementCount; i++) {
                 result = result.concat(obj.children[i]);
                 if (obj.children[i].childElementCount !== 0) {
-                    result = result.concat(getAllChildren(obj.children[i]))
+                    result = result.concat(getAllChildren(obj.children[i]));
                 }
             }
             return result
@@ -106,7 +106,7 @@ javascript: /*获取图片书签by leizingyiu；@20200701-01:06:55*/
                 if (bg != "" || bg != undefined) {
                     result[result.length] = String(bg).replace(reg, "$2");
                     result[result.length - 1] = replaceBoo == true ? result[result.length - 1].replace(reg2, "$1$2") : result[result.length - 1];
-                    result[result.length - 1] = regReplaceForSomeWeb(result[result.length - 1], replaceSomeWeb)
+                    result[result.length - 1] = regReplaceForSomeWeb(result[result.length - 1], replaceSomeWeb);
                 }
 
             }
@@ -114,14 +114,14 @@ javascript: /*获取图片书签by leizingyiu；@20200701-01:06:55*/
         }
 
         function regReplaceForSomeWeb(str, replaceSomeWeb) {
-            var result = ''
+            var result = '';
             for (let r in replaceSomeWeb) {
 
                 if (str.indexOf(r) != -1) {
-                    result = str.replace(replaceSomeWeb[r]['reg'], replaceSomeWeb[r]['result'])
+                    result = str.replace(replaceSomeWeb[r]['reg'], replaceSomeWeb[r]['result']);
                 }
             }
             return result;
         }
-
+        console.log('来关注我微博 @leizingyiu 呀，虽然不怎么更新😀');
     })() /*来关注我微博 @leizingyiu 呀，虽然不怎么更新😀*/

@@ -1,0 +1,31 @@
+  
+<style>
+p{text-align:center;line-height:2em;position: absolute; top: 50%;left:50%; transform: translate(-50%,-50%);}
+#getImageBtn{text-decoration:none;color:#313335;border:solid 0.2em #5c5d5e;    border-style: dashed;    border-radius: 5px;padding:5px;margin:10px;transition: all 0.5s}
+.cantUse{ opacity: 0.5; font-size:0.7em;cursor:wait; }
+.use{cursor:move;}
+</style>
+
+<p>将<a id="getContentBtn" class="use">获取主内容</a>拖到书签栏<br>
+  目前添加了behance和taobao<br>
+  ————————————————————<br>
+  by <a href="https://weibo.com/p/1005051688314062/">@leizingyiu</a>
+</p>
+
+<script src="/myFunctions/openWin.js"></script>
+<script src="/myFunctions/clickAndDrag(obj,dragUrl,clickUrl).js"></script>
+
+<script id="getContentScript">
+
+javascript:
+//pauseDaScript var u=window.location.href;var dict={'behance.net':"#project-canvas",'taobao.com':'#J_DivItemDesc'};var D='';for(let d in dict){D=u.indexOf(d)!=-1?d:D};if(D!=""){var p=document.querySelector(dict[D]);var b=document.getElementsByTagName("body")[0];var h=document.getElementsByTagName("html")[0];h.removeChild(b);var pr=document.createElement("pre");pr.innerText=b.innerHTML;pr.style.display="none";var bo=document.createElement("body");h.appendChild(bo);bo.appendChild(p);bo.appendChild(pr);function recovery(pr,bo){var b=document.createElement("body");b.innerHTML=pr.innerText;var h=document.getElementsByTagName("html")[0];h.removeChild(h.getElementsByTagName('body')[0]);h.appendChild(b)}document.onkeydown=function(event){var e=event||window.e;var keyCode=e.keyCode||e.which;switch(keyCode){case 27:recovery(pr,bo);break}}}
+
+</script>
+
+<script>
+clickAndDrag(document.getElementById("getContentBtn"),
+             document.getElementById('getContentScript').innerHTML.replace("\/\/pauseDaScript", ""), 
+             "getContent.js");
+console.log("来关注我微博 @leizingyiu 呀，虽然不怎么更新😀")
+
+</script>

@@ -2,7 +2,8 @@ javascript:
 var u = window.location.href;
 var dict = {
 	'behance.net': "#project-canvas",
-	'taobao.com': '#J_DivItemDesc'
+	'taobao.com': '#J_DivItemDesc',
+	'weibo.com':'div.WB_frame_c'
 };
 var D = '';
 for (let d in dict) {

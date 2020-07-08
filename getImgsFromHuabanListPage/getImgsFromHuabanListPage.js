@@ -11,14 +11,18 @@ javascript: (function() {
 	numDiv.style.color = '#fff';
 	let obj = document.getElementsByClassName("pin");
 	for (i = 0; i < obj.length; i++) {
-		list[obj[i].getAttribute("data-id")] = obj[i].querySelector("a.layer-view>img").src
+        	if(Boolean( obj[i].querySelector("a.layer-view>img"))!=false){
+		    list[obj[i].getAttribute("data-id")] = obj[i].querySelector("a.layer-view>img").src;
+        	}
 	}
 	numDiv.innerText = '已经获取 ' + Object.getOwnPropertyNames(list).length + " 张图片,按esc提取";
 	document.getElementsByTagName("html")[0].appendChild(numDiv);
 	function addToList() {
 		obj = document.getElementsByClassName("pin");
 		for (i = 0; i < obj.length; i++) {
-			list[obj[i].getAttribute("data-id")] = obj[i].querySelector("a.layer-view>img").src
+            		if(Boolean( obj[i].querySelector("a.layer-view>img"))!=false){
+    				list[obj[i].getAttribute("data-id")] = obj[i].querySelector("a.layer-view>img").src;
+           		}
 		}
 		numDiv.innerText = '已经获取 ' + Object.getOwnPropertyNames(list).length + " 张图片,按esc提取";
 		console.log(numDiv.innerText)

@@ -16,7 +16,7 @@ javascript: (function() {
 
 	function addToList() {
 		box = document.querySelector("#waterfall") ? document.querySelector("#waterfall") : document.querySelector(".waterfall");
-		obj = document.getElementsByClassName("qudit");
+		obj = document.getElementsByClassName("pin");
 		for (i = 0; i < obj.length; i++) {
 			list[obj[i].getAttribute("data-id")] = obj[i].querySelector("a.layer-view>img").src;
 		}

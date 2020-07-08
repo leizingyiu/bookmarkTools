@@ -9,19 +9,19 @@ javascript: (function() {
 	numDiv.style.background = "rgba(102, 102, 102,0.8)";
 	numDiv.style.textAlign = 'center';
 	numDiv.style.color = '#fff';
-
+	let obj = document.getElementsByClassName("pin");
+	for (i = 0; i < obj.length; i++) {
+		list[obj[i].getAttribute("data-id")] = obj[i].querySelector("a.layer-view>img").src
+	}
 	numDiv.innerText = '已经获取 ' + Object.getOwnPropertyNames(list).length + " 张图片,按esc提取";
-
 	document.getElementsByTagName("html")[0].appendChild(numDiv);
-
 	function addToList() {
-		box = document.querySelector("#waterfall") ? document.querySelector("#waterfall") : document.querySelector(".waterfall");
 		obj = document.getElementsByClassName("pin");
 		for (i = 0; i < obj.length; i++) {
-			list[obj[i].getAttribute("data-id")] = obj[i].querySelector("a.layer-view>img").src;
+			list[obj[i].getAttribute("data-id")] = obj[i].querySelector("a.layer-view>img").src
 		}
 		numDiv.innerText = '已经获取 ' + Object.getOwnPropertyNames(list).length + " 张图片,按esc提取";
-		console.log(numDiv.innerText);
+		console.log(numDiv.innerText)
 	}
 	var targetNode = document.getElementsByTagName('body')[0];
 	var config = {
@@ -35,11 +35,10 @@ javascript: (function() {
 	function makeImgPage(imgList) {
 		var result = "";
 		for (var i in imgList) {
-			result += '<img src=' + imgList[i].replace(/_fw\d*\/format\/.*/g, '') + '><br>';
+			result += '<img src=' + imgList[i].replace(/_fw\d*\/format\/.*/g, '') + '><br>'
 		}
 		return result
 	}
-
 	document.onkeydown = function(event) {
 		var e = event || window.e;
 		var keyCode = e.keyCode || e.which;
@@ -48,8 +47,7 @@ javascript: (function() {
 			observer.disconnect();
 			var result = makeImgPage(list);
 			document.write(result);
-			break
+			break;
 		}
 	}
-
 })()

@@ -1,0 +1,28 @@
+<style>
+p{text-align:center;line-height:2em;position: absolute; top: 50%;left:50%; transform: translate(-50%,-50%);}
+#getImageBtn{text-decoration:none;color:#313335;border:solid 0.2em #5c5d5e;    border-style: dashed;    border-radius: 5px;padding:5px;margin:10px;transition: all 0.5s}
+.cantUse{ opacity: 0.5; font-size:0.7em;cursor:wait; }
+.use{cursor:move;}
+</style>
+
+<p>先将<a id="getImageBtn" class="use">獲取花瓣列表图片</a>拖到书签栏<br>
+  去花瓣列表页，点击刚才拖上去的书签，点击上面的书签，滚动页面到左下角有足够的数量，然后按esc~<br>
+</p>
+
+<script src="/myFunctions/openWin.js"></script>
+<script src="/myFunctions/clickAndDrag(obj,dragUrl,clickUrl).js"></script>
+
+<script id="getImageScript">
+javascript:
+//pauseDaScript (function(){list={};var numDiv=document.createElement("p");numDiv.style.position="fixed";numDiv.style.left="15px";numDiv.style.bottom="10px";numDiv.style.zIndex="999999999";numDiv.style.padding="1em";numDiv.style.background="rgba(102, 102, 102,0.8)";numDiv.style.textAlign='center';numDiv.style.color='#fff';numDiv.innerText='已经获取 '+Object.getOwnPropertyNames(list).length+" 张图片,按esc提取";document.getElementsByTagName("html")[0].appendChild(numDiv);function addToList(){box=document.querySelector("#waterfall")?document.querySelector("#waterfall"):document.querySelector(".waterfall");obj=document.getElementsByClassName("qudit");for(i=0;i<obj.length;i++){list[obj[i].getAttribute("data-id")]=obj[i].querySelector("a.layer-view>img").src}numDiv.innerText='已经获取 '+Object.getOwnPropertyNames(list).length+" 张图片,按esc提取";console.log(numDiv.innerText)}var targetNode=document.getElementsByTagName('body')[0];var config={attributes:true,childList:true,subtree:true};var observer=new MutationObserver(addToList);observer.observe(targetNode,config);function makeImgPage(imgList){var result="";for(var i in imgList){result+='<img src='+imgList[i].replace(/_fw\d*\/format\/.*/g,'')+'><br>'}return result}document.onkeydown=function(event){var e=event||window.e;var keyCode=e.keyCode||e.which;switch(keyCode){case 27:observer.disconnect();var result=makeImgPage(list);document.write(result);break;}}})()
+
+
+</script>
+
+<script>
+clickAndDrag(document.getElementById("getImageBtn"),
+             document.getElementById('getImageScript').innerHTML.replace("\/\/pauseDaScript", ""), 
+             "getImg.js");
+console.log("来关注我微博 @leizingyiu 呀，虽然不怎么更新😀")
+
+</script>

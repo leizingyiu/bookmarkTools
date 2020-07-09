@@ -6,7 +6,7 @@ javascript: (function() {
 		for (var j = 0; j < a.length; j++) {
 			if (a[j].style.backgroundImage != "") {
 				a[j].style.backgroundImage = a[j].style.backgroundImage.replace(/(.+)(jpg.+jpg)(.+)/, "$1jpg$3");
-a[j].getElementsByTagName("span")[0].style.display="inline-block!important";
+				a[j].getElementsByTagName("span")[0].style.display="inline-block!important";
 			}
 		}
 	}

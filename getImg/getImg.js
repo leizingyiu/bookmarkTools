@@ -43,7 +43,9 @@ javascript: /*获取图片书签by leizingyiu；*/
  			} catch (err) {}
  		}
  	}
+    mySrcList =[...new Set(mySrcList)]
  	mySrc = makeImgPage(mySrcList);
+    
  	var myStyle = "<style>img{max-width:100vw;}</style>";
  	if (mySrc != '') {
  		document.write(myStyle + '<center>' + mySrc + '</center>');

@@ -1,6 +1,6 @@
 javascript: /*获取图片书签by leizingyiu；*/
  (function() {
- 	console.log("%E8%8E%B7%E5%8F%96%E5%9B%BE%E7%89%87%E4%B9%A6%E7%AD%BEby leizingyiu @20200702-16:53:20");
+ 	console.log("%E8%8E%B7%E5%8F%96%E5%9B%BE%E7%89%87%E4%B9%A6%E7%AD%BEby leizingyiu @20200803-15:08:59");
  	var mySrc = '';
  	var mySrcList = [];
  	var imgSrcList = [];
@@ -19,7 +19,11 @@ javascript: /*获取图片书签by leizingyiu；*/
  		'alicdn.com': {
  			'reg': /(\S+)(jpg|png|jpeg|gif)(.+)/gi,
  			'result': '$1$2'
- 		}
+ 		},
+   'pinimg.com': {
+			'reg': /(i.pinimg.com\/)[^\/]+(.+)/,
+			'result': '$1originals$2'
+		}
  	};
  	for (var i = 0; i < replaceWhiteList.length; i++) {
  		if (window.location.href.indexOf(replaceWhiteList[i]) != -1) {

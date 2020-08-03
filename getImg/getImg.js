@@ -20,7 +20,7 @@ javascript: /*获取图片书签by leizingyiu；*/
  			'reg': /(\S+)(jpg|png|jpeg|gif)(.+)/gi,
  			'result': '$1$2'
  		},
-   'pinimg.com': {
+   		'pinimg.com': {
 			'reg': /(i.pinimg.com\/)[^\/]+(.+)/,
 			'result': '$1originals$2'
 		}

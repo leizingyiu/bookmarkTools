@@ -1,0 +1,25 @@
+<style>
+p{text-align:center;line-height:2em;position: absolute; top: 50%;left:50%; transform: translate(-50%,-50%);}
+#getImageBtn{text-decoration:none;color:#313335;border:solid 0.2em #5c5d5e;    border-style: dashed;    border-radius: 5px;padding:5px;margin:10px;transition: all 0.5s}
+.cantUse{ opacity: 0.5; font-size:0.7em;cursor:wait; }
+.use{cursor:move;}
+</style>
+
+<p>先将<a id="cleanTBURL" class="use">清理地址</a>拖到书签栏<br>在浏览淘宝宝贝时，点击刚才拖上去的书签，就可以清理地址里面多余的信息啦~<br> /*来关注我微博 @leizingyiu 呀，虽然不怎么更新😀*/</p>
+
+<script src="/myFunctions/openWin.js"></script>
+<script src="/myFunctions/clickAndDrag(obj,dragUrl,clickUrl).js"></script>
+
+<script id="cleanTBURLScript">
+javascript:
+//pauseDaScript function parseQueryString(url){var obj={};var keyvalue=[];var key="",value="";var paraString=url.substring(url.indexOf("?")+1,url.length).split("&");for(var i in paraString){keyvalue=paraString[i].split("=");key=keyvalue[0];value=keyvalue[1];obj[key]=value}obj.valuesToStr=function(){var args=arguments;var resultStr="?";for(var i=0;i<args.length;i++){resultStr+=String(obj[args[i]])=="undefined"?"":args[i]+"="+obj[args[i]]+"&"};return resultStr};return obj}var myHref=window.location.href;var obj=parseQueryString(myHref);var newLocation=location.protocol+"//"+location.host+location.pathname+obj.valuesToStr("id","keyword","pageNo","search");window.location.href=newLocation;
+</script>
+
+<script>
+clickAndDrag(document.getElementById("cleanTBURL"),
+document.getElementById('cleanTBURLScript').innerHTML.replace("\/\/pauseDaScript", ""), 
+"cleanTBURL.js");
+
+console.log("来关注我微博 @leizingyiu 呀，虽然不怎么更新😀")
+
+</script>

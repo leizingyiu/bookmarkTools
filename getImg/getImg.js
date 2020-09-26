@@ -7,6 +7,150 @@ javascript: /*获取图片书签by leizingyiu；*/
         var bgUrlList = [];
         var replaceWhiteList = ['instagram.com'];
         var replaceBoo = true;
+
+        var pageSetUp = {
+            divId: 'imgsByYiu',
+            imgClass: 'daImgByYiu',
+            otherHtml: '<div id="popbgByYiu"></div> <p id="popDiv"><img id="popImg"></p>',
+            style: `
+            img.daImgByYiu {
+                max-height: 50vh;   margin: 1vh;   transition: auto;  transition: 0.5s; cursor: pointer;
+            }
+
+            img.daImgByYiu:hover {
+                box-shadow: rgb(30 132 220 / 19% ) 0px 10px 50px, rgb(30 132 220 / 20% ) 0px 2px 10px;  transform: scale(1.01);
+            }
+
+            .popbgByYiuOn {
+                position: fixed; width: 100% ;    height: 100% ;  z - index: 999;   background: rgb(255 255 255 / 0.6);    top: 0; left: 0;    cursor: pointer;
+            }
+
+            #popDiv {
+                display: block; position: fixed;    top: 50% ;  left: 50% ; z-index: 1000;  transform: translate(-50% , -50% ); overflow: auto; width: auto;    height: 100vh;  margin: 0;
+            }
+
+            #popImg {
+                position: relative; max-height: 100vh;  cursor: zoom-in ;
+            }
+
+            .popDivZoomedIn{
+                height: 100vh!important;
+            }
+            .popDivZoomedIn100Vw{
+                height: 100vh!important;
+                width:100vw!important;
+            }
+            .popDivZoomedIn img,.popDivZoomedIn100Vw img{
+                max-height:none!important;  max-width:none!important;cursor: zoom-out!important;
+            }
+
+            .popDivZoomedOut{
+                height: auto!important;
+            }
+            .popDivZoomedOut img{
+                max-height:100vh!important; max-width:80vw!important;
+            }
+
+            *{
+                transition: 0.5s
+            }
+
+            #popDiv::-webkit-scrollbar {
+                display: none;
+            }
+            .blur {	
+                filter: url(blur.svg#blur); /* FireFox, Chrome, Opera */
+
+                -webkit-filter: blur(10px); /* Chrome, Opera */
+                   -moz-filter: blur(10px);
+                    -ms-filter: blur(10px);    
+                        filter: blur(10px);
+
+                filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=10, MakeShadow=false); /* IE6~IE9 */
+            }
+        `,
+            scripts: `
+        console.log("script run!!")
+        p = document.querySelectorAll("div#imgsByYiu img.daImgByYiu");
+
+        function getImgNaturalDimension(img, callback) {
+          if (typeof img.naturalWidth == "undefined") { // IE6/7/8
+            var temImg = new Image();
+            temImg.onload = function() {
+              callback({width: temImg.width, height:temImg.height});
+            }
+            temImg.src = img.src;
+          } else { // 现代浏览器
+            callback({width: img.naturalWidth, height:img.naturalHeight});
+          }
+        }
+
+        function onImg() {
+            document.html.style.overflow="hidden";
+            document.getElementById("imgsByYiu").className+=" blur ";
+            console.log( document.html.style.overflow)
+			
+        	document.getElementById("popDiv").className = "popDivOn";
+
+        	var daimg = document.getElementById("popImg");
+        	daimg.src = this.src;
+        	daimg.style.display = "block";
+
+        	document.getElementById("popImg").className = "popImgOn";
+        	document.getElementById("popbgByYiu").className = "popbgByYiuOn";
+
+            document.getElementById("popDiv").className='popDivZoomedOut';
+            
+        }
+        console.log("defined onImg()");
+
+        for (i = 0; i < p.length; i++) {
+        	p[i].onclick = onImg;
+        }
+        function offImg() {
+
+            document.html.style.overflow="initial"
+            document.getElementById("imgsByYiu").className=document.getElementById("imgsByYiu").className.replace("blur","");
+
+        	document.getElementById("popbgByYiu").className = "";
+        	document.getElementById("popDiv").className = "";
+
+        	var daimg = document.getElementById("popImg");
+        	daimg.style.display = "none";
+        	daimg.className = "";
+        	daimg.src = ""
+        };
+        console.log("defined offImg()");
+
+        document.getElementById("popbgByYiu").onclick = offImg;
+        
+        document.getElementById("popImg").onclick = function() {
+            console.log("click popImg");
+            getImgNaturalDimension(this , function(dimension){
+                console.log("实际尺寸：", dimension.width, dimension.height);
+                console.log(document.body.clientWidth,document.body.clientHeight)
+                if(dimension.width>window.innerWidth || dimension.height>window.innerHeight){
+                    popDiv = document.getElementById("popDiv");
+                    if(dimension.width>window.innerWidth){
+                        popDiv.className=popDiv.className=='popDivZoomedIn100Vw'?'popDivZoomedOut':'popDivZoomedIn100Vw';
+                        popDiv.scrollLeft=(popDiv.scrollWidth-popDiv.offsetWidth)/2;
+                        popDiv.scrollTop=(popDiv.scrollHeight-popDiv.offsetHeight)/2;
+                    }else{
+                        popDiv.className=popDiv.className=='popDivZoomedIn'?'popDivZoomedOut':'popDivZoomedIn';
+                    }
+                    
+                    
+                }else{
+                    document.getElementById("popDiv").className='popDivZoomedOut';
+                    document.getElementById("popImg").style.cursor='default';
+                }
+            })
+        }
+        console.log("defined #popImg.onclick()");
+
+    `
+        };
+
         var replaceSomeWeb = {
             'huabanimg.com': {
                 'reg': /_fw\d*\/format\/.*/g,
@@ -47,9 +191,11 @@ javascript: /*获取图片书签by leizingyiu；*/
                 } catch (err) {}
             }
         }
-        mySrcList = [...new Set(mySrcList)]
-
-        replaceFullPage(mySrcList,);
+        mySrcList = [...new Set(mySrcList)];
+        console.log(mySrcList);
+        var pageCodeBlock = makeImgsCodeBlock(mySrcList.reverse(), pageSetUp['divId'], pageSetUp['imgClass'], pageSetUp['otherHtml'], pageSetUp['style'], pageSetUp['scripts']);
+        replaceFullPage(pageCodeBlock);
+        eval(pageSetUp['scripts'])
 
         void 0;
 
@@ -113,11 +259,37 @@ javascript: /*获取图片书签by leizingyiu；*/
             return result
         }
 
+        function makeImgsCodeBlock(imgList, divId, imgClass, otherHtml, style, scripts) {
+
+            var result = '';
+            result += '<div id="' + divId + '" class="">';
+
+            var imgDoms = '';
+
+            if (imgList instanceof Array) {
+                for (var i = 0; i < imgList.length; i++) {
+                    imgDoms = '<img class="' + imgClass + '" src="' + imgList[i].replace(/_\/fw\/\d*\/format\/.*/g, '') + '">' + imgDoms;
+                }
+            } else {
+                for (var i in imgList) {
+                    imgDoms = '<img class="' + imgClass + '" src="' + imgList[i].replace(/_\/fw\/\d*\/format\/.*/g, '') + '">' + imgDoms;
+                }
+            }
+
+            result += imgDoms;
+            result += '</div>';
+            result += otherHtml;
+            result += '<style>' + style + '</style>';
+            result += '<script>' + scripts + '</script>';
+
+            return result
+        }
+
         function regReplaceForSomeWeb(str, replaceSomeWeb) {
             var result = '';
             for (let r in replaceSomeWeb) {
                 console.log(r);
-                console.log(str.indexOf(r))
+                console.log(str.indexOf(r));
                 if (str.indexOf(r) != -1) {
                     result = str.replace(replaceSomeWeb[r]['reg'], replaceSomeWeb[r]['result'])
                 }
@@ -125,7 +297,7 @@ javascript: /*获取图片书签by leizingyiu；*/
             if (result == '') {
                 result = str;
             }
-            return result
+            return result;
         }
 
         function replaceFullPage() {
@@ -135,7 +307,7 @@ javascript: /*获取图片书签by leizingyiu；*/
             resultObj.id = 'replacePageAsObjs';
 
             for (let i in objs) {
-                resultObj.append(objs[i]);
+                resultObj.innerHTML += objs[i];
             }
             var sourceBody = document.getElementsByTagName("body")[0];
             var html = document.getElementsByTagName("html")[0];
@@ -169,4 +341,4 @@ javascript: /*获取图片书签by leizingyiu；*/
         }
 
         console.log('%E6%9D%A5%E5%85%B3%E6%B3%A8%E6%88%91%E5%BE%AE%E5%8D%9A @leizingyiu %E5%91%80%EF%BC%8C%E8%99%BD%E7%84%B6%E4%B8%8D%E6%80%8E%E4%B9%88%E6%9B%B4%E6%96%B0%F0%9F%98%80')
-    })() /*来关注我微博 @leizingyiu 呀，虽然不怎么更新😀*/
+    })(); /*来关注我微博 @leizingyiu 呀，虽然不怎么更新😀*/

@@ -1,0 +1,11 @@
+{
+	"outputs": [
+		{
+			"inputs": ["getImgsFromHuabanListPage.js"],
+			"output": "getImgsFromHuabanListPage.min.js",
+			"generateMap": true,
+			"mangle": true,
+			"isolate": false
+		}
+	]
+}

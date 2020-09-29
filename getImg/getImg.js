@@ -293,8 +293,8 @@ javascript: /*获取图片书签by leizingyiu；*/
             result += imgDoms;
             result += '</div>';
             result += otherHtml;
-            result += '<style>' + style + '</style>';
-            result += '<script>' + scripts + '</script>';
+            result += '<'+'style>' + style + '<'+'/style>';
+            result += '<'+'script>' + scripts + '<'+'/script>';
 
             return result
         }
@@ -349,7 +349,7 @@ javascript: /*获取图片书签by leizingyiu；*/
                     case 27:
                         recovery(sourceBody, newBody);
                         document.onkeydown = eval(sourceOnKeyDownStr);
-                        break
+                        break;
                 }
             };
         }

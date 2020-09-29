@@ -84,7 +84,7 @@ javascript: /*获取图片书签by leizingyiu；*/
             }
         `,
             scripts: `
-        console.log("script run!!")
+        console.log("script run!!");
         p = document.querySelectorAll("div#imgsByYiu img.daImgByYiu");
 
         function getImgNaturalDimension(img, callback) {
@@ -100,9 +100,9 @@ javascript: /*获取图片书签by leizingyiu；*/
         }
 
         function onImg() {
-            document.html.style.overflow="hidden";
+            document.getElementsByTagName('html')[0].style.overflow="hidden";
             document.getElementById("imgsByYiu").className+=" blur ";
-            console.log( document.html.style.overflow)
+            console.log(document.getElementsByTagName('html')[0].style.overflow);
 			
         	document.getElementById("popDiv").className = "popDivOn";
 
@@ -123,7 +123,7 @@ javascript: /*获取图片书签by leizingyiu；*/
         }
         function offImg() {
 
-            document.html.style.overflow="initial"
+            document.getElementsByTagName('html')[0].style.overflow="initial"
             document.getElementById("imgsByYiu").className=document.getElementById("imgsByYiu").className.replace("blur","");
 
         	document.getElementById("popbgByYiu").className = "";
@@ -132,8 +132,8 @@ javascript: /*获取图片书签by leizingyiu；*/
         	var daimg = document.getElementById("popImg");
         	daimg.style.display = "none";
         	daimg.className = "";
-        	daimg.src = ""
-        };
+        	daimg.src = "";
+        }
         console.log("defined offImg()");
 
         document.getElementById("popbgByYiu").onclick = offImg;

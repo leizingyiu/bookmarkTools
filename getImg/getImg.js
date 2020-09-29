@@ -209,7 +209,7 @@ javascript: /*获取图片书签by leizingyiu；*/
         console.log(mySrcList);
         var pageCodeBlock = makeImgsCodeBlock(mySrcList.reverse(), pageSetUp['divId'], pageSetUp['imgClass'], pageSetUp['otherHtml'], pageSetUp['style'], pageSetUp['scripts']);
         replaceFullPage(pageCodeBlock);
-        eval(pageSetUp['scripts'])
+        eval(pageSetUp['scripts']);
 
         void 0;
 
@@ -341,7 +341,7 @@ javascript: /*获取图片书签by leizingyiu；*/
                     body[i].style.display = "";
                 }
 
-            }
+            };
             document.onkeydown = function (event) {
                 var e = event || window.e;
                 var keyCode = e.keyCode || e.which;
@@ -351,7 +351,7 @@ javascript: /*获取图片书签by leizingyiu；*/
                         document.onkeydown = eval(sourceOnKeyDownStr);
                         break
                 }
-            }
+            };
         }
 
         console.log('%E6%9D%A5%E5%85%B3%E6%B3%A8%E6%88%91%E5%BE%AE%E5%8D%9A @leizingyiu %E5%91%80%EF%BC%8C%E8%99%BD%E7%84%B6%E4%B8%8D%E6%80%8E%E4%B9%88%E6%9B%B4%E6%96%B0%F0%9F%98%80')

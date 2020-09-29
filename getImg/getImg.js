@@ -92,7 +92,7 @@ javascript: /*获取图片书签by leizingyiu；*/
             var temImg = new Image();
             temImg.onload = function() {
               callback({width: temImg.width, height:temImg.height});
-            }
+            };
             temImg.src = img.src;
           } else { // 现代浏览器
             callback({width: img.naturalWidth, height:img.naturalHeight});
@@ -123,7 +123,7 @@ javascript: /*获取图片书签by leizingyiu；*/
         }
         function offImg() {
 
-            document.getElementsByTagName('html')[0].style.overflow="initial"
+            document.getElementsByTagName('html')[0].style.overflow="initial";
             document.getElementById("imgsByYiu").className=document.getElementById("imgsByYiu").className.replace("blur","");
 
         	document.getElementById("popbgByYiu").className = "";
@@ -142,7 +142,7 @@ javascript: /*获取图片书签by leizingyiu；*/
             console.log("click popImg");
             getImgNaturalDimension(this , function(dimension){
                 console.log("实际尺寸：", dimension.width, dimension.height);
-                console.log(document.body.clientWidth,document.body.clientHeight)
+                console.log(document.body.clientWidth,document.body.clientHeight);
                 if(dimension.width>window.innerWidth || dimension.height>window.innerHeight){
                     popDiv = document.getElementById("popDiv");
                     if(dimension.width>window.innerWidth){
@@ -159,7 +159,7 @@ javascript: /*获取图片书签by leizingyiu；*/
                     document.getElementById("popImg").style.cursor='default';
                 }
             })
-        }
+        };
         console.log("defined #popImg.onclick()");
 
     `

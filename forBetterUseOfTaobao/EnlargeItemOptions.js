@@ -40,6 +40,7 @@ javascript: (function() {
 			}
 		};
 	document.body.onscroll = scrollFunc;
+	scroll();
 	if (document.addEventListener) {
 		document.addEventListener('DOMMouseScroll', scrollFunc, false)
 	}

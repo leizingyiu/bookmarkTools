@@ -17,7 +17,7 @@ javascript: (function() {
 	void 0;
 
 	function scroll() {
-		var c = document.getElementsByClassName("tb-item-info-l")[0];
+		var c = document.querySelector(".tb-item-info-l,.tb-gallery");
 		var cRect = c.getBoundingClientRect();
 		var p = c.parentElement;
 		var pRect = p.getBoundingClientRect();

@@ -5,7 +5,9 @@ p{text-align:center;line-height:2em;position: absolute; top: 50%;left:50%; trans
 .use{cursor:move;}
 </style>
 
-<p>先将<a id="cleanTBURL" class="use">清理地址</a>拖到书签栏<br>在浏览淘宝宝贝时，点击刚才拖上去的书签，就可以清理地址里面多余的信息啦~<br> /*来关注我微博 @leizingyiu 呀，虽然不怎么更新😀*/</p>
+<p>先将<a id="cleanTBURL" class="use">清理地址</a>拖到书签栏<br>在浏览淘宝宝贝时，点击刚才拖上去的书签，就可以清理地址里面多余的信息啦~<br>
+  将<a id="enlargeItemOptions" class="use">清理地址</a>拖到书签栏<br>在浏览淘宝宝贝时，点击刚才拖上去的书签，就可以放大选项啦~
+  <br> /*来关注我微博 @leizingyiu 呀，虽然不怎么更新😀*/</p>
 
 <script src="/myFunctions/openWin.js"></script>
 <script src="/myFunctions/clickAndDrag(obj,dragUrl,clickUrl).js"></script>
@@ -15,11 +17,21 @@ javascript:
 //pauseDaScript function parseQueryString(url){var obj={};var keyvalue=[];var key="",value="";var paraString=url.substring(url.indexOf("?")+1,url.length).split("&");for(var i in paraString){keyvalue=paraString[i].split("=");key=keyvalue[0];value=keyvalue[1];obj[key]=value}obj.valuesToStr=function(){var args=arguments;var resultStr="?";for(var i=0;i<args.length;i++){resultStr+=String(obj[args[i]])=="undefined"?"":args[i]+"="+obj[args[i]]+"&"};return resultStr};return obj}var myHref=window.location.href;var obj=parseQueryString(myHref);var newLocation=location.protocol+"//"+location.host+location.pathname+obj.valuesToStr("id","keyword","pageNo","search");window.location.href=newLocation;
 </script>
 
+<script id="enlargeItemOptionsScript">
+javascript:
+//pauseDaScript (function(){var size=93;var shopList=document.getElementsByClassName("J_TSaleProp");for(var i=0;i<shopList.length;i++){var a=shopList[i].getElementsByTagName("a");for(var j=0;j<a.length;j++){if(a[j].style.backgroundImage!=""){a[j].style.backgroundImage=a[j].style.backgroundImage.replace(/(.+)(jpg.+jpg)(.+)/,"$1jpg$3");a[j].getElementsByTagName("span")[0].style.display="inline-block!important"}}}var s=document.createElement("style");s.innerText=".tb-prop .tb-img li a{background-size:cover!important;min-height:"+size+"px!important; min-width:"+size+"px!important}.tb-prop .tb-img li a span{opacity:0;display: block!important; bottom: 0; position: absolute; left: 50%; transform: translateX(-50%); background: rgba(255,255,255,0.7); padding: 0 6px; line-height: 1.25em;text-indent:0;white-space: break-spaces;} ul.J_TSaleProp:hover li a span { opacity: 0.9; transition: 0.2s;}";document.getElementsByTagName("html")[0].appendChild(s);document.getElementById("J_ImgBooth").style.width="100%";void 0;function scroll(){var c=document.querySelector(".tb-item-info-l,.tb-gallery");var cRect=c.getBoundingClientRect();var p=c.parentElement;var pRect=p.getBoundingClientRect();var pTop=pRect.top;var pBottom=pTop+p.clientHeight;if(pTop<0&&pBottom>c.clientHeight-Number(c.style.paddingTop.replace('px',''))){c.style.paddingTop=(20-pTop)+'px'}else if(pTop<0&&pBottom<c.clientHeight-Number(c.style.paddingTop.replace('px',''))){c.style.paddingTop=p.clientHeight-c.clientHeight+ -Number(c.style.paddingTop.replace('px',''))+'px'}else{c.style.paddingTop='20px'}void 0;return null}var scrollFunc=function(e){e=e||window.event;if(e.wheelDelta){scroll()}};document.body.onscroll=scrollFunc;scroll();if(document.addEventListener){document.addEventListener('DOMMouseScroll',scrollFunc,false)}window.onmousewheel=document.onmousewheel=scrollFunc;void 0})();
+</script>
+
 <script>
 clickAndDrag(document.getElementById("cleanTBURL"),
 document.getElementById('cleanTBURLScript').innerHTML.replace("\/\/pauseDaScript", ""), 
 "cleanTBURL.js");
 
+  clickAndDrag(document.getElementById("enlargeItemOptions"),
+document.getElementById('enlargeItemOptionsScript').innerHTML.replace("\/\/pauseDaScript", ""), 
+"EnlargeItemOptions.js");
+
+  
 console.log("来关注我微博 @leizingyiu 呀，虽然不怎么更新😀")
 
 </script>

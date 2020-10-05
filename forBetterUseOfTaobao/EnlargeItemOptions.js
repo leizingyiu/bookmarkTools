@@ -11,7 +11,10 @@ javascript: (function() {
 		}
 	}
 	var s = document.createElement("style");
-	s.innerText = ".tb-prop .tb-img li a{background-size:cover!important;min-height:" + size + "px!important; min-width:" + size + "px!important}.tb-prop .tb-img li a span{display: block!important; bottom: 0; position: absolute; left: 50%; transform: translateX(-50%); background: rgba(255,255,255,0.7); padding: 0 6px; line-height: 1.25em;text-indent:0;white-space: break-spaces;}";
+	s.innerText = ".tb-prop .tb-img li a{background-size:cover!important;min-height:" + size + "px!important; min-width:" + size + "px!important}.tb-prop .tb-img li a span{opacity:0;display: block!important; bottom: 0; position: absolute; left: 50%; transform: translateX(-50%); background: rgba(255,255,255,0.7); padding: 0 6px; line-height: 1.25em;text-indent:0;white-space: break-spaces;} ul.J_TSaleProp:hover li a span { opacity: 0.9; transition: 0.2s;}";
+
+	
+	
 	document.getElementsByTagName("html")[0].appendChild(s);
 	document.getElementById("J_ImgBooth").style.width = "100%";
 	void 0;

@@ -1,6 +1,6 @@
 <style>
 p{text-align:center;line-height:2em;position: absolute; top: 50%;left:50%; transform: translate(-50%,-50%);}
-#getImageBtn{text-decoration:none;color:#313335;border:solid 0.2em #5c5d5e;    border-style: dashed;    border-radius: 5px;padding:5px;margin:10px;transition: all 0.5s}
+#cleanTBURL,#enlargeItemOptions{text-decoration:none;color:#313335;border:solid 0.2em #5c5d5e;    border-style: dashed;    border-radius: 5px;padding:5px;margin:10px;transition: all 0.5s}
 .cantUse{ opacity: 0.5; font-size:0.7em;cursor:wait; }
 .use{cursor:move;}
 </style>
@@ -10,7 +10,7 @@ p{text-align:center;line-height:2em;position: absolute; top: 50%;left:50%; trans
   <br> /*来关注我微博 @leizingyiu 呀，虽然不怎么更新😀*/</p>
 
 <script src="/myFunctions/openWin.js"></script>
-<script src="/myFunctions/clickAndDrag(obj,dragUrl,clickUrl).js"></script>
+<script src="/myFunctions/clickAndDrag(obj,dragUrl,clickUrl).js">console.log(clickAndDrag.toString())</script>
 
 <script id="cleanTBURLScript">
 javascript:
@@ -27,7 +27,7 @@ clickAndDrag(document.getElementById("cleanTBURL"),
 document.getElementById('cleanTBURLScript').innerHTML.replace("\/\/pauseDaScript", ""), 
 "cleanTBURL.js");
 
-  clickAndDrag(document.getElementById("enlargeItemOptions"),
+clickAndDrag(document.getElementById("enlargeItemOptions"),
 document.getElementById('enlargeItemOptionsScript').innerHTML.replace("\/\/pauseDaScript", ""), 
 "EnlargeItemOptions.js");
 

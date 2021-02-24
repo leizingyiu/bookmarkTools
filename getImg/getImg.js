@@ -1,3 +1,22 @@
+<<<<<<< Updated upstream
+=======
+/*
+The MIT License (MIT)
+
+Copyright (c) Tue Sep 29 2020  leizingyiu
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORTOR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+
+
+
+
+
+>>>>>>> Stashed changes
 javascript: /*获取图片书签by leizingyiu；*/
     (function () {
         console.log("获取图片书签by leizingyiu @20200803-15:08:59");
@@ -54,7 +73,7 @@ javascript: /*获取图片书签by leizingyiu；*/
             *{
                 transition: 0.5s
             }
-
+            #newBody{background:#fff;}
             #popDiv::-webkit-scrollbar {
                 display: none;
             }
@@ -88,7 +107,11 @@ javascript: /*获取图片书签by leizingyiu；*/
         function onImg() {
             document.getElementsByTagName('html')[0].style.overflow="hidden";
             document.getElementById("imgsByYiu").className+=" blur ";
+<<<<<<< Updated upstream
             console.log(document.getElementsByTagName('html')[0].style.overflow);
+=======
+            console.log( document.getElementsByTagName('html')[0].style.overflow)
+>>>>>>> Stashed changes
 			
         	document.getElementById("popDiv").className = "popDivOn";
 
@@ -109,7 +132,11 @@ javascript: /*获取图片书签by leizingyiu；*/
         }
         function offImg() {
 
+<<<<<<< Updated upstream
             document.getElementsByTagName('html')[0].style.overflow="initial";
+=======
+            document.getElementsByTagName('html')[0].style.overflow="initial"
+>>>>>>> Stashed changes
             document.getElementById("imgsByYiu").className=document.getElementById("imgsByYiu").className.replace("blur","");
 
         	document.getElementById("popbgByYiu").className = "";

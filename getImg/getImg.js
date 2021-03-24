@@ -1,37 +1,29 @@
-<<<<<<< Updated upstream
-=======
 /*
 The MIT License (MIT)
-
 Copyright (c) Tue Sep 29 2020  leizingyiu
-
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORTOR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-
-
-
-
->>>>>>> Stashed changes
 javascript: /*获取图片书签by leizingyiu；*/
-    (function () {
-        console.log("获取图片书签by leizingyiu @20200803-15:08:59");
-        var mySrc = '';
-        var mySrcList = [];
-        var imgSrcList = [];
-        var bgUrlList = [];
-        var replaceWhiteList = ['instagram.com'];
-        var replaceBoo = true;
+(function () {
+    console.log("获取图片书签by leizingyiu @20200803-15:08:59");
+    var mySrc = '';
+    var mySrcList = [];
+    var imgSrcList = [];
+    var bgUrlList = [];
+    var replaceWhiteList = ['instagram.com'];
+    var replaceBoo = true;
 
-        var pageSetUp = {
-            divId: 'imgsByYiu',
-            imgClass: 'daImgByYiu',
-            otherHtml: '<div id="popbgByYiu"></div> <p id="popDiv"><img id="popImg"></p>',
-            style: `
+    var pageSetUp = {
+        divId: 'imgsByYiu',
+        imgClass: 'daImgByYiu',
+        otherHtml: '<div id="popbgByYiu"></div> <p id="popDiv"><img id="popImg"></p>',
+        style: `
+            #imgsByYiu li{
+                display:inline;
+            }
             img.daImgByYiu {
                 max-height: 50vh;   margin: 1vh;   transition: auto;  transition: 0.5s; cursor: pointer;
             }
@@ -88,9 +80,9 @@ javascript: /*获取图片书签by leizingyiu；*/
                 filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=10, MakeShadow=false); /* IE6~IE9 */
             }
         `,
-            scripts: `
+        scripts: `
         console.log("script run!!");
-        p = document.querySelectorAll("div#imgsByYiu img.daImgByYiu");
+        p = document.querySelectorAll("#imgsByYiu img.daImgByYiu");
 
         function getImgNaturalDimension(img, callback) {
           if (typeof img.naturalWidth == "undefined") { // IE6/7/8
@@ -107,11 +99,8 @@ javascript: /*获取图片书签by leizingyiu；*/
         function onImg() {
             document.getElementsByTagName('html')[0].style.overflow="hidden";
             document.getElementById("imgsByYiu").className+=" blur ";
-<<<<<<< Updated upstream
             console.log(document.getElementsByTagName('html')[0].style.overflow);
-=======
-            console.log( document.getElementsByTagName('html')[0].style.overflow)
->>>>>>> Stashed changes
+
 			
         	document.getElementById("popDiv").className = "popDivOn";
 
@@ -132,11 +121,7 @@ javascript: /*获取图片书签by leizingyiu；*/
         }
         function offImg() {
 
-<<<<<<< Updated upstream
             document.getElementsByTagName('html')[0].style.overflow="initial";
-=======
-            document.getElementsByTagName('html')[0].style.overflow="initial"
->>>>>>> Stashed changes
             document.getElementById("imgsByYiu").className=document.getElementById("imgsByYiu").className.replace("blur","");
 
         	document.getElementById("popbgByYiu").className = "";
@@ -176,200 +161,213 @@ javascript: /*获取图片书签by leizingyiu；*/
         console.log("defined #popImg.onclick()");
 
     `
-        };
+    };
 
-        var replaceSomeWeb = {
-            'huabanimg.com': {
-                'reg': /_fw\d*\/format\/.*/g,
-                'result': ''
-            },
-            'sinaimg.cn': {
-                'reg': /(\.sinaimg\.cn\/)([^/]+)(\/)/g,
-                'result': '$1large$3'
-            },
-            'alicdn.com': {
-                'reg': /(\S+)(jpg|png|jpeg|gif)(.+)/gi,
-                'result': '$1$2'
-            },
-            'pinimg.com': {
-                'reg': /(i.pinimg.com\/)[^\/]+(.+)/,
-                'result': '$1originals$2'
-            },
-            'xiaohongshu.com': {
-                'reg': /(.+)\?.+/,
-                'result': '$1'
-            }
-        };
-        for (var i = 0; i < replaceWhiteList.length; i++) {
-            if (window.location.href.indexOf(replaceWhiteList[i]) != -1) {
-                replaceBoo = false
-            }
+    var replaceSomeWeb = {
+        'huabanimg.com': {
+            'reg': /_fw\d*\/format\/.*/g,
+            'result': ''
+        },
+        'sinaimg.cn': {
+            'reg': /(\.sinaimg\.cn\/)([^/]+)(\/)/g,
+            'result': '$1large$3'
+        },
+        'alicdn.com': {
+            'reg': /(\S+)(jpg|png|jpeg|gif)(.+)/gi,
+            'result': '$1$2'
+        },
+        'pinimg.com': {
+            'reg': /(i.pinimg.com\/)[^\/]+(.+)/,
+            'result': '$1originals$2'
+        },
+        'xiaohongshu.com': {
+            'reg': /(.+)\?.+/,
+            'result': '$1'
         }
+    };
+    for (var i = 0; i < replaceWhiteList.length; i++) {
+        if (window.location.href.indexOf(replaceWhiteList[i]) != -1) {
+            replaceBoo = false
+        }
+    }
 
-        imgSrcList = imgLinkArray(document, replaceBoo, replaceSomeWeb);
-        bgUrlList = bgImgLinkArray(document, replaceBoo, replaceSomeWeb);
-        mySrcList = mySrcList.concat(imgSrcList, bgUrlList);
+    imgSrcList = imgLinkArray(document, replaceBoo, replaceSomeWeb);
+    bgUrlList = bgImgLinkArray(document, replaceBoo, replaceSomeWeb);
+    mySrcList = mySrcList.concat(imgSrcList, bgUrlList);
 
-        var myFrame = document.getElementsByTagName("iframe");
-        var frameDoc;
-        for (j = 0; j < myFrame.length; j++) {
-            if (myFrame[j].scrollWidth != 0 || myFrame[j].scrollHeight != 0) {
+    var myFrame = document.getElementsByTagName("iframe");
+    var frameDoc;
+    for (j = 0; j < myFrame.length; j++) {
+        if (myFrame[j].scrollWidth != 0 || myFrame[j].scrollHeight != 0) {
+            try {
+                frameDoc = myFrame[j].contentWindow.document;
+                imgSrcList = imgLinkArray(frameDoc, replaceBoo, replaceSomeWeb);
+                bgUrlList = bgImgLinkArray(frameDoc, replaceBoo, replaceSomeWeb);
+                mySrcList = mySrcList.concat(imgSrcList, bgUrlList)
+            } catch (err) { }
+        }
+    }
+    mySrcList = [...new Set(mySrcList)];
+    console.log(mySrcList);
+    var pageCodeBlock = makeImgsCodeBlock(mySrcList.reverse(), pageSetUp['divId'], pageSetUp['imgClass'], pageSetUp['otherHtml'], pageSetUp['style'], pageSetUp['scripts']);
+    replaceFullPage(pageCodeBlock);
+    eval(pageSetUp['scripts']);
+
+    void 0;
+
+    function imgLinkArray(obj, replaceBoo, replaceSomeWeb) {
+        var result = [];
+        var reg = /(\S+)(jpg|png|jpeg|gif)(.+)/gi;
+        var regData = /^data.*/g;
+        for (var i = 0; i < obj.images.length; i++) {
+            if (obj.images[i].hasAttribute("src")) {
+                result[result.length] = obj.images[i].src
+            } else if (obj.images[i].hasAttribute("lazy-scr-load")) {
+                result[result.length] = obj.images[i].attributes["lazy-src-load"].value
+            } else {
                 try {
-                    frameDoc = myFrame[j].contentWindow.document;
-                    imgSrcList = imgLinkArray(frameDoc, replaceBoo, replaceSomeWeb);
-                    bgUrlList = bgImgLinkArray(frameDoc, replaceBoo, replaceSomeWeb);
-                    mySrcList = mySrcList.concat(imgSrcList, bgUrlList)
-                } catch (err) {}
-            }
-        }
-        mySrcList = [...new Set(mySrcList)];
-        console.log(mySrcList);
-        var pageCodeBlock = makeImgsCodeBlock(mySrcList.reverse(), pageSetUp['divId'], pageSetUp['imgClass'], pageSetUp['otherHtml'], pageSetUp['style'], pageSetUp['scripts']);
-        replaceFullPage(pageCodeBlock);
-        eval(pageSetUp['scripts']);
-
-        void 0;
-
-        function imgLinkArray(obj, replaceBoo, replaceSomeWeb) {
-            var result = [];
-            var reg = /(\S+)(jpg|png|jpeg|gif)(.+)/gi;
-            var regData = /^data.*/g;
-            for (var i = 0; i < obj.images.length; i++) {
-                if (obj.images[i].hasAttribute("src")) {
-                    result[result.length] = obj.images[i].src
-                } else if (obj.images[i].hasAttribute("lazy-scr-load")) {
-                    result[result.length] = obj.images[i].attributes["lazy-src-load"].value
-                } else {
-                    try {
-                        result[result.length] = obj.images[i].attributes[0].value
-                    } catch (err) {
-                        console.log(obj.images[i])
-                    }
+                    result[result.length] = obj.images[i].attributes[0].value
+                } catch (err) {
+                    console.log(obj.images[i])
                 }
-                if (regData.test(result[result.length - 1]) != true && replaceBoo) {
-                    result[result.length] = result[result.length - 1].replace(reg, "$1$2")
-                }
-                result[result.length] = regReplaceForSomeWeb(result[result.length - 1], replaceSomeWeb);
             }
-            return result
+            if (regData.test(result[result.length - 1]) != true && replaceBoo) {
+                result[result.length] = result[result.length - 1].replace(reg, "$1$2")
+            }
+            result[result.length] = regReplaceForSomeWeb(result[result.length - 1], replaceSomeWeb);
         }
+        return result
+    }
 
-        function makeImgPage(imgArray) {
+    /*     function makeImgPage(imgArray) {
             var result = "";
             for (var i = 0; i < imgArray.length; i++) {
                 result += '<img src=' + imgArray[i] + '><br>'
             }
             return result
         }
+     */
+    function sizeTheImgs(dom) {
+        let img = dom.querySelectAll('img');
+        for (let i = 0; i < img.length; i++) {
+            let w = img[i].naturalWidth;
+            let h = img[i].naturalHeight;
+            /* TODO:  */
+        }
+    }
 
-        function getAllChildren(obj) {
-            var result = [];
-            for (var i = 0; i < obj.childElementCount; i++) {
-                result = result.concat(obj.children[i]);
-                if (obj.children[i].childElementCount !== 0) {
-                    result = result.concat(getAllChildren(obj.children[i]))
-                }
+
+    function getAllChildren(obj) {
+        var result = [];
+        for (var i = 0; i < obj.childElementCount; i++) {
+            result = result.concat(obj.children[i]);
+            if (obj.children[i].childElementCount !== 0) {
+                result = result.concat(getAllChildren(obj.children[i]))
             }
-            return result
+        }
+        return result
+    }
+
+    function bgImgLinkArray(obj, replaceBoo, replaceSomeWeb) {
+        var result = [];
+        var all = getAllChildren(obj);
+        var bg;
+        var reg = /(url\(")(.*)("\))/g;
+        var reg2 = /(\S+)(jpg|png|jpeg|gif)(.+)/gi;
+        for (var j = 0; j < all.length; j++) {
+            bg = all[j].style.backgroundImage;
+            if (bg != "" || bg != undefined) {
+                result[result.length] = String(bg).replace(reg, "$2");
+                result[result.length - 1] = replaceBoo == true ? result[result.length - 1].replace(reg2, "$1$2") : result[result.length - 1];
+                result[result.length - 1] = regReplaceForSomeWeb(result[result.length - 1], replaceSomeWeb)
+            }
+        }
+        return result
+    }
+
+    function makeImgsCodeBlock(imgList, divId, imgClass, otherHtml, style, scripts) {
+
+        var result = '';
+        var imgParentDom = 'ul';
+        var imgHeadDom = 'li';
+        result += '<' + imgParentDom + ' id="' + divId + '" class="">';
+
+        var imgDoms = '';
+
+        if (imgList instanceof Array) {
+            for (var i = 0; i < imgList.length; i++) {
+                imgDoms = '<' + imgHeadDom + '><img class="' + imgClass + '" src="' + imgList[i].replace(/_\/fw\/\d*\/format\/.*/g, '') + '"></' + imgHeadDom + '>' + imgDoms;
+            }
+        } else {
+            for (var i in imgList) {
+                imgDoms = '<' + imgHeadDom + '><img class="' + imgClass + '" src="' + imgList[i].replace(/_\/fw\/\d*\/format\/.*/g, '') + '"></' + imgHeadDom + '>' + imgDoms;
+            }
         }
 
-        function bgImgLinkArray(obj, replaceBoo, replaceSomeWeb) {
-            var result = [];
-            var all = getAllChildren(obj);
-            var bg;
-            var reg = /(url\(")(.*)("\))/g;
-            var reg2 = /(\S+)(jpg|png|jpeg|gif)(.+)/gi;
-            for (var j = 0; j < all.length; j++) {
-                bg = all[j].style.backgroundImage;
-                if (bg != "" || bg != undefined) {
-                    result[result.length] = String(bg).replace(reg, "$2");
-                    result[result.length - 1] = replaceBoo == true ? result[result.length - 1].replace(reg2, "$1$2") : result[result.length - 1];
-                    result[result.length - 1] = regReplaceForSomeWeb(result[result.length - 1], replaceSomeWeb)
-                }
+        result += imgDoms;
+        result += '</' + imgParentDom + '>';
+        result += otherHtml;
+        result += '<' + 'style>' + style + '<' + '/style>';
+        result += '<' + 'script>' + scripts + '<' + '/script>';
+
+        return result
+    }
+
+    function regReplaceForSomeWeb(str, replaceSomeWeb) {
+        var result = '';
+        for (let r in replaceSomeWeb) {
+            console.log(r);
+            console.log(str.indexOf(r));
+            if (str.indexOf(r) != -1) {
+                result = str.replace(replaceSomeWeb[r]['reg'], replaceSomeWeb[r]['result'])
             }
-            return result
         }
-
-        function makeImgsCodeBlock(imgList, divId, imgClass, otherHtml, style, scripts) {
-
-            var result = '';
-            result += '<div id="' + divId + '" class="">';
-
-            var imgDoms = '';
-
-            if (imgList instanceof Array) {
-                for (var i = 0; i < imgList.length; i++) {
-                    imgDoms = '<img class="' + imgClass + '" src="' + imgList[i].replace(/_\/fw\/\d*\/format\/.*/g, '') + '">' + imgDoms;
-                }
-            } else {
-                for (var i in imgList) {
-                    imgDoms = '<img class="' + imgClass + '" src="' + imgList[i].replace(/_\/fw\/\d*\/format\/.*/g, '') + '">' + imgDoms;
-                }
-            }
-
-            result += imgDoms;
-            result += '</div>';
-            result += otherHtml;
-            result += '<' + 'style>' + style + '<' + '/style>';
-            result += '<' + 'script>' + scripts + '<' + '/script>';
-
-            return result
+        if (result == '') {
+            result = str;
         }
+        return result;
+    }
 
-        function regReplaceForSomeWeb(str, replaceSomeWeb) {
-            var result = '';
-            for (let r in replaceSomeWeb) {
-                console.log(r);
-                console.log(str.indexOf(r));
-                if (str.indexOf(r) != -1) {
-                    result = str.replace(replaceSomeWeb[r]['reg'], replaceSomeWeb[r]['result'])
-                }
-            }
-            if (result == '') {
-                result = str;
-            }
-            return result;
+    function replaceFullPage() {
+        var sourceOnKeyDownStr = document.onkeydown == null ? 'null' : document.onkeydown.toString();
+        var objs = arguments;
+        var resultObj = document.createElement("div");
+        resultObj.id = 'replacePageAsObjs';
+
+        for (let i in objs) {
+            resultObj.innerHTML += objs[i];
         }
+        var sourceBody = document.getElementsByTagName("body")[0];
+        var html = document.getElementsByTagName("html")[0];
+        var newBody = document.createElement("body");
+        newBody.id = "newBody";
+        newBody.appendChild(resultObj);
 
-        function replaceFullPage() {
-            var sourceOnKeyDownStr = document.onkeydown == null ? 'null' : document.onkeydown.toString();
-            var objs = arguments;
-            var resultObj = document.createElement("div");
-            resultObj.id = 'replacePageAsObjs';
+        html.appendChild(newBody);
+        sourceBody.style.display = "none";
+        //html.removeChild(sourceBody);
 
-            for (let i in objs) {
-                resultObj.innerHTML += objs[i];
-            }
-            var sourceBody = document.getElementsByTagName("body")[0];
+        var recovery = function (hiddenBody, sourceBody) {
             var html = document.getElementsByTagName("html")[0];
-            var newBody = document.createElement("body");
-            newBody.id = "newBody";
-            newBody.appendChild(resultObj);
+            var body = document.getElementsByTagName('body');
+            html.removeChild(document.getElementById('newBody'));
+            for (let i = 0; i < body.length; i++) {
+                body[i].style.display = "";
+            }
 
-            html.appendChild(newBody);
-            sourceBody.style.display = "none";
-            //html.removeChild(sourceBody);
+        };
+        document.onkeydown = function (event) {
+            var e = event || window.e;
+            var keyCode = e.keyCode || e.which;
+            switch (keyCode) {
+                case 27:
+                    recovery(sourceBody, newBody);
+                    document.onkeydown = eval(sourceOnKeyDownStr);
+                    break;
+            }
+        };
+    }
 
-            var recovery = function (hiddenBody, sourceBody) {
-                var html = document.getElementsByTagName("html")[0];
-                var body = document.getElementsByTagName('body');
-                html.removeChild(document.getElementById('newBody'));
-                for (let i = 0; i < body.length; i++) {
-                    body[i].style.display = "";
-                }
-
-            };
-            document.onkeydown = function (event) {
-                var e = event || window.e;
-                var keyCode = e.keyCode || e.which;
-                switch (keyCode) {
-                    case 27:
-                        recovery(sourceBody, newBody);
-                        document.onkeydown = eval(sourceOnKeyDownStr);
-                        break;
-                }
-            };
-        }
-
-        console.log('来关注我微博 @leizingyiu 呀，虽然不怎么更新😀')
-    })(); /*来关注我微博 @leizingyiu 呀，虽然不怎么更新😀*/
+    console.log('来关注我微博 @leizingyiu 呀，虽然不怎么更新😀')
+})();
+/*来关注我微博 @leizingyiu 呀，虽然不怎么更新😀*/

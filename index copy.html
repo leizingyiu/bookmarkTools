@@ -1,0 +1,47 @@
+<style>
+body {line-height:2em;position: absolute; top: 50%;left:50%; transform: translate(-50%,-50%);}
+
+a{text-decoration:none;color:#313335;border-bottom: dashed 0.2em #5c5d5e;        border-radius: 5px;padding:5px;transition: all 0.5s}
+
+.cantUse{ opacity: 0.5; font-size:0.7em;cursor:wait; }
+.use{cursor:move;}
+  .pointer{cursor:pointer;}
+
+</style>
+
+
+<!-- TODO: 
+
+总介绍页
+  dl_left
+    dt
+      dropdown list : 书签列表
+    dd
+      ""
+  footer_right
+      个人宣传内容
+
+书签内容页：
+  dl_top
+    dt_left
+      dropdown list : 书签列表
+      a : 书签拖拽按钮
+    dd_right
+      书签使用介绍内容
+  footer_bottom
+    个人宣传内容
+
+-->
+
+<script type="text/javascript">
+  let requestURL = 'getImg/getImg.js';
+  let request = new XMLHttpRequest();
+  request.open('GET', requestURL);
+  request.responseType = 'text';/* json */
+  request.send();
+  request.onload = function() {
+  document.write( request.response);
+  };
+</script>
+
+<script> console.log("来关注我微博 @leizingyiu 呀，虽然不怎么更新😀");</script>

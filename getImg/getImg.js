@@ -1,12 +1,7 @@
-/*
-The MIT License (MIT)
-Copyright (c) Tue Sep 29 2020  leizingyiu
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORTOR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-*/
-
 javascript: /*获取图片书签by leizingyiu；*/
+/* 
+"Last modified": "2021/04/26 11:44:41"
+*/
 (function () {
     console.log("获取图片书签by leizingyiu @20200803-15:08:59");
     var mySrc = '';
@@ -85,13 +80,13 @@ javascript: /*获取图片书签by leizingyiu；*/
         p = document.querySelectorAll("#imgsByYiu img.daImgByYiu");
 
         function getImgNaturalDimension(img, callback) {
-          if (typeof img.naturalWidth == "undefined") { // IE6/7/8
+          if (typeof img.naturalWidth == "undefined") {
             var temImg = new Image();
             temImg.onload = function() {
               callback({width: temImg.width, height:temImg.height});
             };
             temImg.src = img.src;
-          } else { // 现代浏览器
+          } else {
             callback({width: img.naturalWidth, height:img.naturalHeight});
           }
         }
@@ -345,7 +340,7 @@ javascript: /*获取图片书签by leizingyiu；*/
 
         html.appendChild(newBody);
         sourceBody.style.display = "none";
-        //html.removeChild(sourceBody);
+        /* html.removeChild(sourceBody); */
 
         var recovery = function (hiddenBody, sourceBody) {
             var html = document.getElementsByTagName("html")[0];

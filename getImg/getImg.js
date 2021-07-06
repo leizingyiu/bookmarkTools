@@ -1,9 +1,9 @@
 javascript: /*获取图片书签by leizingyiu；*/
 /* 
-"Last modified": "2021/04/26 11:44:41"
+"Last modified": "2021/07/06 17:42:47"
 */
 (function () {
-    console.log("获取图片书签by leizingyiu @20200803-15:08:59");
+    console.log("获取图片书签by leizingyiu @2021/07/06 17:38:11");
     var mySrc = '';
     var mySrcList = [];
     var imgSrcList = [];
@@ -178,6 +178,10 @@ javascript: /*获取图片书签by leizingyiu；*/
         'xiaohongshu.com': {
             'reg': /(.+)\?.+/,
             'result': '$1'
+        },
+        'duitang.com': {
+            '': /\.thumb\.\d*_\d*/,
+            'result': ''
         }
     };
     for (var i = 0; i < replaceWhiteList.length; i++) {

@@ -1,6 +1,6 @@
 javascript: /*获取图片书签by leizingyiu；*/
 /* 
-"Last modified": "2021/07/06 17:42:47"
+"Last modified": "2021/07/06 17:49:10"
 */
 (function () {
     console.log("获取图片书签by leizingyiu @2021/07/06 17:38:11");
@@ -180,7 +180,7 @@ javascript: /*获取图片书签by leizingyiu；*/
             'result': '$1'
         },
         'duitang.com': {
-            '': /\.thumb\.\d*_\d*/,
+            'reg': /\.thumb\.\d*_\d*/,
             'result': ''
         }
     };

@@ -1,0 +1,52 @@
+<html>
+
+<head>
+  <script src="https://cdn.bootcdn.net/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+  <script>
+    document.oncontextmenu = function (event) { event.preventDefault(); };
+    var c1 = [255, 255, 255], c2 = [196, 196, 196], brushWeight = 1;
+    var beforeX, beforeY;
+    function setup() {
+      createCanvas(windowWidth, windowHeight);
+      background(...c1);
+    }
+    function draw() {
+
+      fill(...c1);
+      circle(windowWidth - brushWeight / 2, windowHeight - brushWeight / 2, brushWeight + 10);
+      fill(...c2);
+      circle(windowWidth - brushWeight / 2, windowHeight - brushWeight / 2, brushWeight);
+
+      strokeWeight(brushWeight);
+      if (mouseIsPressed) {
+        if (mouseButton === LEFT) {
+          stroke(...c2);
+          blendMode(MULTIPLY);
+        }
+        if (mouseButton === RIGHT || mouseButton === CENTER) {
+          stroke(...c1);
+          blendMode(LIGHTEST)
+        }
+        if (typeof beforeX != 'undefined') {
+          line(beforeX, beforeY, mouseX, mouseY);
+        }
+        beforeX = mouseX;
+        beforeY = mouseY;
+      } else {
+        beforeX = undefined;
+        beforeY = undefined;
+      }
+    }
+    function mouseWheel(event) {
+      brushWeight += event.delta / 10;
+      brushWeight = brushWeight > 100 ? 100 : brushWeight;
+    }
+  </script>
+</head>
+
+<body style='margin:0;'>
+  <main>
+  </main>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<html>
+
+<head>
+  <script src="https://cdn.bootcdn.net/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+  <script>
+
+    var c1 = [255, 255, 255], c2 = [99, 99, 99];
+    var beforeX, beforeY;
+    function setup() {
+      createCanvas(windowWidth, windowHeight);
+      background(...c1);
+
+    }
+    function draw() {
+      if (mouseIsPressed) {
+        if (mouseButton === LEFT) {
+          strokeWeight(1);
+          stroke(...c2);
+        }
+        if (mouseButton === RIGHT || mouseButton === CENTER) {
+          strokeWeight(2);
+          stroke(...c1);
+        }
+
+        if (typeof beforeX != 'undefined') {
+          line(beforeX, beforeY, mouseX, mouseY);
+        }
+        beforeX = mouseX;
+        beforeY = mouseY;
+      } else {
+
+        beforeX = undefined;
+        beforeY = undefined;
+      }
+    }
+  </script>
+</head>
+
+<body style='margin:0;'>
+  <main>
+  </main>
+</body>
+
+</html>

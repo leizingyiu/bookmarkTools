@@ -1,6 +1,6 @@
 javascript: /*获取图片书签by leizingyiu；*/
 /* 
-"Last modified": "2021/10/11 15:17:54"
+"Last modified": "2021/10/11 15:16:45"
 */
 (function () {
     console.log("获取图片书签by leizingyiu @2021/07/06 17:38:11");
@@ -184,7 +184,7 @@ javascript: /*获取图片书签by leizingyiu；*/
             'result': ''
         },
         'dribbble.com': {
-            'reg': /\?[^\?]*/,
+            'reg': /?[^?]/,
             'result': ''
         },
     };

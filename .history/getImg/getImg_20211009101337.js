@@ -1,6 +1,6 @@
 javascript: /*获取图片书签by leizingyiu；*/
 /* 
-"Last modified": "2021/10/11 15:17:54"
+"Last modified": "2021/07/06 17:49:10"
 */
 (function () {
     console.log("获取图片书签by leizingyiu @2021/07/06 17:38:11");
@@ -182,11 +182,7 @@ javascript: /*获取图片书签by leizingyiu；*/
         'duitang.com': {
             'reg': /\.thumb\.\d*_\d*/,
             'result': ''
-        },
-        'dribbble.com': {
-            'reg': /\?[^\?]*/,
-            'result': ''
-        },
+        }
     };
     for (var i = 0; i < replaceWhiteList.length; i++) {
         if (window.location.href.indexOf(replaceWhiteList[i]) != -1) {

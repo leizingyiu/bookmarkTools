@@ -1,6 +1,6 @@
 javascript: /*获取图片书签by leizingyiu；*/
 /* 
-"Last modified": "2021/10/12 13:31:49"
+"Last modified": "2021/10/12 13:43:36"
 */
 (function () {
     console.log("获取图片书签by leizingyiu @2021/07/06 17:38:11");
@@ -54,8 +54,7 @@ javascript: /*获取图片书签by leizingyiu；*/
                 height: 100vh!important;
             }
             .popDivZoomedIn100Vw{
-                height: 100vh!important;
-                width:100vw!important;
+                height: 100vh!important;                width:100vw!important;
             }
             .popDivZoomedIn img,.popDivZoomedIn100Vw img{
                 max-height:none!important;  max-width:none!important;cursor: zoom-out!important;
@@ -65,24 +64,18 @@ javascript: /*获取图片书签by leizingyiu；*/
                 height: auto!important;
             }
             .popDivZoomedOut img{
-                max-height:100vh!important; max-width:80vw!important;
+                max-height:98vh!important;                max-width:80vw!important;
             }
 
-            *{
-                transition: 0.5s
-            }
+            *{transition: 0.5s;}
             #newBody{background:#fff;}
-            #popDiv::-webkit-scrollbar {
-                display: none;
-            }
+            #popDiv::-webkit-scrollbar {display: none;}
             .blur {	
                 filter: url(blur.svg#blur); /* FireFox, Chrome, Opera */
-
                 -webkit-filter: blur(10px); /* Chrome, Opera */
                    -moz-filter: blur(10px);
                     -ms-filter: blur(10px);    
                         filter: blur(10px);
-
                 filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=10, MakeShadow=false); /* IE6~IE9 */
             }
         `,
@@ -223,17 +216,18 @@ javascript: /*获取图片书签by leizingyiu；*/
         }
     }
     mySrcList = [...new Set(mySrcList)];
-    // console.log(mySrcList);
+    /*    console.log(mySrcList);*/
     var pageCodeBlock = makeImgsCodeBlock(mySrcList.reverse(), pageSetUp['divId'], pageSetUp['imgClass'], pageSetUp['otherHtml'], pageSetUp['style'], pageSetUp['scripts']);
     replaceFullPage(pageCodeBlock);
     eval(pageSetUp['scripts']);
 
     [...document.querySelectorAll('img')].map(function (img) {
+        if (img.id == 'popImg') { return }
         img.onload = function () {
-            console.log(img);
+            /*console.log(img);*/
             sizeTheImgs(img.parentElement);
         }
-    })
+    });
 
     void 0;
 
@@ -250,7 +244,7 @@ javascript: /*获取图片书签by leizingyiu；*/
                 try {
                     result[result.length] = obj.images[i].attributes[0].value
                 } catch (err) {
-                    // console.log(obj.images[i])
+                    /* console.log(obj.images[i])*/
                 }
             }
             if (regData.test(result[result.length - 1]) != true && replaceBoo) {
@@ -270,7 +264,7 @@ javascript: /*获取图片书签by leizingyiu；*/
         }
      */
     function sizeTheImgs(dom) {
-        // console.log(dom);
+        /* console.log(dom);*/
         let img = dom.querySelectorAll('img');
         for (let i = 0; i < img.length; i++) {
             let size = getImgNaturalDimensions(img[i]);
@@ -284,15 +278,15 @@ javascript: /*获取图片书签by leizingyiu；*/
     }
 
     function getImgNaturalDimensions(img, callback = function () { void 0 }) {
-        var nWidth, nHeight
-        if (img.naturalWidth != undefined) { // 现代浏览器
-            nWidth = img.naturalWidth
-            nHeight = img.naturalHeight
-        } else { // IE6/7/8
-            var image = new Image()
-            image.src = img.src
+        var nWidth, nHeight;
+        if (img.naturalWidth != undefined) { /* 现代浏览器*/
+            nWidth = img.naturalWidth;
+            nHeight = img.naturalHeight;
+        } else { /* IE6/7/8*/
+            var image = new Image();
+            image.src = img.src;
             image.onload = function () {
-                callback(image.width, image.height)
+                callback(image.width, image.height);
             }
         }
         return [nWidth, nHeight]
@@ -359,8 +353,8 @@ javascript: /*获取图片书签by leizingyiu；*/
     function regReplaceForSomeWeb(str, replaceSomeWeb) {
         var result = '';
         for (let r in replaceSomeWeb) {
-            // console.log(r);
-            // console.log(str.indexOf(r));
+            /* console.log(r);*/
+            /* console.log(str.indexOf(r));*/
             if (str.indexOf(r) != -1) {
                 result = str.replace(replaceSomeWeb[r]['reg'], replaceSomeWeb[r]['result'])
             }

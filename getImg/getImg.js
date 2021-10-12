@@ -1,6 +1,6 @@
 javascript: /*获取图片书签by leizingyiu；*/
 /* 
-"Last modified": "2021/10/12 13:08:28"
+"Last modified": "2021/10/12 13:31:49"
 */
 (function () {
     console.log("获取图片书签by leizingyiu @2021/07/06 17:38:11");
@@ -407,6 +407,7 @@ javascript: /*获取图片书签by leizingyiu；*/
             var keyCode = e.keyCode || e.which;
             switch (keyCode) {
                 case 27:
+                    document.getElementsByTagName('html')[0].style.overflow = "initial";
                     recovery(sourceBody, newBody);
                     document.onkeydown = eval(sourceOnKeyDownStr);
                     break;

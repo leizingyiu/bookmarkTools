@@ -1,6 +1,6 @@
 javascript: /*获取图片书签by leizingyiu；*/
 /* 
-"Last modified": "2021/10/11 15:17:54"
+"Last modified": "2021/10/12 13:08:28"
 */
 (function () {
     console.log("获取图片书签by leizingyiu @2021/07/06 17:38:11");
@@ -18,6 +18,17 @@ javascript: /*获取图片书签by leizingyiu；*/
         style: `
             #imgsByYiu li{
                 display:inline;
+                position:relative;
+            }
+
+            #imgsByYiu li i{
+                position: absolute;
+                right: 2vh;
+                bottom: 2vh;
+                line-height: 1em;
+                padding: 0.5vh;
+                background: rgba(0,0,0,0.5);
+                color: #fff;
             }
             img.daImgByYiu {
                 max-height: 50vh;   margin: 1vh;   transition: auto;  transition: 0.5s; cursor: pointer;
@@ -155,6 +166,7 @@ javascript: /*获取图片书签by leizingyiu；*/
         };
         console.log("defined #popImg.onclick()");
 
+
     `
     };
 
@@ -211,10 +223,17 @@ javascript: /*获取图片书签by leizingyiu；*/
         }
     }
     mySrcList = [...new Set(mySrcList)];
-    console.log(mySrcList);
+    // console.log(mySrcList);
     var pageCodeBlock = makeImgsCodeBlock(mySrcList.reverse(), pageSetUp['divId'], pageSetUp['imgClass'], pageSetUp['otherHtml'], pageSetUp['style'], pageSetUp['scripts']);
     replaceFullPage(pageCodeBlock);
     eval(pageSetUp['scripts']);
+
+    [...document.querySelectorAll('img')].map(function (img) {
+        img.onload = function () {
+            console.log(img);
+            sizeTheImgs(img.parentElement);
+        }
+    })
 
     void 0;
 
@@ -231,7 +250,7 @@ javascript: /*获取图片书签by leizingyiu；*/
                 try {
                     result[result.length] = obj.images[i].attributes[0].value
                 } catch (err) {
-                    console.log(obj.images[i])
+                    // console.log(obj.images[i])
                 }
             }
             if (regData.test(result[result.length - 1]) != true && replaceBoo) {
@@ -251,13 +270,34 @@ javascript: /*获取图片书签by leizingyiu；*/
         }
      */
     function sizeTheImgs(dom) {
-        let img = dom.querySelectAll('img');
+        // console.log(dom);
+        let img = dom.querySelectorAll('img');
         for (let i = 0; i < img.length; i++) {
-            let w = img[i].naturalWidth;
-            let h = img[i].naturalHeight;
+            let size = getImgNaturalDimensions(img[i]);
+            let w = size[0];
+            let h = size[1];
+            let I = document.createElement('i');
+            I.innerText = w + 'x' + h;
+            img[i].parentNode.appendChild(I);
             /* TODO:  */
         }
     }
+
+    function getImgNaturalDimensions(img, callback = function () { void 0 }) {
+        var nWidth, nHeight
+        if (img.naturalWidth != undefined) { // 现代浏览器
+            nWidth = img.naturalWidth
+            nHeight = img.naturalHeight
+        } else { // IE6/7/8
+            var image = new Image()
+            image.src = img.src
+            image.onload = function () {
+                callback(image.width, image.height)
+            }
+        }
+        return [nWidth, nHeight]
+    }
+
 
 
     function getAllChildren(obj) {
@@ -319,8 +359,8 @@ javascript: /*获取图片书签by leizingyiu；*/
     function regReplaceForSomeWeb(str, replaceSomeWeb) {
         var result = '';
         for (let r in replaceSomeWeb) {
-            console.log(r);
-            console.log(str.indexOf(r));
+            // console.log(r);
+            // console.log(str.indexOf(r));
             if (str.indexOf(r) != -1) {
                 result = str.replace(replaceSomeWeb[r]['reg'], replaceSomeWeb[r]['result'])
             }
@@ -345,6 +385,9 @@ javascript: /*获取图片书签by leizingyiu；*/
         var newBody = document.createElement("body");
         newBody.id = "newBody";
         newBody.appendChild(resultObj);
+
+
+
 
         html.appendChild(newBody);
         sourceBody.style.display = "none";

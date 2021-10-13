@@ -1,6 +1,6 @@
 javascript: /*获取图片书签by leizingyiu；*/
 /* 
-"Last modified": "2021/10/14 01:22:39"
+"Last modified": "2021/10/14 01:22:04"
 */
 (function () {
 
@@ -217,7 +217,7 @@ javascript: /*获取图片书签by leizingyiu；*/
         'instagrame.com': async function () {
             
            const result = await [...document.querySelectorAll('a')].map(async function (a) {
-                const p = await new Promise((resolve, reject) => {
+                var p = await new Promise((resolve, reject) => {
                     fetch(a.href)
                         .then(respone => respone.text())
                         .then(t => t.match(/<script type="text\/javascript">window\._sharedData = .*<\/script>/)[0].match(/(?<=>).*(?=<\/)/)[0].replace(/window\._sharedData/, 'result'))

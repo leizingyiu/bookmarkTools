@@ -1,6 +1,6 @@
 javascript: /*获取图片书签by leizingyiu；*/
 /* 
-"Last modified": "2021/10/14 01:22:39"
+"Last modified": "2021/10/14 01:11:18"
 */
 (function () {
 
@@ -215,22 +215,21 @@ javascript: /*获取图片书签by leizingyiu；*/
 
     var pretreament = {
         'instagrame.com': async function () {
-            
-           const result = await [...document.querySelectorAll('a')].map(async function (a) {
-                const p = await new Promise((resolve, reject) => {
+            var result = [];
+            [...document.querySelectorAll('a')].map(function (a) {
+                var p = new Promise((resolve, reject) => {
                     fetch(a.href)
-                        .then(respone => respone.text())
-                        .then(t => t.match(/<script type="text\/javascript">window\._sharedData = .*<\/script>/)[0].match(/(?<=>).*(?=<\/)/)[0].replace(/window\._sharedData/, 'result'))
-                        .then(t => eval(t))
-                        .then(result => (result.entry_data.PostPage[0].graphql.shortcode_media.display_resources[2].src))
-                        .then(function (src) {
-                            i = a.querySelector('img');
-                            i.src = src;
-                        });
+                    .then(respone => respone.text())
+                    .then(t => t.match(/<script type="text\/javascript">window\._sharedData = .*<\/script>/)[0].match(/(?<=>).*(?=<\/)/)[0].replace(/window\._sharedData/, 'result'))
+                    .then(t => eval(t))
+                    .then(result => (result.entry_data.PostPage[0].graphql.shortcode_media.display_resources[2].src))
+                    .then(function (src) {
+                        i = a.querySelector('img');
+                        i.src = src;
+                    });
                 })
                 return p;
-            });
-            return result;
+            })
         }
     };
 
@@ -239,10 +238,9 @@ javascript: /*获取图片书签by leizingyiu；*/
 
     for (let i = 0, ii = Object.keys(pretreament); i < ii; i++) {
         if (window.location.href.indexOf(pretreament[Object.keys(pretreament)[i]]) != -1) {
-            let tempArr = new Promise((resolve,reject) => {
+            pretreamentArr[i] = new Promise((resolve, reject) => {
                 pretreament[Object.keys(pretreament)[i]]();
-            }) 
-            pretreamentArr = [...pretreamentArr, ...tempArr];
+            });
         }
     };
 

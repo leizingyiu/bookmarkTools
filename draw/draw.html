@@ -1,4 +1,4 @@
-<html>
+data:text/html,<html>
 
 <head>
   <script src="https://cdn.bootcdn.net/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
@@ -32,7 +32,7 @@
       }
     }
     function mouseWheel(event) {
-      blendMode(LIGHTEST)
+      blendMode(LIGHTEST);
 
       fill(...c1);
       circle(windowWidth - 100, windowHeight - 100, brushWeight);
@@ -42,7 +42,7 @@
       brushWeight = brushWeight < 0 ? 1 : brushWeight;
       brushWeight = brushWeight > 100 ? 100 : brushWeight;
 
-      blendMode(MULTIPLY)
+      blendMode(MULTIPLY);
       fill(...c2);
       circle(windowWidth - 100, windowHeight - 100, brushWeight);
 

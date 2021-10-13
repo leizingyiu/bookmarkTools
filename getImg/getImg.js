@@ -1,8 +1,19 @@
 javascript: /*获取图片书签by leizingyiu；*/
 /* 
-"Last modified": "2021/10/12 13:43:36"
+"Last modified": "2021/10/13 15:12:05"
 */
 (function () {
+
+    function eval1(str) {
+        var script = document.createElement('script');
+        script.type = "text/javascript";
+        script.text = str;
+        document.getElementsByTagName('head')[0].appendChild(script);
+        document.head.removeChild(document.head.lastChild);
+        /**https://www.cnblogs.com/lxg0/p/7805266.html */
+    }
+
+
     console.log("获取图片书签by leizingyiu @2021/07/06 17:38:11");
     var mySrc = '';
     var mySrcList = [];
@@ -25,6 +36,8 @@ javascript: /*获取图片书签by leizingyiu；*/
                 position: absolute;
                 right: 2vh;
                 bottom: 2vh;
+                font-size: 0.8rem;
+                letter-spacing: 0.1rem;
                 line-height: 1em;
                 padding: 0.5vh;
                 background: rgba(0,0,0,0.5);
@@ -193,11 +206,35 @@ javascript: /*获取图片书签by leizingyiu；*/
             'result': ''
         },
     };
+
     for (var i = 0; i < replaceWhiteList.length; i++) {
         if (window.location.href.indexOf(replaceWhiteList[i]) != -1) {
             replaceBoo = false
         }
-    }
+    };
+
+    var pretreament = {
+        'instagrame.com': function () {
+            [...document.querySelectorAll('a')].map(function (a) {
+                fetch(a.href)
+                    .then(respone => respone.text())
+                    .then(t => t.match(/<script type="text\/javascript">window\._sharedData = .*<\/script>/)[0].match(/(?<=>).*(?=<\/)/)[0].replace(/window\._sharedData/, 'result'))
+                    .then(t => eval(t))
+                    .then(result => (result.entry_data.PostPage[0].graphql.shortcode_media.display_resources[2].src))
+                    .then(function (src) {
+                        i = a.querySelector('img');
+                        i.src = src;
+                    });
+            })
+        }
+    };
+    for (let i = 0, ii = Object.keys(pretreament); i < ii; i++) {
+        if (window.location.href.indexOf(pretreament[Object.keys(pretreament)[i]]) != -1) {
+            pretreament[Object.keys(pretreament)[i]]();
+        }
+    };
+
+    /* TODO promise*/
 
     imgSrcList = imgLinkArray(document, replaceBoo, replaceSomeWeb);
     bgUrlList = bgImgLinkArray(document, replaceBoo, replaceSomeWeb);
@@ -219,7 +256,7 @@ javascript: /*获取图片书签by leizingyiu；*/
     /*    console.log(mySrcList);*/
     var pageCodeBlock = makeImgsCodeBlock(mySrcList.reverse(), pageSetUp['divId'], pageSetUp['imgClass'], pageSetUp['otherHtml'], pageSetUp['style'], pageSetUp['scripts']);
     replaceFullPage(pageCodeBlock);
-    eval(pageSetUp['scripts']);
+    try { eval1(pageSetUp['scripts']); } catch (err) { console.log(err) };
 
     [...document.querySelectorAll('img')].map(function (img) {
         if (img.id == 'popImg') { return }
@@ -228,6 +265,7 @@ javascript: /*获取图片书签by leizingyiu；*/
             sizeTheImgs(img.parentElement);
         }
     });
+
 
     void 0;
 

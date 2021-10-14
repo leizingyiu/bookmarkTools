@@ -1,18 +1,51 @@
-<style>
-body {line-height:2em;position: absolute; top: 50%;left:50%; transform: translate(-50%,-50%);}
+<!DOCTYPE html>
+<html lang="en">
 
-a{text-decoration:none;color:#313335;border-bottom: dashed 0.2em #5c5d5e;        border-radius: 5px;padding:5px;transition: all 0.5s}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bookmark tools by leizingyiu</title>
+    <link rel="stylesheet" type="text/css" href="https://www.leizingyiu.net/css/tbDefaultCss.min.css" />
+    <link rel="stylesheet" href="./css/style.css">
 
-.cantUse{ opacity: 0.5; font-size:0.7em;cursor:wait; }
-.use{cursor:move;}
-  .pointer{cursor:pointer;}
+</head>
 
-</style>
+<body>
+    <main>
+        <ul id="toolsList">
+            <li>
+                <dl>
+                    <dt>getImg</dt>
+                    <dd>get images from page</dd>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt>note</dt>
+                    <dd>just a node pad </dd>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt>draw</dt>
+                    <dd>a draw pad</dd>
+                </dl>
+            </li>
+        </ul>
+        <div id="detail">
+            <dl id="bookmarkContainer">
+                <dt>
+                    <a id="bookmark" href="javascript:void 0 ">drag me into bookmarks bar</a>
+                </dt>
+                <dd>
+                    get images from page
+                </dd>
+            </dl>
 
-<p><a class="pointer" href='getImg/getImg.html' >獲取圖片.js</a> 已添加还原微博花瓣图片功能@20200701</p>
-<p><a class="pointer" href='getVideo/getVideo.html' >提取视频.js</a></p>
-<p><a class="pointer" href='getContent/getContent.html' >獲取主要内容.js</a> 目前支持淘宝和behance@20200702</p>
-<p>by <a href='https://weibo.com/p/1005051688314062' style='border: none; text-decoration: underline;'>@leizingyiu</a></p>
-<!-- <p><a class="pointer" href='refreshHuabanImage/refreshHuabanImage.html' >刷新花瓣图片.js</a></p> -->
+            <article class="markdown-body">some content</article>
+        </div>
+    </main>
+</body>
 
-<script> console.log("来关注我微博 @leizingyiu 呀，虽然不怎么更新😀");</script>
+</html>

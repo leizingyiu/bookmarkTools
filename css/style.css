@@ -1,0 +1,64 @@
+html{
+    font-size: 16px;
+}
+body{width: 100vw;height: 100vh;overflow: hidden;}
+main{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+}
+main>*{
+    flex-grow: 1;
+    height: 100%;
+}
+main ul#toolsList{
+    overflow: scroll;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    letter-spacing: 0.1em;
+}
+main ul#toolsList dl{
+    padding: 1em;
+    font-weight: 300;
+}
+main ul#toolsList dt{
+    font-size: 1.5rem;
+}
+main ul#toolsList dd{
+    font-size: 1rem;
+}
+
+main #detail #bookmarkContainer{
+    position: relative;
+}
+main #detail #bookmarkContainer::after{
+    display: block;
+    padding-top: 100%;
+    content: '';
+}
+main #detail #bookmarkContainer>dt{
+    position: absolute;
+    left: 50%;
+    bottom: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+}
+main #detail #bookmarkContainer>dt>a{
+display: inline-block;
+    border: dashed 2px rgba(0,0,0,0.5);
+    font-size: 1.5em;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    border-radius: 0.25em;
+    padding: 0.25em;
+}
+
+main #detail #bookmarkContainer>dd{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,100%);
+    text-align: center;
+}

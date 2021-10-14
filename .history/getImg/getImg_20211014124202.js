@@ -1,6 +1,6 @@
 javascript: /*获取图片书签by leizingyiu；*/
 /* 
-"Last modified": "2021/10/14 14:05:19"
+"Last modified": "2021/10/14 12:41:48"
 */
 (function () {
 
@@ -214,89 +214,61 @@ javascript: /*获取图片书签by leizingyiu；*/
     };
 
     var pretreament = {
-        'instagram.com': async function () {
-
-            const result = [...document.querySelectorAll('a')].map(async function (a) {
-                const p = await new Promise((resolve, reject) => {
-                    fetch(a.href)
-                        .then(respone => respone.text())
-                        .then(t => t.match(/<script type="text\/javascript">window\.__additionalDataLoaded.*<\/script>/)[0].match(/(?<=>).*(?=<\/)/)[0].replace(/window\.__additionalDataLoaded\((.*)\)$, '$1').replace(/;$/, ''))
-                        .then(t => JSON.parse(t))
-                        .then(result => (result['entry_data']['PostPage'][0].graphql.shortcode_media.display_resources[2].src))
-                        .then(function (src) {
-                            i = a.querySelector('img');
-                            i.src = src;
-                        });
-                })
-                return p;
-            });
-            return result;
+        'instagrame.com': function () {
+            [...document.querySelectorAll('a')].map(function (a) {
+                fetch(a.href)
+                    .then(respone => respone.text())
+                    .then(t => t.match(/<script type="text\/javascript">window\._sharedData = .*<\/script>/)[0].match(/(?<=>).*(?=<\/)/)[0].replace(/window\._sharedData/, 'result'))
+                    .then(t => eval(t))
+                    .then(result => (result.entry_data.PostPage[0].graphql.shortcode_media.display_resources[2].src))
+                    .then(function (src) {
+                        i = a.querySelector('img');
+                        i.src = src;
+                    });
+            })
+        }
+    };
+    for (let i = 0, ii = Object.keys(pretreament); i < ii; i++) {
+        if (window.location.href.indexOf(pretreament[Object.keys(pretreament)[i]]) != -1) {
+            pretreament[Object.keys(pretreament)[i]]();
         }
     };
 
-    var pretreamentArr = [];
-
-    var pretreamentName = Object.keys(pretreament).map(i => window.location.href.indexOf(i) != -1 ? i : false).filter(Boolean).toString();
-    console.log(pretreamentName);
-
-    if (pretreamentName) {
-        pretreamentArr = pretreament[pretreamentName]();
-    }
-
-    // for (let i = 0, ii = Object.keys(pretreament).length; i < ii; i++) {
-    //     if (window.location.href.indexOf(pretreament[Object.keys(pretreament)[i]]) != -1) {
-    //         let tempArr = pretreament[Object.keys(pretreament)[i]]();
-    //         pretreamentArr = [...pretreamentArr, ...tempArr];
-    //     }
-    // };
-
-    console.log(pretreamentArr);
-
-    Promise.all(pretreamentArr).then((i) => {
-        main();
-    });
-
     /* TODO promise*/
 
-    /*main();*/
+    imgSrcList = imgLinkArray(document, replaceBoo, replaceSomeWeb);
+    bgUrlList = bgImgLinkArray(document, replaceBoo, replaceSomeWeb);
+    mySrcList = mySrcList.concat(imgSrcList, bgUrlList);
 
-
-
-    function main() {
-        console.log('start main');
-        imgSrcList = imgLinkArray(document, replaceBoo, replaceSomeWeb);
-        bgUrlList = bgImgLinkArray(document, replaceBoo, replaceSomeWeb);
-        mySrcList = mySrcList.concat(imgSrcList, bgUrlList);
-
-        var myFrame = document.getElementsByTagName("iframe");
-        var frameDoc;
-        for (j = 0; j < myFrame.length; j++) {
-            if (myFrame[j].scrollWidth != 0 || myFrame[j].scrollHeight != 0) {
-                try {
-                    frameDoc = myFrame[j].contentWindow.document;
-                    imgSrcList = imgLinkArray(frameDoc, replaceBoo, replaceSomeWeb);
-                    bgUrlList = bgImgLinkArray(frameDoc, replaceBoo, replaceSomeWeb);
-                    mySrcList = mySrcList.concat(imgSrcList, bgUrlList)
-                } catch (err) { }
-            }
+    var myFrame = document.getElementsByTagName("iframe");
+    var frameDoc;
+    for (j = 0; j < myFrame.length; j++) {
+        if (myFrame[j].scrollWidth != 0 || myFrame[j].scrollHeight != 0) {
+            try {
+                frameDoc = myFrame[j].contentWindow.document;
+                imgSrcList = imgLinkArray(frameDoc, replaceBoo, replaceSomeWeb);
+                bgUrlList = bgImgLinkArray(frameDoc, replaceBoo, replaceSomeWeb);
+                mySrcList = mySrcList.concat(imgSrcList, bgUrlList)
+            } catch (err) { }
         }
-        mySrcList = [...new Set(mySrcList)];
-        /*    console.log(mySrcList);*/
-        var pageCodeBlock = makeImgsCodeBlock(mySrcList.reverse(), pageSetUp['divId'], pageSetUp['imgClass'], pageSetUp['otherHtml'], pageSetUp['style'], pageSetUp['scripts']);
-        replaceFullPage(pageCodeBlock);
-        try { eval1(pageSetUp['scripts']); } catch (err) { console.log(err) };
-
-        [...document.querySelectorAll('img')].map(function (img) {
-            if (img.id == 'popImg') { return }
-            img.onload = function () {
-                /*console.log(img);*/
-                sizeTheImgs(img.parentElement);
-            }
-        });
-
-
-        return void 0;
     }
+    mySrcList = [...new Set(mySrcList)];
+    /*    console.log(mySrcList);*/
+    var pageCodeBlock = makeImgsCodeBlock(mySrcList.reverse(), pageSetUp['divId'], pageSetUp['imgClass'], pageSetUp['otherHtml'], pageSetUp['style'], pageSetUp['scripts']);
+    replaceFullPage(pageCodeBlock);
+    try { eval1(pageSetUp['scripts']); } catch (err) { console.log(err) };
+
+    [...document.querySelectorAll('img')].map(function (img) {
+        if (img.id == 'popImg') { return }
+        img.onload = function () {
+            /*console.log(img);*/
+            sizeTheImgs(img.parentElement);
+        }
+    });
+
+
+    void 0;
+
     function imgLinkArray(obj, replaceBoo, replaceSomeWeb) {
         var result = [];
         var reg = /(\S+)(jpg|png|jpeg|gif)(.+)/gi;

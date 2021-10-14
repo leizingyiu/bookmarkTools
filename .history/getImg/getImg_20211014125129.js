@@ -1,6 +1,6 @@
 javascript: /*获取图片书签by leizingyiu；*/
 /* 
-"Last modified": "2021/10/14 14:05:19"
+"Last modified": "2021/10/14 12:51:02"
 */
 (function () {
 
@@ -220,9 +220,9 @@ javascript: /*获取图片书签by leizingyiu；*/
                 const p = await new Promise((resolve, reject) => {
                     fetch(a.href)
                         .then(respone => respone.text())
-                        .then(t => t.match(/<script type="text\/javascript">window\.__additionalDataLoaded.*<\/script>/)[0].match(/(?<=>).*(?=<\/)/)[0].replace(/window\.__additionalDataLoaded\((.*)\)$, '$1').replace(/;$/, ''))
-                        .then(t => JSON.parse(t))
-                        .then(result => (result['entry_data']['PostPage'][0].graphql.shortcode_media.display_resources[2].src))
+                        .then(t => t.match(/<script type="text\/javascript">window\._sharedData = .*<\/script>/)[0].match(/(?<=>).*(?=<\/)/)[0].replace(/window\._sharedData/, 'result'))
+                        .then(t => eval(t))
+                        .then(result => (result.entry_data.PostPage[0].graphql.shortcode_media.display_resources[2].src))
                         .then(function (src) {
                             i = a.querySelector('img');
                             i.src = src;
@@ -236,13 +236,13 @@ javascript: /*获取图片书签by leizingyiu；*/
 
     var pretreamentArr = [];
 
-    var pretreamentName = Object.keys(pretreament).map(i => window.location.href.indexOf(i) != -1 ? i : false).filter(Boolean).toString();
+    var pretreamentName=Object.keys(pretreament).map(i => window.location.href.indexOf(i) != -1 ? i : false).filter(Boolean).toString();
     console.log(pretreamentName);
 
     if (pretreamentName) {
         pretreamentArr = pretreament[pretreamentName]();
-    }
-
+    } 
+    
     // for (let i = 0, ii = Object.keys(pretreament).length; i < ii; i++) {
     //     if (window.location.href.indexOf(pretreament[Object.keys(pretreament)[i]]) != -1) {
     //         let tempArr = pretreament[Object.keys(pretreament)[i]]();

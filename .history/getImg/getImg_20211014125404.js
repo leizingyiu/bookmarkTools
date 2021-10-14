@@ -1,6 +1,6 @@
 javascript: /*获取图片书签by leizingyiu；*/
 /* 
-"Last modified": "2021/10/14 14:05:19"
+"Last modified": "2021/10/14 12:53:45"
 */
 (function () {
 
@@ -220,9 +220,10 @@ javascript: /*获取图片书签by leizingyiu；*/
                 const p = await new Promise((resolve, reject) => {
                     fetch(a.href)
                         .then(respone => respone.text())
-                        .then(t => t.match(/<script type="text\/javascript">window\.__additionalDataLoaded.*<\/script>/)[0].match(/(?<=>).*(?=<\/)/)[0].replace(/window\.__additionalDataLoaded\((.*)\)$, '$1').replace(/;$/, ''))
-                        .then(t => JSON.parse(t))
-                        .then(result => (result['entry_data']['PostPage'][0].graphql.shortcode_media.display_resources[2].src))
+                        .then(t => t.match(/<script type="text\/javascript">window\._sharedData = .*<\/script>/)[0].match(/(?<=>).*(?=<\/)/)[0].replace(/window\._sharedData/, 'var result'))
+                        .then(t => eval(t))
+                        .then(t=>console.log(t))
+                        .then(result => (result.entry_data.PostPage[0].graphql.shortcode_media.display_resources[2].src))
                         .then(function (src) {
                             i = a.querySelector('img');
                             i.src = src;

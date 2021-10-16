@@ -1,16 +1,15 @@
 javascript: (function () {
+	console.log(`
+	last modified: "2021/10/16 00:06:53"
+	`);
 
 	[...document.querySelectorAll('.J_TSaleProp a')].map(function (a) {
 		if (a.style.backgroundImage != "") {
 			a.style.backgroundImage = a.style.backgroundImage.replace(/(.+)((png|jpg).+jpg)(.?)/, "$1$3$4");
 		} else {
-			a.style.minHeight = '0px';
-			a.style.minWidth = '0px';
-			a.style.width = '100%';
-			a.style.textAlign = 'left';
-			a.getElementsByTagName("span")[0].style.marginTop = "0";
-			a.parentElement.style.width = '100%';
 
+			a.style.cssText = `display: inline-block;
+							   padding: 3px 6px !important;`;
 		}
 	});
 
@@ -110,9 +109,9 @@ javascript: (function () {
 		S.innerText = `#bd{
 			overflow:visible!important;
 		}
-		.tb-gallery,.tb-meta.tb-promo-meta{
+		.tb-gallery,.tb-meta.tb-promo-meta,.tb-meta{
 			position: sticky;
-			top: 0;
+			top: 0px;
 			z-index: 100;
 		}
 		#detail .tb-summary .tb-item-info .tb-item-info-l{
@@ -175,5 +174,5 @@ javascript: (function () {
 		document.getElementsByTagName("html")[0].appendChild(S);
 
 	}
-	void 0
+	return void 0;
 })();

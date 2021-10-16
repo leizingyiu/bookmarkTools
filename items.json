@@ -1,0 +1,85 @@
+{
+    "getImg": {
+        "name": "getImg",
+        "showName": {
+            "cn": "获取图片",
+            "en": "get Images"
+        },
+        "describe": {
+            "cn": "获取页面上的图片",
+            "en": "get images from page"
+        },
+        "scriptPath": "./bookmarks/getImg/getImg.js",
+        "mdPath": {
+            "cn": "./bookmarks/getImg/readme.md",
+            "en": "./bookmarks/getImg/readme_en.md"
+        }
+    },
+    "notePad": {
+        "name": "notePad",
+        "showName": {
+            "cn": "记事本",
+            "en": "notePad"
+        },
+        "describe": {
+            "cn": "可以在浏览器随便写点什么",
+            "en": "note pad in new page"
+        },
+        "scriptPath": "./bookmarks/notePad/nodePad.js",
+        "mdPath": {
+            "cn": "./bookmarks/notePad/readme.md",
+            "en": "./bookmarks/notePad/readme_en.md"
+        },
+        "pointerCursor": true
+    },
+    "drawPad": {
+        "name": "drawPad",
+        "showName": {
+            "cn": "画板",
+            "en": "drawPad"
+        },
+        "describe": {
+            "cn": "可以在浏览器随便画点什么",
+            "en": "draw sth in new page"
+        },
+        "scriptPath": "./bookmarks/drawPad/draw.js",
+        "mdPath": {
+            "cn": "./bookmarks/drawPad/readme.md",
+            "en": "./bookmarks/drawPad/readme_en.md"
+        },
+        "pointerCursor": true
+    },
+    "unblockSelect": {
+        "name": "unblockSelect",
+        "showName": {
+            "cn": "解锁复制",
+            "en": "unblock select"
+        },
+        "describe": {
+            "cn": "解除页面对选中文字的限制",
+            "en": "Cancel the restriction of the selected text on the page"
+        },
+        "scriptPath": "./bookmarks/unblockSelect/unblockSelect.js",
+        "mdPath": {
+            "cn": "./bookmarks/unblockSelect/readme.md",
+            "en": "./bookmarks/unblockSelect/readme_en.md"
+        },
+        "pointerCursor": true
+    },
+    "enlargeTaobaoSku": {
+        "name": "enlargeTaobaoSku",
+        "showName": {
+            "cn": "放大淘宝宝贝选项",
+            "en": "enlarge taobao Sku"
+        },
+        "describe": {
+            "cn": "淘宝选项缩略图太小了，用这个放大",
+            "en": "enlarge sku pics in taobao item page "
+        },
+        "scriptPath": "bookmarks/enLargeTaobaoSku/enLargeTaobaoSku.js",
+        "mdPath": {
+            "cn": "./bookmarks/enLargeTaobaoSku/readme.md",
+            "en": "./bookmarks/enLargeTaobaoSku/readme_en.md"
+        }
+    }
+}

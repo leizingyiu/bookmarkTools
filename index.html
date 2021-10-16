@@ -8,13 +8,14 @@
     <title>bookmark tools by leizingyiu</title>
     <link rel="stylesheet" type="text/css" href="https://www.leizingyiu.net/css/tbDefaultCss.min.css" />
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/markdown.css">
 
 </head>
 
 <body>
     <main>
         <ul id="toolsList">
-            <li>
+            <!-- <li>
                 <dl>
                     <dt>getImg</dt>
                     <dd>get images from page</dd>
@@ -22,30 +23,62 @@
             </li>
             <li>
                 <dl>
-                    <dt>note</dt>
+                    <dt>notePad</dt>
                     <dd>just a node pad </dd>
                 </dl>
             </li>
             <li>
                 <dl>
-                    <dt>draw</dt>
+                    <dt>drawPad</dt>
                     <dd>a draw pad</dd>
                 </dl>
             </li>
+            <li>
+                <dl>
+                    <dt>enLargeTaobaoSku</dt>
+                    <dd>enlarge taobao sku pic</dd>
+                </dl>
+            </li> -->
         </ul>
         <div id="detail">
             <dl id="bookmarkContainer">
                 <dt>
-                    <a id="bookmark" href="javascript:void 0 ">drag me into bookmarks bar</a>
+                    <a id="bookmarkBtn" href="javascript:void 0 " alt='drag me into bookmarks bar'>
+
+                    </a>
                 </dt>
                 <dd>
-                    get images from page
+
                 </dd>
             </dl>
+            <article class="markdown-body">
 
-            <article class="markdown-body">some content</article>
+            </article>
         </div>
     </main>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px"
+        viewBox="0 0 360 360" xml:space="preserve" class="" style="position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -999;enable-background: accumulate;">
+        <path id='arrow' stroke-dasharray="3000,3000" stroke-dashoffset="3000">
+            <animate attributeName="stroke-dashoffset" to="0" dur="3s" begin="0s" fill="freeze"
+                repeatCount="indefinite">
+            </animate>
+        </path>
+
+
+    </svg>
+
+    <script>
+        let logDebug = location.href.indexOf('leizingyiu.net') == -1;
+        logDebug = false;
+        console.log = logDebug ? console.log : () => void 0;
+    </script>
+    <script src="./script/polyfill.min.js"></script>
+    <script src="./script/marked.min.js"></script>
+    <script src="./script/script.js"></script>
+    <script src="./script/drawArrow.js"></script>
 </body>
 
 </html>

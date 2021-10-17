@@ -1,5 +1,5 @@
 /**
-Last modified: "2021/10/17 12:22:19"
+Last modified: "2021/10/17 00:55:32"
  */
 // console.log('main script');
 //console.warn = () => { };
@@ -30,22 +30,16 @@ main();
 function main() {
     let indexContent = {
         'btn': {
-            "cn": "书签工具  （点我随机跳一个书签",
-            "en": "bookmark tools   （Click me to jump to a bookmark randomly"
+            "cn": "书签工具",
+            "en": "bookmark tools"
         },
         "dd": {
-            "cn": "或者拖去书签栏试试？",
-            "en": "or try to drag that to the bookmark bar ?"
+            "cn": "by leizingyiu",
+            "en": "by leizingyiu"
         },
         "article": {
-            "cn": `<p style="font-weight:300;">
-            记录收藏一些，平时自己写的，或者收集回来的，书签工具 <br><br>
-            点击按钮可访问源码
-            </p>`,
-            "en": `<p style="font-weight:300;">
-            Collect some records, usually write by yourself, or collect back, bookmark tool <br><br>
-            Click the button to access the source code
-            </p>`
+            "cn": "把虚线框的按钮，拖到书签栏就可以了",
+            "en": "drag that button to your bookmark bar, then use it"
         }
     };
     if (Object.keys(searchJson).indexOf('bookmark') != -1) {
@@ -83,9 +77,9 @@ function main() {
             document.querySelector('#bookmarkBtn').innerText = j[k].showName[lang];
             document.querySelector("#bookmarkContainer dd").innerText = j[k].describe[lang];
             */
-        document.querySelector('#bookmarkBtn').innerHTML = indexContent.btn[lang];
-        document.querySelector('#bookmarkContainer dd').innerHTML = indexContent.dd[lang];
-        document.querySelector('#detail article').innerHTML = indexContent.article[lang];
+        document.querySelector('#bookmarkBtn').innerText = indexContent.btn[lang];
+        document.querySelector('#bookmarkContainer dd').innerText = indexContent.dd[lang];
+        document.querySelector('#detail article').innerText = indexContent.article[lang];
     }
     loadMenu();
 
@@ -129,56 +123,6 @@ function loadMenu() {
     const menuText = {
         'selectLang': { "cn": "language:", "en": '语言:' }
     }
-
-    {
-        let langList = ['cn', 'en'];
-        let li = document.createElement('li');
-        let dl = document.createElement('dl');
-        let dt = document.createElement('dt');
-        let dd = document.createElement('dd');
-        let ul = document.createElement('ul');
-
-        li.id = 'header';
-        dt.innerHTML = '<a href="javascript:window.location=window.location.origin+window.location.pathname;">Bookmark Tools</a>';
-        dd.innerText = 'by leizingyiu';
-        document.getElementById('toolsList').appendChild(li);
-        li.appendChild(dl);
-        dl.appendChild(dt);
-        dl.appendChild(dd);
-        dd.appendChild(ul);
-
-        let langLi = document.createElement('li');
-        langLi.innerText = menuText.selectLang[lang];
-        ul.appendChild(langLi);
-
-        langList.map(la => {
-            let l = document.createElement('li');
-            l.innerText = la;
-            l.onclick = function () {
-                let searchJ = getQueryJson();
-                searchJ.lang = this.innerText;
-                window.location = window.location.origin + window.location.pathname + '?' + jsonToSearch(searchJ);
-            }
-            ul.appendChild(l);
-        });
-    }
-
-    {
-        let footerLi = document.createElement('li');
-        let dl = document.createElement('dl');
-        let dt = document.createElement('dt');
-        let dd = document.createElement('dd');
-
-        footerLi.id = 'footer';
-        dt.innerHTML = 'Designed & Powerd by Leizingyiu</br>Copyright© <a href="https://leizingyiu.net" >Leizingyiu.net</a>';
-        dd.innerHTML = '粤ICP备2020086793号';
-        document.getElementById('toolsList').appendChild(footerLi);
-        footerLi.appendChild(dl);
-        dl.appendChild(dt);
-        dl.appendChild(dd);
-    }
-
-
     fetch(rootPath + '\\items.json')
         .then(r => r.json())
         .then(json => {
@@ -216,8 +160,7 @@ function loadMenu() {
                     loadDetail(thisJson);
                 }
 
-                document.getElementById('toolsList').insertBefore(li,
-                    document.getElementById('footer'));
+                document.getElementById('toolsList').appendChild(li);
                 li.appendChild(dl);
                 dl.appendChild(dt);
                 dl.appendChild(dd);
@@ -225,7 +168,36 @@ function loadMenu() {
 
         });
 
+    let langList = ['cn', 'en'];
+    let li = document.createElement('li');
+    let dl = document.createElement('dl');
+    let dt = document.createElement('dt');
+    let dd = document.createElement('dd');
+    let ul = document.createElement('ul');
 
+    li.id = 'header';
+    dt.innerText = 'Bookmark Tools';
+    dd.innerText = 'by leizingyiu';
+    document.getElementById('toolsList').appendChild(li);
+    li.appendChild(dl);
+    dl.appendChild(dt);
+    dl.appendChild(dd);
+    dd.appendChild(ul);
+
+    let langLi = document.createElement('li');
+    langLi.innerText = menuText.selectLang[lang];
+    ul.appendChild(langLi);
+
+    langList.map(la => {
+        let l = document.createElement('li');
+        l.innerText = la;
+        l.onclick = function () {
+            let searchJ = getQueryJson();
+            searchJ.lang = this.innerText;
+            window.location = window.location.origin + window.location.pathname + '?' + jsonToSearch(searchJ);
+        }
+        ul.appendChild(l);
+    })
 
     return void 0;
 }

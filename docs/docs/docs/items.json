@@ -3,7 +3,7 @@
         "name": "getImg",
         "showName": {
             "cn": "获取图片",
-            "en": "Get Images"
+            "en": "get Images"
         },
         "describe": {
             "cn": "获取页面上的图片",
@@ -52,8 +52,8 @@
     "unblockSelect": {
         "name": "unblockSelect",
         "showName": {
-            "cn": "解锁选中限制",
-            "en": "Unlock Selection Restrictions"
+            "cn": "解锁复制",
+            "en": "unblock select"
         },
         "describe": {
             "cn": "解除页面对选中文字的限制",
@@ -70,7 +70,7 @@
         "name": "enlargeTaobaoSku",
         "showName": {
             "cn": "放大淘宝宝贝选项",
-            "en": "Enlarge Taobao Sku"
+            "en": "enlarge taobao Sku"
         },
         "describe": {
             "cn": "淘宝选项缩略图太小了，用这个放大",

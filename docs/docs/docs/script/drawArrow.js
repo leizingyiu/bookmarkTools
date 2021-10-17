@@ -61,13 +61,11 @@ function drawArrowPath(fillColor, classList) {
     path.setAttribute('stroke', fillColor);
     path.setAttribute('stroke-width', Math.sin(strokeWidthIndex++ / Math.PI) * strokeWidth + strokeWidth * 2);
 
-    document.querySelector('html').style.cssText = '--border-color:' + fillColor + ';';
-
     document.getElementsByTagName('svg')[0].setAttribute('viewBox', '0 0 ' + winW + ' ' + winH);
 }
 
 function refleshPath() {
-    drawArrowPath('hsla(' + ((hOfHsl++ % 100) / 100 * 360) + ',' + sOfHsl + ',' + lOfHsl + ',1)', ['hue']);
+    drawArrowPath('hsla(' + (hOfHsl++ % 360) + ',' + sOfHsl + ',' + lOfHsl + ',1)', ['hue']);
 };
 
 

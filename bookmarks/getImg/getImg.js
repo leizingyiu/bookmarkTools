@@ -1,5 +1,5 @@
 javascript: console.log(`获取图片书签by leizingyiu
-Last modified : "2021/10/25 00:52:01"
+Last modified : "2021/10/25 02:20:38"
 `);
 (function () {
 
@@ -9,7 +9,6 @@ Last modified : "2021/10/25 00:52:01"
         script.text = str;
         document.getElementsByTagName('head')[0].appendChild(script);
         document.head.removeChild(document.head.lastChild);
-        /**https://www.cnblogs.com/lxg0/p/7805266.html */
     }
 
     var replaceWhiteList = ['instagram.com'], replaceBoo = true;
@@ -213,19 +212,6 @@ Last modified : "2021/10/25 00:52:01"
         var aHrefLink = ahrefImgLinkArray(document, replaceBoo, replaceSomeWeb);
         var mySrcList = [];
         mySrcList = mySrcList.concat(imgSrcList, bgUrlList, aHrefLink);
-
-        /*        // var myFrame = document.getElementsByTagName("iframe");
-                // var frameDoc;
-                // for (j = 0; j < myFrame.length; j++) {
-                //     if (myFrame[j].scrollWidth != 0 || myFrame[j].scrollHeight != 0) {
-                //         try {
-                //             frameDoc = myFrame[j].contentWindow.document;
-                //             imgSrcList = imgLinkArray(frameDoc, replaceBoo, replaceSomeWeb);
-                //             bgUrlList = bgImgLinkArray(frameDoc, replaceBoo, replaceSomeWeb);
-                //             mySrcList = mySrcList.concat(imgSrcList, bgUrlList)
-                //         } catch (err) { }
-                //     }
-                // }*/
 
         [...document.getElementsByTagName("iframe")].map(frame => {
             try {

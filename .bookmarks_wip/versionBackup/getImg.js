@@ -1,9 +1,9 @@
 javascript: console.log(`获取图片书签by leizingyiu
-Last modified : "2021/10/25 00:52:01"
+Last modified : "2021/10/15 12:24:25"
 `);
 (function () {
 
-    function evil(str) {
+    function eval1(str) {
         var script = document.createElement('script');
         script.type = "text/javascript";
         script.text = str;
@@ -12,7 +12,7 @@ Last modified : "2021/10/25 00:52:01"
         /**https://www.cnblogs.com/lxg0/p/7805266.html */
     }
 
-    var replaceWhiteList = ['instagram.com'], replaceBoo = true;
+    var mySrcList = [], imgSrcList = [], bgUrlList = [], replaceWhiteList = ['instagram.com'], replaceBoo = true;
 
     var pageSetUp = {
         divId: 'imgsByYiu',
@@ -208,43 +208,28 @@ Last modified : "2021/10/25 00:52:01"
     main();
 
     function main() {
-        var imgSrcList = imgLinkArray(document, replaceBoo, replaceSomeWeb);
-        var bgUrlList = bgImgLinkArray(document, replaceBoo, replaceSomeWeb);
-        var aHrefLink = ahrefImgLinkArray(document, replaceBoo, replaceSomeWeb);
-        var mySrcList = [];
-        mySrcList = mySrcList.concat(imgSrcList, bgUrlList, aHrefLink);
+        console.log('start main');
+        imgSrcList = imgLinkArray(document, replaceBoo, replaceSomeWeb);
+        bgUrlList = bgImgLinkArray(document, replaceBoo, replaceSomeWeb);
+        mySrcList = mySrcList.concat(imgSrcList, bgUrlList);
 
-        /*        // var myFrame = document.getElementsByTagName("iframe");
-                // var frameDoc;
-                // for (j = 0; j < myFrame.length; j++) {
-                //     if (myFrame[j].scrollWidth != 0 || myFrame[j].scrollHeight != 0) {
-                //         try {
-                //             frameDoc = myFrame[j].contentWindow.document;
-                //             imgSrcList = imgLinkArray(frameDoc, replaceBoo, replaceSomeWeb);
-                //             bgUrlList = bgImgLinkArray(frameDoc, replaceBoo, replaceSomeWeb);
-                //             mySrcList = mySrcList.concat(imgSrcList, bgUrlList)
-                //         } catch (err) { }
-                //     }
-                // }*/
-
-        [...document.getElementsByTagName("iframe")].map(frame => {
-            try {
-                frameDoc = frame.contentWindow.document;
-                imgSrcList = imgLinkArray(frameDoc, replaceBoo, replaceSomeWeb);
-                bgUrlList = bgImgLinkArray(frameDoc, replaceBoo, replaceSomeWeb);
-                aHrefLink = ahrefImgLinkArray(frameDoc, replaceBoo, replaceSomeWeb);
-                mySrcList = mySrcList.concat(imgSrcList, bgUrlList, aHrefLink)
-            } catch (err) { }
-        });
-
+        var myFrame = document.getElementsByTagName("iframe");
+        var frameDoc;
+        for (j = 0; j < myFrame.length; j++) {
+            if (myFrame[j].scrollWidth != 0 || myFrame[j].scrollHeight != 0) {
+                try {
+                    frameDoc = myFrame[j].contentWindow.document;
+                    imgSrcList = imgLinkArray(frameDoc, replaceBoo, replaceSomeWeb);
+                    bgUrlList = bgImgLinkArray(frameDoc, replaceBoo, replaceSomeWeb);
+                    mySrcList = mySrcList.concat(imgSrcList, bgUrlList)
+                } catch (err) { }
+            }
+        }
         mySrcList = [...new Set(mySrcList)];
-
+        /*    console.log(mySrcList);*/
         var pageCodeBlock = makeImgsCodeBlock(mySrcList.reverse(), pageSetUp['divId'], pageSetUp['imgClass'], pageSetUp['otherHtml'], pageSetUp['style'], pageSetUp['scripts']);
-
         replaceFullPage(pageCodeBlock);
-
-        try { evil(pageSetUp['scripts']); } catch (err) { console.log(err) };
-
+        try { eval1(pageSetUp['scripts']); } catch (err) { console.log(err) };
 
         [...document.querySelectorAll('img')].map(function (img) {
             if (img.id == 'popImg') { return }
@@ -280,43 +265,6 @@ Last modified : "2021/10/25 00:52:01"
         }
         return result
     }
-    function bgImgLinkArray(obj, replaceBoo, replaceSomeWeb) {
-        let result = [];
-        let all = obj.querySelectorAll('*');
-        let bg = '';
-        let reg = /(?:['"])[^'"]+/g;
-        let reg2 = /(\S+)(jpg|png|jpeg|gif)(.+)/gi;
-        for (let j = 0; j < all.length; j++) {
-            bg = all[j].style.backgroundImage.match(reg);
-            console.log(bg);
-            if (bg != "" && bg != null) {
-                [...bg].map(i => {
-                    result[result.length] = i;
-                    result[result.length - 1] = replaceBoo == true ? result[result.length - 1].replace(reg2, "$1$2") : result[result.length - 1];
-                    result[result.length - 1] = regReplaceForSomeWeb(result[result.length - 1], replaceSomeWeb)
-
-                });
-
-
-            }
-        }
-        return result
-    }
-    function ahrefImgLinkArray(obj, replaceBoo, replaceSomeWeb) {
-        let result = [];
-        let all = obj.querySelectorAll('a');
-        let reg = /(url\(")(.*)("\))/g;
-        let reg2 = /(\S+)(jpg|png|jpeg|gif)(.+)/gi;
-        for (let j = 0; j < all.length; j++) {
-            bg = all[j].href.match(/(\.jpg)|(\.gif)|(\.png)|(\.jpeg)|(\.webp)/) ? all[j].href : '';
-            if (bg != "" || bg != undefined) {
-                result[result.length] = String(bg).replace(reg, "$2");
-                result[result.length - 1] = replaceBoo == true ? result[result.length - 1].replace(reg2, "$1$2") : result[result.length - 1];
-                result[result.length - 1] = regReplaceForSomeWeb(result[result.length - 1], replaceSomeWeb)
-            }
-        }
-        return result
-    }
 
     function sizeTheImgs(dom) {
         /* console.log(dom);*/
@@ -346,56 +294,68 @@ Last modified : "2021/10/25 00:52:01"
         return [nWidth, nHeight]
     }
 
-    function makeImgsCodeBlock(imgList, divId, imgClass, otherHtml, style, scripts) {
-        let result = document.createElement("div");
-        let ul = document.createElement('ul');
-        ul.id = divId;
-        result.appendChild(ul);
-        var li, img;
-        console.log(imgList instanceof Array);
 
-        if (imgList instanceof Array) {
-            imgList.map(image => {
-                li = document.createElement('li');
-                img = document.createElement('img');
-                img.classList.add(imgClass);
-                img.src = image.replace(/_\/fw\/\d*\/format\/.*/g, '');
-                ul.appendChild(li);
-                li.appendChild(img);
-            });
-            console.log(ul);
-        } else {
-            Object.keys(imgList).map(k => {
-                li = document.createElement('li');
-                img = document.createElement('img');
-                img.classList.add(imgClass);
-                img.src = imgList[k].replace(/_\/fw\/\d*\/format\/.*/g, '');
-                ul.appendChild(li);
-                li.appendChild(img);
 
-            });
-            console.log(ul);
-
+    function getAllChildren(obj) {
+        var result = [];
+        for (var i = 0; i < obj.childElementCount; i++) {
+            result = result.concat(obj.children[i]);
+            if (obj.children[i].childElementCount !== 0) {
+                result = result.concat(getAllChildren(obj.children[i]))
+            }
         }
-        console.log(imgList, result);
-        let styleDom = document.createElement('style');
-        let scriptDom = document.createElement('script');
-        styleDom.innerHTML = style;
-        scriptDom.innerHTML = scripts;
-        let tempDom = document.createElement('div');
-        tempDom.innerHTML = otherHtml;
-        [...tempDom.children].map(dom => {
-            result.appendChild(dom);
-        });
-        result.appendChild(styleDom);
-        result.appendChild(scriptDom);
-        return result;
+        return result
     }
 
+    function bgImgLinkArray(obj, replaceBoo, replaceSomeWeb) {
+        var result = [];
+        var all = getAllChildren(obj);
+        var bg;
+        var reg = /(url\(")(.*)("\))/g;
+        var reg2 = /(\S+)(jpg|png|jpeg|gif)(.+)/gi;
+        for (var j = 0; j < all.length; j++) {
+            bg = all[j].style.backgroundImage;
+            if (bg != "" || bg != undefined) {
+                result[result.length] = String(bg).replace(reg, "$2");
+                result[result.length - 1] = replaceBoo == true ? result[result.length - 1].replace(reg2, "$1$2") : result[result.length - 1];
+                result[result.length - 1] = regReplaceForSomeWeb(result[result.length - 1], replaceSomeWeb)
+            }
+        }
+        return result
+    }
+
+    function makeImgsCodeBlock(imgList, divId, imgClass, otherHtml, style, scripts) {
+        var result = '';
+        var imgParentDom = 'ul';
+        var imgHeadDom = 'li';
+        result += '<' + imgParentDom + ' id="' + divId + '" class="">';
+
+        var imgDoms = '';
+
+        if (imgList instanceof Array) {
+            for (var i = 0; i < imgList.length; i++) {
+                imgDoms = '<' + imgHeadDom + '><img class="' + imgClass + '" src="' + imgList[i].replace(/_\/fw\/\d*\/format\/.*/g, '') + '"></' + imgHeadDom + '>' + imgDoms;
+            }
+        } else {
+            for (var i in imgList) {
+                imgDoms = '<' + imgHeadDom + '><img class="' + imgClass + '" src="' + imgList[i].replace(/_\/fw\/\d*\/format\/.*/g, '') + '"></' + imgHeadDom + '>' + imgDoms;
+            }
+        }
+
+        result += imgDoms;
+        result += '</' + imgParentDom + '>';
+        result += otherHtml;
+        result += '<' + 'style>' + style + '<' + '/style>';
+        result += '<' + 'script>' + scripts + '<' + '/script>';
+
+        return result
+    }
 
     function regReplaceForSomeWeb(str, replaceSomeWeb) {
         var result = '';
         for (let r in replaceSomeWeb) {
+            /* console.log(r);*/
+            /* console.log(str.indexOf(r));*/
             if (str.indexOf(r) != -1) {
                 result = str.replace(replaceSomeWeb[r]['reg'], replaceSomeWeb[r]['result'])
             }
@@ -413,11 +373,7 @@ Last modified : "2021/10/25 00:52:01"
         resultObj.id = 'replacePageAsObjs';
 
         for (let i in objs) {
-            if (objs[i] instanceof HTMLElement) {
-                resultObj.appendChild(objs[i]);
-            } else {
-                resultObj.innerHTML += objs[i];
-            }
+            resultObj.innerHTML += objs[i];
         }
         var sourceBody = document.getElementsByTagName("body")[0];
         var html = document.getElementsByTagName("html")[0];

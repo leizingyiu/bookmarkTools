@@ -1,5 +1,5 @@
 javascript: console.log(`获取图片书签by leizingyiu
-Last modified : "2021/10/25 02:20:38"
+Last modified : "2021/10/29 14:35:52"
 `);
 (function () {
 
@@ -201,7 +201,7 @@ Last modified : "2021/10/25 02:20:38"
     for (var i = 0; i < replaceWhiteList.length; i++) {
         if (window.location.href.indexOf(replaceWhiteList[i]) != -1) {
             replaceBoo = false
-        }
+        };
     };
 
     main();
@@ -220,9 +220,9 @@ Last modified : "2021/10/25 02:20:38"
                 bgUrlList = bgImgLinkArray(frameDoc, replaceBoo, replaceSomeWeb);
                 aHrefLink = ahrefImgLinkArray(frameDoc, replaceBoo, replaceSomeWeb);
                 mySrcList = mySrcList.concat(imgSrcList, bgUrlList, aHrefLink)
-            } catch (err) { }
+            } catch (err) { };
         });
-
+        mySrcList = mySrcList.reverse();
         mySrcList = [...new Set(mySrcList)];
 
         var pageCodeBlock = makeImgsCodeBlock(mySrcList.reverse(), pageSetUp['divId'], pageSetUp['imgClass'], pageSetUp['otherHtml'], pageSetUp['style'], pageSetUp['scripts']);
@@ -242,7 +242,7 @@ Last modified : "2021/10/25 02:20:38"
 
 
         return void 0;
-    }
+    };
     function imgLinkArray(obj, replaceBoo, replaceSomeWeb) {
         var result = [];
         var reg = /(\S+)(jpg|png|jpeg|gif)(.+)/gi;
@@ -257,15 +257,15 @@ Last modified : "2021/10/25 02:20:38"
                     result[result.length] = obj.images[i].attributes[0].value
                 } catch (err) {
                     /* console.log(obj.images[i])*/
-                }
-            }
+                };
+            };
             if (regData.test(result[result.length - 1]) != true && replaceBoo) {
                 result[result.length] = result[result.length - 1].replace(reg, "$1$2")
-            }
+            };
             result[result.length] = regReplaceForSomeWeb(result[result.length - 1], replaceSomeWeb);
-        }
-        return result
-    }
+        };
+        return result;
+    };
     function bgImgLinkArray(obj, replaceBoo, replaceSomeWeb) {
         let result = [];
         let all = obj.querySelectorAll('*');
@@ -273,20 +273,20 @@ Last modified : "2021/10/25 02:20:38"
         let reg = /(?:['"])[^'"]+/g;
         let reg2 = /(\S+)(jpg|png|jpeg|gif)(.+)/gi;
         for (let j = 0; j < all.length; j++) {
+            console.log(all[j].style);
+            console.log(all[j].style.backgroundImage);
+            if (all[j].style.backgroundImage == '' || all[j].style.backgroundImage == undefined) { continue; }
             bg = all[j].style.backgroundImage.match(reg);
             console.log(bg);
             if (bg != "" && bg != null) {
                 [...bg].map(i => {
-                    result[result.length] = i;
+                    result[result.length] = i.replace(/^['"]/, '');
                     result[result.length - 1] = replaceBoo == true ? result[result.length - 1].replace(reg2, "$1$2") : result[result.length - 1];
                     result[result.length - 1] = regReplaceForSomeWeb(result[result.length - 1], replaceSomeWeb)
-
                 });
-
-
-            }
-        }
-        return result
+            };
+        };
+        return result;
     }
     function ahrefImgLinkArray(obj, replaceBoo, replaceSomeWeb) {
         let result = [];
@@ -299,9 +299,9 @@ Last modified : "2021/10/25 02:20:38"
                 result[result.length] = String(bg).replace(reg, "$2");
                 result[result.length - 1] = replaceBoo == true ? result[result.length - 1].replace(reg2, "$1$2") : result[result.length - 1];
                 result[result.length - 1] = regReplaceForSomeWeb(result[result.length - 1], replaceSomeWeb)
-            }
-        }
-        return result
+            };
+        };
+        return result;
     }
 
     function sizeTheImgs(dom) {
@@ -314,8 +314,8 @@ Last modified : "2021/10/25 02:20:38"
             let I = document.createElement('i');
             I.innerText = w + 'x' + h;
             img[i].parentNode.appendChild(I);
-        }
-    }
+        };
+    };
 
     function getImgNaturalDimensions(img, callback = function () { void 0 }) {
         var nWidth, nHeight;
@@ -327,9 +327,9 @@ Last modified : "2021/10/25 02:20:38"
             image.src = img.src;
             image.onload = function () {
                 callback(image.width, image.height);
-            }
-        }
-        return [nWidth, nHeight]
+            };
+        };
+        return [nWidth, nHeight];
     }
 
     function makeImgsCodeBlock(imgList, divId, imgClass, otherHtml, style, scripts) {
@@ -362,7 +362,7 @@ Last modified : "2021/10/25 02:20:38"
             });
             console.log(ul);
 
-        }
+        };
         console.log(imgList, result);
         let styleDom = document.createElement('style');
         let scriptDom = document.createElement('script');
@@ -376,7 +376,7 @@ Last modified : "2021/10/25 02:20:38"
         result.appendChild(styleDom);
         result.appendChild(scriptDom);
         return result;
-    }
+    };
 
 
     function regReplaceForSomeWeb(str, replaceSomeWeb) {
@@ -385,10 +385,10 @@ Last modified : "2021/10/25 02:20:38"
             if (str.indexOf(r) != -1) {
                 result = str.replace(replaceSomeWeb[r]['reg'], replaceSomeWeb[r]['result'])
             }
-        }
+        };
         if (result == '') {
             result = str;
-        }
+        };
         return result;
     }
 
@@ -411,13 +411,9 @@ Last modified : "2021/10/25 02:20:38"
         newBody.id = "newBody";
         newBody.appendChild(resultObj);
 
-
-
-
         html.appendChild(newBody);
         sourceBody.style.display = "none";
         /* html.removeChild(sourceBody); */
-
         var recovery = function (hiddenBody, sourceBody) {
             var html = document.getElementsByTagName("html")[0];
             var body = document.getElementsByTagName('body');
@@ -425,8 +421,8 @@ Last modified : "2021/10/25 02:20:38"
             for (let i = 0; i < body.length; i++) {
                 body[i].style.display = "";
             }
-
         };
+
         document.onkeydown = function (event) {
             var e = event || window.e;
             var keyCode = e.keyCode || e.which;
@@ -436,9 +432,9 @@ Last modified : "2021/10/25 02:20:38"
                     recovery(sourceBody, newBody);
                     document.onkeydown = eval(sourceOnKeyDownStr);
                     break;
-            }
+            };
         };
-    }
+    };
 
-    console.log('来关注我微博 @leizingyiu 呀，虽然不怎么更新😀')
+    console.log('来关注我微博 @leizingyiu 呀，虽然不怎么更新😀');
 })();

@@ -1,5 +1,5 @@
 /**
-Last modified: "2021/10/17 12:22:19"
+Last modified: "2021/10/29 15:23:05"
  */
 // console.log('main script');
 //console.warn = () => { };
@@ -27,6 +27,7 @@ console.log(lang);
 
 
 main();
+
 function main() {
     let indexContent = {
         'btn': {
@@ -97,9 +98,13 @@ function setUrl(name, value) {
     let searchJ = getQueryJson();
     searchJ[name] = value;
     let url = location.pathname + '?' + jsonToSearch(searchJ);
-    history.pushState({ url: url, title: document.title }, document.title, url);
+    history.pushState({
+        url: url,
+        title: document.title
+    }, document.title, url);
     return void 0;
 }
+
 function loadDetail(json) {
     console.log(json);
     setUrl('bookmark', json['name']);
@@ -110,7 +115,11 @@ function loadDetail(json) {
     let describe = Object.keys(json['describe'])[0] != '0' ? json['describe'][lang] : json['describe'];
 
     document.querySelector("#bookmarkContainer dd").innerText = describe;
-    loadBtn(json['scriptPath']);
+    if (json.hasOwnProperty('minPath')) {
+        loadBtn(json['minPath'], json['scriptPath']);
+    } else {
+        loadBtn(json['scriptPath']);
+    }
 
     let mdPath = Object.keys(json['mdPath'])[0] != '0' ? json['mdPath'][lang] : json['mdPath'];
     loadMd(mdPath);
@@ -127,7 +136,10 @@ function loadMenu() {
     // console.trace();
     // console.log('load menu');
     const menuText = {
-        'selectLang': { "cn": "language:", "en": '语言:' }
+        'selectLang': {
+            "cn": "language:",
+            "en": '语言:'
+        }
     }
 
     {
@@ -230,12 +242,14 @@ function loadMenu() {
     return void 0;
 }
 
-function loadBtn(url) {
-    fetch(url)
+function loadBtn(minUrl, readUrl = minUrl) {
+    fetch(minUrl)
         .then(r => r.text())
         .then(t => {
             let btn = document.getElementById('bookmarkBtn');
-            clickAndDrag(btn, t, url);
+            t = t.match(/(^javascript)|(^data)/) ? t : 'javascript:' + t;
+            //* console.log(t, '\n', readUrl);*/
+            clickAndDrag(btn, t, readUrl);
         });
 
     return void 0;
@@ -280,6 +294,7 @@ function clickAndDrag(dom, dragUrl, clickUrl) {
         }
     }, false)
 }
+
 function openWin(url, tar) {
     if (url.indexOf('javascript:') == 0) {
         console.log(url);

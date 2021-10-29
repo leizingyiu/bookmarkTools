@@ -1,5 +1,5 @@
 /* 
-Last modified: "2021/10/25 02:09:40"
+Last modified: "2021/10/29 17:55:19"
  */
 :root {
     --padding-size: 1rem;
@@ -153,7 +153,7 @@ main #detail {
     /* display: flex;
     flex-direction: column; */
     /* justify-content: center; */
-    flex-grow: 2;
+    flex-grow: 100;
     max-width: 60vw;
     overflow-y: scroll;
     height: fit-content;
@@ -170,6 +170,7 @@ main #detail #bookmarkContainer::after {
     display: block;
     padding-top: 64%;
     content: '';
+    padding-bottom: 4em;
 }
 
 main #detail #bookmarkContainer>dt {
@@ -238,7 +239,8 @@ main #detail #bookmarkContainer>dd::after{
     padding-top: 1em;
     left: 50%;
     transform: translate(-50%, 0);
-   width: 50vw;
+   width: 100vw;
+   max-width: 200%;
     position: absolute;
 }
 
@@ -320,6 +322,7 @@ main #detail article {
 
     main #detail article {
         padding-top: 2em;
+        margin-top: 2em;
     }
 }
 

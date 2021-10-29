@@ -1,6 +1,6 @@
 javascript: (function () {
 	console.log(`
-	last modified: "2021/10/17 00:13:43"
+	last modified: "2021/10/29 13:01:58"
 	`);
 
 	[...document.querySelectorAll('.J_TSaleProp a')].map(function (a) {

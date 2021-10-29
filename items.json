@@ -99,8 +99,8 @@
         "scriptPath": "bookmarks/taoKoulingReader/taoKoulingReader.min.js",
         "minPath": "bookmarks/taoKoulingReader/taoKoulingReader.js",
         "mdPath": {
-            "cn": "./bookmarks/enLargeTaobaoSku/readme.md",
-            "en": "./bookmarks/enLargeTaobaoSku/readme_en.md"
+            "cn": "./bookmarks/taoKoulingReader/readme.md",
+            "en": "./bookmarks/taoKoulingReader/readme_en.md"
         }
     }
 }

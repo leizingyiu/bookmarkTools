@@ -1,5 +1,5 @@
 /* 
-Last modified: "2021/10/29 17:55:19"
+Last modified: "2021/10/29 19:27:16"
  */
 :root {
     --padding-size: 1rem;
@@ -249,6 +249,8 @@ main #detail article {
     padding: 0 2em 2em;
     width: fit-content;
     margin: auto;
+    min-width: 72%;
+    max-width: 90%;
 }
 
 @media screen and (max-width: 800px) {

@@ -10,6 +10,7 @@
             "en": "get images from page"
         },
         "scriptPath": "./bookmarks/getImg/getImg.js",
+        "minPath": "./bookmarks/getImg/getImg.min.js",
         "mdPath": {
             "cn": "./bookmarks/getImg/readme.md",
             "en": "./bookmarks/getImg/readme_en.md"
@@ -43,6 +44,7 @@
             "en": "draw sth in new page"
         },
         "scriptPath": "./bookmarks/drawPad/draw.js",
+        "minPath": "./bookmarks/drawPad/draw.min.js",
         "mdPath": {
             "cn": "./bookmarks/drawPad/readme.md",
             "en": "./bookmarks/drawPad/readme_en.md"
@@ -60,6 +62,7 @@
             "en": "Cancel the restriction of the selected text on the page"
         },
         "scriptPath": "./bookmarks/unblockSelect/unblockSelect.js",
+        "minPath": "./bookmarks/unblockSelect/unblockSelect.min.js",
         "mdPath": {
             "cn": "./bookmarks/unblockSelect/readme.md",
             "en": "./bookmarks/unblockSelect/readme_en.md"
@@ -77,9 +80,27 @@
             "en": "enlarge sku pics in taobao item page "
         },
         "scriptPath": "bookmarks/enLargeTaobaoSku/enLargeTaobaoSku.js",
+        "minPath": "bookmarks/enLargeTaobaoSku/enLargeTaobaoSku.min.js",
         "mdPath": {
             "cn": "./bookmarks/enLargeTaobaoSku/readme.md",
             "en": "./bookmarks/enLargeTaobaoSku/readme_en.md"
+        }
+    },
+    "taoKouling": {
+        "name": "taoKouling",
+        "showName": {
+            "cn": "淘口令解析跳转",
+            "en": "taoKouling reader"
+        },
+        "describe": {
+            "cn": "解析淘口令，在电脑看到优惠信息，可以直接浏览器打开啦",
+            "en": "Analyze the TaoKouling . If see the discount information on the computer, you can open it directly in the browser"
+        },
+        "scriptPath": "bookmarks/taoKoulingReader/taoKoulingReader.min.js",
+        "minPath": "bookmarks/taoKoulingReader/taoKoulingReader.js",
+        "mdPath": {
+            "cn": "./bookmarks/taoKoulingReader/readme.md",
+            "en": "./bookmarks/taoKoulingReader/readme_en.md"
         }
     }
 }

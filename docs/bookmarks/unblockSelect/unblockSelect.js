@@ -1,7 +1,7 @@
 javascript: "use strict";
 
 [...document.querySelectorAll('*')].map(dom => {
-    dom.style.cssText = `
+    dom.style.cssText += `
     -webkit-touch-callout: auto!important;
     -webkit-user-select: auto!important;
     -khtml-user-select: auto!important;

@@ -1,3 +1,6 @@
+/* 
+Last modified: "2021/10/29 19:27:16"
+ */
 :root {
     --padding-size: 1rem;
 
@@ -150,7 +153,7 @@ main #detail {
     /* display: flex;
     flex-direction: column; */
     /* justify-content: center; */
-    flex-grow: 2;
+    flex-grow: 100;
     max-width: 60vw;
     overflow-y: scroll;
     height: fit-content;
@@ -167,6 +170,7 @@ main #detail #bookmarkContainer::after {
     display: block;
     padding-top: 64%;
     content: '';
+    padding-bottom: 4em;
 }
 
 main #detail #bookmarkContainer>dt {
@@ -192,6 +196,9 @@ main #detail a#bookmarkBtn {
     box-shadow: 0px 4px 12px 0px rgb(0 0 0 / 8%),
         0px 8px 32px 0px rgb(0 0 0 / 4%);
 }
+
+
+
 
 main #detail a#bookmarkBtn:hover {
     border: dashed 2px var(--border-color);
@@ -224,10 +231,26 @@ main #detail #bookmarkContainer>dd {
     letter-spacing: 0.1em;
 }
 
+main #detail #bookmarkContainer>dd::after{
+    content: "拖拽到书签栏保存，点击查看源码 / Drag and drop to the bookmark bar to save, click to view the source code";
+    font-size: 10px;
+    display: block;
+    opacity: 0.64;
+    padding-top: 1em;
+    left: 50%;
+    transform: translate(-50%, 0);
+   width: 100vw;
+   max-width: 200%;
+    position: absolute;
+}
+
+
 main #detail article {
     padding: 0 2em 2em;
     width: fit-content;
     margin: auto;
+    min-width: 72%;
+    max-width: 90%;
 }
 
 @media screen and (max-width: 800px) {
@@ -295,19 +318,56 @@ main #detail article {
         transform: none;
     }
 
-    main #detail a#bookmarkBtn::after {
+    main #detail #bookmarkContainer>dd::after{
         content: "请在电脑打开 /  pls open this page on computer";
-        font-size: 10px;
-        display: block;
-        opacity: 0.64;
-        padding-top: 2em;
-        left: 50%;
-        transform: translate(-50%, 0);
-        width: 90vw;
-        position: absolute;
     }
 
     main #detail article {
         padding-top: 2em;
+        margin-top: 2em;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 2px;
+    height: 2px;
+    mix-blend-mode: multiply;
+    background-blend-mode: multiply;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.08);
+    mix-blend-mode: multiply;
+    background-blend-mode: multiply;
+}
+
+*:hover::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.32);
+    mix-blend-mode: multiply;
+    background-blend-mode: multiply;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 0;
+    background: rgba(0, 0, 0, 0);
+    mix-blend-mode: multiply;
+    background-blend-mode: multiply;
+}
+
+* {
+    scrollbar-color: rgba(0, 0, 0, 0.02) rgba(0, 0, 0, 0);
+    scrollbar-width: thin;
+}
+
+*:hover {
+    scrollbar-color: rgba(0, 0, 0, 0.08) rgba(0, 0, 0, 0);
+    scrollbar-width: thin;
+}
+
+
+@supports (bottom: env(safe-area-inset-bottom)){
+    body,.fixedBottom{
+        padding-bottom: constant(safe-area-inset-bottom);
+        padding-bottom: env(safe-area-inset-bottom);
     }
 }

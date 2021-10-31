@@ -1,17 +1,18 @@
 javascript: console.log(`获取图片书签by leizingyiu
-Last modified : "2021/10/29 14:35:52"
+Last modified : "2021/10/15 12:24:25"
 `);
 (function () {
 
-    function evil(str) {
+    function eval1(str) {
         var script = document.createElement('script');
         script.type = "text/javascript";
         script.text = str;
         document.getElementsByTagName('head')[0].appendChild(script);
         document.head.removeChild(document.head.lastChild);
+        /**https://www.cnblogs.com/lxg0/p/7805266.html */
     }
 
-    var replaceWhiteList = ['instagram.com'], replaceBoo = true;
+    var mySrcList = [], imgSrcList = [], bgUrlList = [], replaceWhiteList = ['instagram.com'], replaceBoo = true;
 
     var pageSetUp = {
         divId: 'imgsByYiu',
@@ -201,36 +202,34 @@ Last modified : "2021/10/29 14:35:52"
     for (var i = 0; i < replaceWhiteList.length; i++) {
         if (window.location.href.indexOf(replaceWhiteList[i]) != -1) {
             replaceBoo = false
-        };
+        }
     };
 
     main();
 
     function main() {
-        var imgSrcList = imgLinkArray(document, replaceBoo, replaceSomeWeb);
-        var bgUrlList = bgImgLinkArray(document, replaceBoo, replaceSomeWeb);
-        var aHrefLink = ahrefImgLinkArray(document, replaceBoo, replaceSomeWeb);
-        var mySrcList = [];
-        mySrcList = mySrcList.concat(imgSrcList, bgUrlList, aHrefLink);
+        console.log('start main');
+        imgSrcList = imgLinkArray(document, replaceBoo, replaceSomeWeb);
+        bgUrlList = bgImgLinkArray(document, replaceBoo, replaceSomeWeb);
+        mySrcList = mySrcList.concat(imgSrcList, bgUrlList);
 
-        [...document.getElementsByTagName("iframe")].map(frame => {
-            try {
-                frameDoc = frame.contentWindow.document;
-                imgSrcList = imgLinkArray(frameDoc, replaceBoo, replaceSomeWeb);
-                bgUrlList = bgImgLinkArray(frameDoc, replaceBoo, replaceSomeWeb);
-                aHrefLink = ahrefImgLinkArray(frameDoc, replaceBoo, replaceSomeWeb);
-                mySrcList = mySrcList.concat(imgSrcList, bgUrlList, aHrefLink)
-            } catch (err) { };
-        });
-        mySrcList = mySrcList.reverse();
+        var myFrame = document.getElementsByTagName("iframe");
+        var frameDoc;
+        for (j = 0; j < myFrame.length; j++) {
+            if (myFrame[j].scrollWidth != 0 || myFrame[j].scrollHeight != 0) {
+                try {
+                    frameDoc = myFrame[j].contentWindow.document;
+                    imgSrcList = imgLinkArray(frameDoc, replaceBoo, replaceSomeWeb);
+                    bgUrlList = bgImgLinkArray(frameDoc, replaceBoo, replaceSomeWeb);
+                    mySrcList = mySrcList.concat(imgSrcList, bgUrlList)
+                } catch (err) { }
+            }
+        }
         mySrcList = [...new Set(mySrcList)];
-
+        /*    console.log(mySrcList);*/
         var pageCodeBlock = makeImgsCodeBlock(mySrcList.reverse(), pageSetUp['divId'], pageSetUp['imgClass'], pageSetUp['otherHtml'], pageSetUp['style'], pageSetUp['scripts']);
-
         replaceFullPage(pageCodeBlock);
-
-        try { evil(pageSetUp['scripts']); } catch (err) { console.log(err) };
-
+        try { eval1(pageSetUp['scripts']); } catch (err) { console.log(err) };
 
         [...document.querySelectorAll('img')].map(function (img) {
             if (img.id == 'popImg') { return }
@@ -242,7 +241,7 @@ Last modified : "2021/10/29 14:35:52"
 
 
         return void 0;
-    };
+    }
     function imgLinkArray(obj, replaceBoo, replaceSomeWeb) {
         var result = [];
         var reg = /(\S+)(jpg|png|jpeg|gif)(.+)/gi;
@@ -257,51 +256,14 @@ Last modified : "2021/10/29 14:35:52"
                     result[result.length] = obj.images[i].attributes[0].value
                 } catch (err) {
                     /* console.log(obj.images[i])*/
-                };
-            };
+                }
+            }
             if (regData.test(result[result.length - 1]) != true && replaceBoo) {
                 result[result.length] = result[result.length - 1].replace(reg, "$1$2")
-            };
+            }
             result[result.length] = regReplaceForSomeWeb(result[result.length - 1], replaceSomeWeb);
-        };
-        return result;
-    };
-    function bgImgLinkArray(obj, replaceBoo, replaceSomeWeb) {
-        let result = [];
-        let all = obj.querySelectorAll('*');
-        let bg = '';
-        let reg = /(?:['"])[^'"]+/g;
-        let reg2 = /(\S+)(jpg|png|jpeg|gif)(.+)/gi;
-        for (let j = 0; j < all.length; j++) {
-            console.log(all[j].style);
-            console.log(all[j].style.backgroundImage);
-            if (all[j].style.backgroundImage == '' || all[j].style.backgroundImage == undefined) { continue; }
-            bg = all[j].style.backgroundImage.match(reg);
-            console.log(bg);
-            if (bg != "" && bg != null) {
-                [...bg].map(i => {
-                    result[result.length] = i.replace(/^['"]/, '');
-                    result[result.length - 1] = replaceBoo == true ? result[result.length - 1].replace(reg2, "$1$2") : result[result.length - 1];
-                    result[result.length - 1] = regReplaceForSomeWeb(result[result.length - 1], replaceSomeWeb)
-                });
-            };
-        };
-        return result;
-    }
-    function ahrefImgLinkArray(obj, replaceBoo, replaceSomeWeb) {
-        let result = [];
-        let all = obj.querySelectorAll('a');
-        let reg = /(url\(")(.*)("\))/g;
-        let reg2 = /(\S+)(jpg|png|jpeg|gif)(.+)/gi;
-        for (let j = 0; j < all.length; j++) {
-            bg = all[j].href.match(/(\.jpg)|(\.gif)|(\.png)|(\.jpeg)|(\.webp)/) ? all[j].href : '';
-            if (bg != "" || bg != undefined) {
-                result[result.length] = String(bg).replace(reg, "$2");
-                result[result.length - 1] = replaceBoo == true ? result[result.length - 1].replace(reg2, "$1$2") : result[result.length - 1];
-                result[result.length - 1] = regReplaceForSomeWeb(result[result.length - 1], replaceSomeWeb)
-            };
-        };
-        return result;
+        }
+        return result
     }
 
     function sizeTheImgs(dom) {
@@ -314,8 +276,8 @@ Last modified : "2021/10/29 14:35:52"
             let I = document.createElement('i');
             I.innerText = w + 'x' + h;
             img[i].parentNode.appendChild(I);
-        };
-    };
+        }
+    }
 
     function getImgNaturalDimensions(img, callback = function () { void 0 }) {
         var nWidth, nHeight;
@@ -327,68 +289,80 @@ Last modified : "2021/10/29 14:35:52"
             image.src = img.src;
             image.onload = function () {
                 callback(image.width, image.height);
-            };
-        };
-        return [nWidth, nHeight];
+            }
+        }
+        return [nWidth, nHeight]
+    }
+
+
+
+    function getAllChildren(obj) {
+        var result = [];
+        for (var i = 0; i < obj.childElementCount; i++) {
+            result = result.concat(obj.children[i]);
+            if (obj.children[i].childElementCount !== 0) {
+                result = result.concat(getAllChildren(obj.children[i]))
+            }
+        }
+        return result
+    }
+
+    function bgImgLinkArray(obj, replaceBoo, replaceSomeWeb) {
+        var result = [];
+        var all = getAllChildren(obj);
+        var bg;
+        var reg = /(url\(")(.*)("\))/g;
+        var reg2 = /(\S+)(jpg|png|jpeg|gif)(.+)/gi;
+        for (var j = 0; j < all.length; j++) {
+            bg = all[j].style.backgroundImage;
+            if (bg != "" || bg != undefined) {
+                result[result.length] = String(bg).replace(reg, "$2");
+                result[result.length - 1] = replaceBoo == true ? result[result.length - 1].replace(reg2, "$1$2") : result[result.length - 1];
+                result[result.length - 1] = regReplaceForSomeWeb(result[result.length - 1], replaceSomeWeb)
+            }
+        }
+        return result
     }
 
     function makeImgsCodeBlock(imgList, divId, imgClass, otherHtml, style, scripts) {
-        let result = document.createElement("div");
-        let ul = document.createElement('ul');
-        ul.id = divId;
-        result.appendChild(ul);
-        var li, img;
-        console.log(imgList instanceof Array);
+        var result = '';
+        var imgParentDom = 'ul';
+        var imgHeadDom = 'li';
+        result += '<' + imgParentDom + ' id="' + divId + '" class="">';
+
+        var imgDoms = '';
 
         if (imgList instanceof Array) {
-            imgList.map(image => {
-                li = document.createElement('li');
-                img = document.createElement('img');
-                img.classList.add(imgClass);
-                img.src = image.replace(/_\/fw\/\d*\/format\/.*/g, '');
-                ul.appendChild(li);
-                li.appendChild(img);
-            });
-            console.log(ul);
+            for (var i = 0; i < imgList.length; i++) {
+                imgDoms = '<' + imgHeadDom + '><img class="' + imgClass + '" src="' + imgList[i].replace(/_\/fw\/\d*\/format\/.*/g, '') + '"></' + imgHeadDom + '>' + imgDoms;
+            }
         } else {
-            Object.keys(imgList).map(k => {
-                li = document.createElement('li');
-                img = document.createElement('img');
-                img.classList.add(imgClass);
-                img.src = imgList[k].replace(/_\/fw\/\d*\/format\/.*/g, '');
-                ul.appendChild(li);
-                li.appendChild(img);
+            for (var i in imgList) {
+                imgDoms = '<' + imgHeadDom + '><img class="' + imgClass + '" src="' + imgList[i].replace(/_\/fw\/\d*\/format\/.*/g, '') + '"></' + imgHeadDom + '>' + imgDoms;
+            }
+        }
 
-            });
-            console.log(ul);
+        result += imgDoms;
+        result += '</' + imgParentDom + '>';
+        result += otherHtml;
+        result += '<' + 'style>' + style + '<' + '/style>';
+        result += '<' + 'script>' + scripts + '<' + '/script>';
 
-        };
-        console.log(imgList, result);
-        let styleDom = document.createElement('style');
-        let scriptDom = document.createElement('script');
-        styleDom.innerHTML = style;
-        scriptDom.innerHTML = scripts;
-        let tempDom = document.createElement('div');
-        tempDom.innerHTML = otherHtml;
-        [...tempDom.children].map(dom => {
-            result.appendChild(dom);
-        });
-        result.appendChild(styleDom);
-        result.appendChild(scriptDom);
-        return result;
-    };
-
+        return result
+    }
 
     function regReplaceForSomeWeb(str, replaceSomeWeb) {
         var result = '';
         for (let r in replaceSomeWeb) {
+            /* console.log(r);*/
+            /* console.log(str.indexOf(r));*/
             if (str.indexOf(r) != -1) {
                 result = str.replace(replaceSomeWeb[r]['reg'], replaceSomeWeb[r]['result'])
             }
-        };
+        }
         if (result == '') {
             result = str;
-        };
+        }
         return result;
     }
 
@@ -399,11 +373,7 @@ Last modified : "2021/10/29 14:35:52"
         resultObj.id = 'replacePageAsObjs';
 
         for (let i in objs) {
-            if (objs[i] instanceof HTMLElement) {
-                resultObj.appendChild(objs[i]);
-            } else {
-                resultObj.innerHTML += objs[i];
-            }
+            resultObj.innerHTML += objs[i];
         }
         var sourceBody = document.getElementsByTagName("body")[0];
         var html = document.getElementsByTagName("html")[0];
@@ -411,9 +381,13 @@ Last modified : "2021/10/29 14:35:52"
         newBody.id = "newBody";
         newBody.appendChild(resultObj);
 
+
+
+
         html.appendChild(newBody);
         sourceBody.style.display = "none";
         /* html.removeChild(sourceBody); */
+
         var recovery = function (hiddenBody, sourceBody) {
             var html = document.getElementsByTagName("html")[0];
             var body = document.getElementsByTagName('body');
@@ -421,8 +395,8 @@ Last modified : "2021/10/29 14:35:52"
             for (let i = 0; i < body.length; i++) {
                 body[i].style.display = "";
             }
-        };
 
+        };
         document.onkeydown = function (event) {
             var e = event || window.e;
             var keyCode = e.keyCode || e.which;
@@ -432,9 +406,9 @@ Last modified : "2021/10/29 14:35:52"
                     recovery(sourceBody, newBody);
                     document.onkeydown = eval(sourceOnKeyDownStr);
                     break;
-            };
+            }
         };
-    };
+    }
 
-    console.log('来关注我微博 @leizingyiu 呀，虽然不怎么更新😀');
+    console.log('来关注我微博 @leizingyiu 呀，虽然不怎么更新😀')
 })();

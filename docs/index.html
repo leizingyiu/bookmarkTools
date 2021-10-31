@@ -1,10 +1,14 @@
+<!-- 
+    Last modified: "2021/10/25 11:20:38"
+ -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
     <title>bookmark tools by leizingyiu</title>
     <link rel="stylesheet" type="text/css" href="https://www.leizingyiu.net/css/tbDefaultCss.min.css" />
     <link rel="stylesheet" href="./css/style.css">
@@ -15,7 +19,7 @@
 
 <body>
     <main>
-        <ul id="toolsList">
+        <ul id="toolsList" class="fixedBottom">
 
             <!-- <li>
                 <dl>
@@ -46,7 +50,7 @@
         <div id="detail">
             <dl id="bookmarkContainer">
                 <dt>
-                    <a id="bookmarkBtn" href="javascript:void 0 " alt='drag me into bookmarks bar'>
+                    <a id="bookmarkBtn" href="javascript:void 0 " alt='drag me into bookmarks bar' draggable>
 
                     </a>
                 </dt>
@@ -74,8 +78,35 @@
     </svg>
 
     <script>
+
+        // // 禁止橡皮筋效果
+        // document.body.addEventListener('touchmove', function (e) {
+        //     e.preventDefault();
+        // }, { passive: false });
+
+        // var $ = document.queryselector;
+        // var startY, endY;
+        // //记录手指触摸的起点坐标
+        // $('body').on('touchstart', function (e) {
+        //     startY = e.touches[0].pageY;
+        // });
+        // $('body').on('touchmove', function (e) {
+        //     endY = e.touches[0].pageY;  //记录手指触摸的移动中的坐标
+        //     //手指下滑，页面到达顶端不能继续下滑
+        //     if (endY > startY && $(window).scrollTop() <= 0) {
+        //         e.preventDefault();
+        //     }
+        //     //手指上滑，页面到达底部能继续上滑
+        //     if (endY < startY && window.scrollY +
+        //         window.innerHeight >= $('body').scrollHeight) {
+        //         e.preventDefault();
+        //     }
+        // })
+
+
+
         let logDebug = location.href.indexOf('leizingyiu.net') == -1;
-        logDebug = false;
+        logDebug = true;
         console.log = logDebug ? console.log : () => void 0;
     </script>
     <script src="./script/polyfill.min.js"></script>

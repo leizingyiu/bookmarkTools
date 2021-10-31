@@ -1,6 +1,6 @@
-/**
-Last modified: "2021/10/29 15:23:05"
- */
+
+var LastModified = "2021/10/31 22:40:10"
+
 // console.log('main script');
 //console.warn = () => { };
 
@@ -85,10 +85,14 @@ function main() {
             document.querySelector("#bookmarkContainer dd").innerText = j[k].describe[lang];
             */
         document.querySelector('#bookmarkBtn').innerHTML = indexContent.btn[lang];
+        document.querySelector('#bookmarkBtn').setAttribute('showName', indexContent.btn[lang])
         document.querySelector('#bookmarkContainer dd').innerHTML = indexContent.dd[lang];
         document.querySelector('#detail article').innerHTML = indexContent.article[lang];
     }
     loadMenu();
+    console.log('begin load demo');
+    loadDemo();
+    console.log('end load demo');
 
     return void 0;
 }
@@ -111,6 +115,7 @@ function loadDetail(json) {
 
     let showName = Object.keys(json['showName'])[0] != '0' ? json['showName'][lang] : json['showName'];
     document.querySelector('#bookmarkBtn').innerText = showName;
+    document.querySelector('#bookmarkBtn').setAttribute('showName', showName)
 
     let describe = Object.keys(json['describe'])[0] != '0' ? json['describe'][lang] : json['describe'];
 
@@ -142,7 +147,7 @@ function loadMenu() {
         }
     }
 
-    {
+    {/** load  header */
         let langList = ['cn', 'en'];
         let li = document.createElement('li');
         let dl = document.createElement('dl');
@@ -175,14 +180,16 @@ function loadMenu() {
         });
     }
 
-    {
+    {/** load footer  */
         let footerLi = document.createElement('li');
         let dl = document.createElement('dl');
         let dt = document.createElement('dt');
         let dd = document.createElement('dd');
 
         footerLi.id = 'footer';
-        dt.innerHTML = 'Designed & Powerd by Leizingyiu</br>Copyright© <a href="https://leizingyiu.net" >Leizingyiu.net</a>';
+        dt.innerHTML = `Designed & Powerd by Leizingyiu</br>
+        Copyright© <a href="https://leizingyiu.net" >Leizingyiu.net</a></br>
+        Last Update: ${LastModified}`;
         dd.innerHTML = '粤ICP备2020086793号';
         document.getElementById('toolsList').appendChild(footerLi);
         footerLi.appendChild(dl);
@@ -241,7 +248,125 @@ function loadMenu() {
 
     return void 0;
 }
+function loadDemo() {
+    console.log('loading demo');
+    var bookmarkNames = '';
 
+    var demoBtnTxt = { "cn": "书签JS", "en": "bookmark script" }[lang];
+
+    let demoTitle = { 'cn': '书签栏 | ', 'en': "bookmark | " };
+    fetch(rootPath + '\\items.json')
+        .then(r => r.json())
+        .then(json => {
+            console.log(json);
+
+            let keys = Object.keys(json);
+            for (var k of keys) {
+                bookmarkNames += '_' + json[k].showName[lang]
+            }
+            bookmarkNames = demoTitle[lang] + bookmarkNames;
+            // setDomCssText('html', ``);
+
+            if (Object.keys(searchJson).indexOf('bookmark') != -1) {
+                let bookmark = searchJson.bookmark;
+                if (keys.indexOf(bookmark) != -1) {
+                    demoBtnTxt = json[bookmark].showName[lang];
+                }
+            }
+
+            setStyleDom('demoContent', ` :root{
+                --demo-content:'${bookmarkNames}';
+                --demo-btn-txt:'${demoBtnTxt}';
+            }`)
+        });
+
+    setStyleDom('demoBtn', `
+    #bookmarkBtn:after{
+        animation:
+        /* var(--demo-mo-x) 3s linear 0s infinite normal ; ,*/
+         var(--demo-mo-y)  3s linear 0s infinite normal ;
+    }
+    #bookmarkBtn:after{
+    content:attr(showname);
+    font-size: 1em;
+    display:block;
+    position:absolute;
+    left: 50%;
+    top: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+    
+    opacity:1;
+    transition:opacity 0.5s ease;
+    
+    z-index:-99;
+    }
+    
+    #bookmarkContainer:hover #bookmarkBtn:after{
+        opacity:0;
+        animation:none;
+    }
+    `)
+    // let setDemoStyle = function () {
+    //     let detailbox = document.querySelector('#detail').getBoundingClientRect();
+    //     console.log(detailbox);
+    //     setDomCssText('#demo', `
+    //     left:${detailbox.left}px;
+    //     width:${detailbox.width}px;
+    //     `);
+    // };
+
+
+    // setStyleDom('demoStyle',
+    //     `
+    //     #demo{
+    //         position:fixed;
+    //         top:0;
+    //         font-size:14px;
+    //         font-weight:300;
+    //     }
+
+    //     #demo p:after{
+    //     content:var(--demo-content);
+    //     position: fixed;
+    //     top: 0;
+    //     padding: 1em;
+    //     background: hsla(0deg,100%,100%,0.5);
+    //     width: 100%;
+    //     z-index: -999;
+    //     opacity: 1;
+    //     transition: opacity 0.5s ease;
+    //     thisCssFrom:loadDemo;
+    //     }
+
+    //     #demo.hide  {
+    //     opacity: 0;
+    //     display:none;
+    //     thisCssFrom:loadDemo;
+    //     }
+    //     `);
+
+    // setDemoStyle();
+
+    // // Firefox和Chrome早期版本中带有前缀
+    // var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver
+    // // 选择目标节点
+    // var target = document.querySelector('main *');
+    // // 创建观察者对象
+    // var observer = new MutationObserver(function (mutations) {
+    //     mutations.forEach(function (mutation) {
+    //         console.log(mutation.type);
+    //         setDemoStyle();
+    //     });
+    // });
+    // // 配置观察选项:
+    // var config = { attributes: true, childList: true, characterData: true }
+    // // 传入目标节点和观察选项
+    // observer.observe(target, config);
+    // // 随后,你还可以停止观察
+    // // observer.disconnect();
+
+}
 function loadBtn(minUrl, readUrl = minUrl) {
     fetch(minUrl)
         .then(r => r.text())
@@ -310,4 +435,35 @@ function openWin(url, tar) {
     document.getElementsByTagName('body')[0].append(a);
     document.getElementById("openWin").click();
     document.getElementById('openWin').remove();
+}
+
+
+
+function setStyleDom(id, innerHTML) {
+    if (document.querySelector(`#${id}`) == null) {
+        let style = document.createElement('style');
+        style.id = id;
+        style.innerHTML = innerHTML;
+        document.body.appendChild(style);
+    } else {
+        document.querySelector(`#${id}`).innerHTML = innerHTML;
+    }
+}
+function setDomCssText(domSelector = 'html', cssText) {
+    console.log(cssText);
+
+    let txtArr = cssText.split(';');
+    txtArr.map(txt => {
+        console.log(txt);
+        if (txt == undefined || txt == '') { return };
+        let t = txt.split(':');
+        let name = t[0], value = t[1];
+        let dom = document.querySelector(domSelector);
+        console.log(name, value);
+        if (dom.style.cssText.indexOf(name) != -1) {
+            dom.style.cssText = dom.style.cssText.replace(RegExp(`(?:${name}:)[^;]*;`, 'i'), `${name}:${value};`);
+        } else {
+            dom.style.cssText += `${name}:${value};`;
+        };
+    })
 }

@@ -1,5 +1,5 @@
 
-var LastModified = "2021/10/31 22:40:10"
+var LastModified = "2021/11/02 01:20:16"
 
 // console.log('main script');
 //console.warn = () => { };
@@ -254,7 +254,7 @@ function loadDemo() {
 
     var demoBtnTxt = { "cn": "书签JS", "en": "bookmark script" }[lang];
 
-    let demoTitle = { 'cn': '书签栏 | ', 'en': "bookmark | " };
+    let demoTitle = { 'cn': '你的书签栏 | ', 'en': "your bookmarks | " };
     fetch(rootPath + '\\items.json')
         .then(r => r.json())
         .then(json => {
@@ -262,7 +262,7 @@ function loadDemo() {
 
             let keys = Object.keys(json);
             for (var k of keys) {
-                bookmarkNames += '_' + json[k].showName[lang]
+                bookmarkNames += ' 🌏' + json[k].showName[lang]
             }
             bookmarkNames = demoTitle[lang] + bookmarkNames;
             // setDomCssText('html', ``);
@@ -281,11 +281,35 @@ function loadDemo() {
         });
 
     setStyleDom('demoBtn', `
-    #bookmarkBtn:after{
-        animation:
-        /* var(--demo-mo-x) 3s linear 0s infinite normal ; ,*/
-         var(--demo-mo-y)  3s linear 0s infinite normal ;
+#detail:before{
+    content:var(--demo-content);
+        position: absolute;
+        top: 0;
+        padding: 1em;
+        background: hsla(0deg,100%,100%,0.5);
+        border-bottom:solid 1px #aaa;
+        width: max-content%;
+        z-index: -2;
+        opacity: 1;
+        transition: opacity 0.5s ease;
+        letter-spacing:0.05em;
+        font-weight:300;
+        thisCssFrom:loadDemo;
+        word-break: keep-all;
+}
+
+    
+    #bookmarkBtn:{
+        transition:opacity 0.5s ease;
     }
+    #bookmarkBtn:after{
+       animation: var(--demo-mo-x) 3s ease infinite ,var(--demo-mo-y)  3s infinite  ,var(--demo-mo-opacity) 3s infinite;
+    }
+    #detail:hover #bookmarkBtn:after{
+        animation:none;
+        opacity:0;
+    }
+    
     #bookmarkBtn:after{
     content:attr(showname);
     font-size: 1em;
@@ -293,19 +317,18 @@ function loadDemo() {
     position:absolute;
     left: 50%;
     top: 50%;
-    width: 100%;
+    width: max-content;;
+    padding:inherit;
+    border:inherit;
     transform: translate(-50%, -50%);
-    
+    border-radius:inherit;
     opacity:1;
     transition:opacity 0.5s ease;
+    background: radial-gradient(circle, rgba(255,255,255,1) 0%,rgba(255,255,255,0.64) 50%, rgba(255,255,255,0) 100%);
     
-    z-index:-99;
+    z-index:-1;
     }
     
-    #bookmarkContainer:hover #bookmarkBtn:after{
-        opacity:0;
-        animation:none;
-    }
     `)
     // let setDemoStyle = function () {
     //     let detailbox = document.querySelector('#detail').getBoundingClientRect();

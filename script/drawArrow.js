@@ -17,7 +17,6 @@ function drawArrowPath(fromDomSelector, fillColor, classList) {
     var bodyRect = document.body.getBoundingClientRect();
     var bodyX = bodyRect.x;
     var bodyY = bodyRect.y;
-
     var scrollY = document.getElementById('detail').scrollTop;
 
     var btnRect = document.querySelector(fromDomSelector).getBoundingClientRect();
@@ -28,7 +27,7 @@ function drawArrowPath(fromDomSelector, fillColor, classList) {
     var m = [btnMidX, btnMidY];
     var l1 = [btnMidX, btnMidY];
     var q = [btnMidX + (winW - btnMidX + bodyX) / 3 + scrollY / 1.5, btnMidY * 0.8,
-        btnMidX, 10]
+        btnMidX, btnRect.height / 2 + 10]
 
 
     var L = [q[0] - q[2], q[1] - q[3]].map(i => i / 12);
@@ -75,18 +74,40 @@ function drawArrowPath(fromDomSelector, fillColor, classList) {
     let moRootName = 'moPoint';
     setDomCssText('html',
         `--${moRootName}-P1:${P1};  --${moRootName}-P2:${P2};  --${moRootName}-P3:${P3};
-        --demo-mo-x:${moRootName}x; --demo-mo-y:${moRootName}y`);
+        --demo-mo-x:${moRootName}x; --demo-mo-y:${moRootName}y;--demo-mo-opacity:${moRootName}opacity;`);
+
+    // setStyleDom('moveBtn', `    
+    // @keyframes ${moRootName}x{
+    // 0%  {transform:translateX(${P1[0]}px)}
+    // 50% {transform:translateX(${P2[0]}px)}
+    // 100%{transform:translateX(${P3[0]}px)}
+    // }
+    // @keyframes ${moRootName}y{
+    //     0%  {transform:translateY(${P1[1]}px)}
+    //     64%{transform:translateY(${P3[1]}px)}
+    //     100%{transform:translateY(${P3[1]}px)}
+    //     }
+    // `);
 
     setStyleDom('moveBtn', `    
     @keyframes ${moRootName}x{
-    0%  {transform:translateX(${P1[0]}px)}
-    50% {transform:translateX(${P2[0]}px)}
-    100%{transform:translateX(${P3[0]}px)}
+    0%  {margin-left:${P1[0]}px;}
+    16% {margin-left:${P2[0] / 2 + btnRect.width / 2}px;}
+    64%{margin-left:${P3[0] + btnRect.width / 2}px;}
+    100%{margin-left:${P3[0] + btnRect.width / 2}px;}
     }
     @keyframes ${moRootName}y{
         0%  {transform:translateY(${P1[1]}px)}
-        100%{transform:translateY(${P3[1]}px)}
-        }
+        64%{transform:translateY(${P3[1] - btnRect.height / 2}px)}
+        100%{transform:translateY(${P3[1] - btnRect.height / 2}px)}
+    }
+
+    @keyframes ${moRootName}opacity{
+        0%  {opacity:0}
+        24%{opacity:0.8}
+        90%{opacity:0.8}
+        100%{opacity:0}
+    }
     `);
 
 

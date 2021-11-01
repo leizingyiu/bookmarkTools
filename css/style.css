@@ -1,5 +1,5 @@
 /* 
-Last modified: "2021/10/31 22:46:48"
+Last modified: "2021/11/01 23:27:00"
  */
 
  @keyframes btnUpToBookmarkBar {
@@ -161,8 +161,8 @@ main ul#toolsList li#footer a:hover:after {
     .v-page{
     height: fit-content;
     
-    overflow: scroll;
-    /* margin: auto; */
+    overflow: visible;
+    margin: auto;
     padding: auto;
     display: block;
     width: 100%;

@@ -27,7 +27,7 @@ function drawArrowPath(fromDomSelector, fillColor, classList) {
     var m = [btnMidX, btnMidY];
     var l1 = [btnMidX, btnMidY];
     var q = [btnMidX + (winW - btnMidX + bodyX) / 3 + scrollY / 1.5, btnMidY * 0.8,
-        btnMidX, btnRect.height / 2 + 10]
+        btnMidX, btnRect.height / 2]
 
 
     var L = [q[0] - q[2], q[1] - q[3]].map(i => i / 12);
@@ -98,14 +98,14 @@ function drawArrowPath(fromDomSelector, fillColor, classList) {
     }
     @keyframes ${moRootName}y{
         0%  {transform:translateY(${P1[1]}px)}
-        64%{transform:translateY(${P3[1] - btnRect.height / 2}px)}
-        100%{transform:translateY(${P3[1] - btnRect.height / 2}px)}
+        64%{transform:translateY(${P3[1] - btnRect.height / 3}px)}
+        100%{transform:translateY(${P3[1] - btnRect.height / 3}px)}
     }
 
     @keyframes ${moRootName}opacity{
         0%  {opacity:0}
         24%{opacity:0.8}
-        90%{opacity:0.8}
+        80%{opacity:0.8}
         100%{opacity:0}
     }
     `);

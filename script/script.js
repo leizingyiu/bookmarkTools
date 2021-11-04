@@ -1,5 +1,5 @@
 
-var LastModified = "2021/11/04 17:30:29"
+var LastModified = "2021/11/04 22:20:02"
 
 // console.log('main script');
 //console.warn = () => { };
@@ -285,10 +285,12 @@ function loadDemo() {
     content:var(--demo-content);
         position: absolute;
         top: 0;
-        padding: 1em;
+        font-size:1rem;
+        line-height:1rem;
+        padding: 1rem;
         background: hsla(0deg,100%,100%,0.5);
         border-bottom:solid 1px #aaa;
-        width: max-content;
+        width: 100%;
         z-index: -2;
         opacity: 1;
         transition: opacity 0.5s ease;
@@ -296,56 +298,62 @@ function loadDemo() {
         font-weight:300;
         thisCssFrom:loadDemo;
         word-break: keep-all;
+        white-space: nowrap;
 }
 #detail:after {
     content:'';
     display:block;
-    height:2em;
-    width:100%;
+    height:calc( 3rem + 2px );
+    width:20vw;
     position:absolute;
     top:0;
     right:0;
-    background:#eee;
+    background: rgb(255,255,255);
+    background: linear-gradient(-90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
 }
 
     #detail #bookmarkBtn:after{
        animation: var(--demo-mo-x) 3s ease infinite ,var(--demo-mo-y)  3s infinite  ,var(--demo-mo-opacity) 3s infinite;
        animation-play-state:running;
+     
+
+       content:attr(showname);
+       font-size: 1em;
+       display:block;
+       position:absolute;
+       left: 50%;
+       top: 50%;
+       width: max-content;
+       padding:inherit;
+       border:inherit;
+       transform: translate(-50%, -50%);
+       border-radius:inherit;
+       opacity:1;
+       transition:opacity 0.5s ease;
+       background: radial-gradient(circle, rgba(255,255,255,1) 0%,rgba(255,255,255,0.64) 50%, rgba(255,255,255,0) 100%);
        color:rgba(0,0,0,1);
        background-color:rgba(255, 255, 255, 0.8);
        border-color:rgba(0, 0, 0, 0.3);
        transition:color 0.2s ease, border-color 1s ease ,background-color 1s ease !important;
+       box-shadow: 0px 4px 12px 0px rgba(0 0 0 / 8%),
+       0px 8px 32px 0px rgba(0 0 0 / 4%);
+       
+       z-index:-1;
+       
     }
     #detail:hover #bookmarkBtn:after{
         animation-play-state:paused;
         border-color:rgba(0, 0, 0, 0)!important;
         background-color:rgba(255, 255, 255, 0)!important;
         color:rgba(0,0,0,0);
+        background-image: radial-gradient(circle, rgba(255, 255, 255,0) 0%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 100%);
+        box-shadow: 0px 0px 12px 0px rgb(0 0 0 / 0%),
+        0px 0px 32px 0px rgb(0 0 0 / 0%);
     }
     
-    #detail:hover:before{
+    #detail:hover:before,#detail:hover:after {
         opacity:0;
-    }
-    
-    #bookmarkBtn:after{
-    content:attr(showname);
-    font-size: 1em;
-    display:block;
-    position:absolute;
-    left: 50%;
-    top: 50%;
-    width: max-content;
-    padding:inherit;
-    border:inherit;
-    transform: translate(-50%, -50%);
-    border-radius:inherit;
-    opacity:1;
-    transition:opacity 0.5s ease;
-    background: radial-gradient(circle, rgba(255,255,255,1) 0%,rgba(255,255,255,0.64) 50%, rgba(255,255,255,0) 100%);
-    
-    z-index:-1;
-    }
-    
+    }    
     `)
     // let setDemoStyle = function () {
     //     let detailbox = document.querySelector('#detail').getBoundingClientRect();

@@ -1,5 +1,5 @@
 
-var LastModified = "2021/11/02 01:20:16"
+var LastModified = "2021/11/04 17:30:29"
 
 // console.log('main script');
 //console.warn = () => { };
@@ -288,7 +288,7 @@ function loadDemo() {
         padding: 1em;
         background: hsla(0deg,100%,100%,0.5);
         border-bottom:solid 1px #aaa;
-        width: max-content%;
+        width: max-content;
         z-index: -2;
         opacity: 1;
         transition: opacity 0.5s ease;
@@ -297,16 +297,33 @@ function loadDemo() {
         thisCssFrom:loadDemo;
         word-break: keep-all;
 }
+#detail:after {
+    content:'';
+    display:block;
+    height:2em;
+    width:100%;
+    position:absolute;
+    top:0;
+    right:0;
+    background:#eee;
+}
 
-    
-    #bookmarkBtn:{
-        transition:opacity 0.5s ease;
-    }
-    #bookmarkBtn:after{
+    #detail #bookmarkBtn:after{
        animation: var(--demo-mo-x) 3s ease infinite ,var(--demo-mo-y)  3s infinite  ,var(--demo-mo-opacity) 3s infinite;
+       animation-play-state:running;
+       color:rgba(0,0,0,1);
+       background-color:rgba(255, 255, 255, 0.8);
+       border-color:rgba(0, 0, 0, 0.3);
+       transition:color 0.2s ease, border-color 1s ease ,background-color 1s ease !important;
     }
     #detail:hover #bookmarkBtn:after{
-        animation:none;
+        animation-play-state:paused;
+        border-color:rgba(0, 0, 0, 0)!important;
+        background-color:rgba(255, 255, 255, 0)!important;
+        color:rgba(0,0,0,0);
+    }
+    
+    #detail:hover:before{
         opacity:0;
     }
     
@@ -317,7 +334,7 @@ function loadDemo() {
     position:absolute;
     left: 50%;
     top: 50%;
-    width: max-content;;
+    width: max-content;
     padding:inherit;
     border:inherit;
     transform: translate(-50%, -50%);

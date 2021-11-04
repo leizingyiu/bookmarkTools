@@ -91,10 +91,10 @@ function drawArrowPath(fromDomSelector, fillColor, classList) {
 
     setStyleDom('moveBtn', `    
     @keyframes ${moRootName}x{
-    0%  {margin-left:${P1[0]}px;}
-    16% {margin-left:${P2[0] / 2 + btnRect.width / 2}px;}
-    64%{margin-left:${P3[0] + btnRect.width / 2}px;}
-    100%{margin-left:${P3[0] + btnRect.width / 2}px;}
+    0%  {margin-left:${P1[0] - btnRect.width / 2}px;}
+    16% {margin-left:${P2[0] / 2 - btnRect.width / 2}px;}
+    64%{margin-left:${P3[0] - btnRect.width / 2}px;}
+    100%{margin-left:${P3[0] - btnRect.width / 2}px;}
     }
     @keyframes ${moRootName}y{
         0%  {transform:translateY(${P1[1]}px)}

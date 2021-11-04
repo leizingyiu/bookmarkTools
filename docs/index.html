@@ -1,5 +1,5 @@
 <!-- 
-    Last modified: "2021/10/25 11:20:38"
+    Last modified: "2021/10/30 23:23:42"
  -->
 <!DOCTYPE html>
 <html lang="en">
@@ -10,10 +10,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
     <title>bookmark tools by leizingyiu</title>
-    <link rel="stylesheet" type="text/css" href="https://www.leizingyiu.net/css/tbDefaultCss.min.css" />
+    <link rel="stylesheet" type="text/css" href="./css/tbDefaultCss.min.css" />
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/markdown.css">
-    <link rel="icon" href="https://leizingyiu.net/animated_favicon.gif" type="image/gif">
+    <link rel="icon" href="animated_favicon.gif" type="image/gif">
 
 </head>
 
@@ -39,30 +39,27 @@
                     <dd>a draw pad</dd>
                 </dl>
             </li>
-            <li>
-                <dl>
-                    <dt>enLargeTaobaoSku</dt>
-                    <dd>enlarge taobao sku pic</dd>
-                </dl>
-            </li> -->
+             -->
 
         </ul>
-        <div id="detail">
-            <dl id="bookmarkContainer">
-                <dt>
-                    <a id="bookmarkBtn" href="javascript:void 0 " alt='drag me into bookmarks bar' draggable>
+        <div id="detail" class="v-viewport">
+            <ul></ul>
+            <div class="v-page">
+                <dl id="bookmarkContainer">
+                    <dt>
+                        <a id="bookmarkBtn" href="javascript:void 0 " alt='drag me into bookmarks bar' draggable>
+                        </a>
+                    </dt>
+                    <dd>
+                    </dd>
+                </dl>
+                <article class="markdown-body">
 
-                    </a>
-                </dt>
-                <dd>
-
-                </dd>
-            </dl>
-            <article class="markdown-body">
-
-            </article>
+                </article>
+            </div>
         </div>
     </main>
+
     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px"
         viewBox="0 0 360 360" xml:space="preserve" class="" style="position: absolute;
         top: 0;
@@ -78,7 +75,6 @@
     </svg>
 
     <script>
-
         // // 禁止橡皮筋效果
         // document.body.addEventListener('touchmove', function (e) {
         //     e.preventDefault();

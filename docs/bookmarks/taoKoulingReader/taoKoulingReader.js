@@ -1,8 +1,8 @@
-javascript: { };
+javascript: console.log(`
 /*  Created: 2021/03/03 21:26:31
-    Last modified: "2021/10/29 12:46:39"
+    Last modified: "2021/10/29 19:33:51"
     by leizingyiu
-    */
+    */`);
 function getSearchJson() {
     var search;
     if (arguments.length == 0) {

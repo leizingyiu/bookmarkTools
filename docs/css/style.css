@@ -1,6 +1,10 @@
 /* 
-Last modified: "2021/10/29 19:27:16"
+Last modified: "2021/11/01 23:27:00"
  */
+
+ @keyframes btnUpToBookmarkBar {
+     
+ }
 :root {
     --padding-size: 1rem;
 
@@ -145,30 +149,54 @@ main ul#toolsList li#footer a:hover:after {
     transform: scale(0%, 100%);
 }
 
-
-
-
-
-main #detail {
-    /* display: flex;
-    flex-direction: column; */
-    /* justify-content: center; */
-    flex-grow: 100;
-    max-width: 60vw;
-    overflow-y: scroll;
-    height: fit-content;
+.v-viewport{
     max-height: 100%;
     margin: auto;
+    display: flex;
+    height: 100%;
+    overflow-y: scroll;
+    word-wrap: break-word;
+    white-space: pre-wrap;
 }
+    .v-page{
+    height: fit-content;
+    
+    overflow: visible;
+    margin: auto;
+    padding: auto;
+    display: block;
+    width: 100%;
+    word-wrap: break-word;
+} 
 
+main #detail {
+    flex-grow: 2;
+    max-width: 60vw;
+    overflow-y: scroll;
+   /* height: fit-content;*/
+    max-height: 100%;
+    margin: auto;
+    /* flex-grow: 100; */
+    /* max-width: 60vw; */
+    /* overflow-y: scroll; */
+    /* height: fit-content; */
+    /* max-height: 100%; */
+    /* margin: auto; */
+    /* margin: auto;
+    height: 100%;
+    display: flex;  
+    flex-direction: column; 
+    justify-content: center; */
+}
 
 main #detail #bookmarkContainer {
     position: relative;
+    flex-grow: 99;
 }
 
 main #detail #bookmarkContainer::after {
     display: block;
-    padding-top: 64%;
+    padding-top: 40%;
     content: '';
     padding-bottom: 4em;
 }

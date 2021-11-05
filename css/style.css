@@ -1,5 +1,5 @@
 /* 
-Last modified: "2021/11/05 00:48:06"
+Last modified: "2021/11/05 12:53:05"
  */
 
  @keyframes btnUpToBookmarkBar {
@@ -162,9 +162,8 @@ main ul#toolsList li#footer a:hover:after {
     word-wrap: break-word;
     white-space: pre-wrap;
 }
-    .v-page{
+.v-page{
     height: fit-content;
-    
     overflow: visible;
     margin: auto;
     padding: auto;
@@ -175,11 +174,13 @@ main ul#toolsList li#footer a:hover:after {
 
 main #detail {
     position:relative;
-    flex-grow: 2;
+    flex-grow: 99;
     max-width: 60vw;
     overflow-y: scroll;
     max-height: 100%;
     margin: auto;
+
+    
 }
 
 main #detail #bookmarkContainer {

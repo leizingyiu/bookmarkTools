@@ -79,8 +79,8 @@
             "cn": "淘宝选项缩略图太小了，用这个放大",
             "en": "enlarge sku pics in taobao item page "
         },
-        "scriptPath": "bookmarks/enLargeTaobaoSku/enLargeTaobaoSku.js",
-        "minPath": "bookmarks/enLargeTaobaoSku/enLargeTaobaoSku.min.js",
+        "scriptPath": "./bookmarks/enLargeTaobaoSku/enLargeTaobaoSku.js",
+        "minPath": "./bookmarks/enLargeTaobaoSku/enLargeTaobaoSku.min.js",
         "mdPath": {
             "cn": "./bookmarks/enLargeTaobaoSku/readme.md",
             "en": "./bookmarks/enLargeTaobaoSku/readme_en.md"
@@ -93,14 +93,31 @@
             "en": "taoKouling reader"
         },
         "describe": {
-            "cn": "解析淘口令，在电脑看到优惠信息，可以直接浏览器打开啦",
-            "en": "Analyze the TaoKouling . If see the discount information on the computer, you can open it directly in the browser"
+            "cn": "解析淘口令，可以直接浏览器打开",
+            "en": "Analyze the TaoKouling . Open it directly on PC / Mac browser"
         },
-        "scriptPath": "bookmarks/taoKoulingReader/taoKoulingReader.min.js",
-        "minPath": "bookmarks/taoKoulingReader/taoKoulingReader.js",
+        "scriptPath": "./bookmarks/taoKoulingReader/taoKoulingReader.js",
+        "minPath": "./bookmarks/taoKoulingReader/taoKoulingReader.min.js",
         "mdPath": {
             "cn": "./bookmarks/taoKoulingReader/readme.md",
             "en": "./bookmarks/taoKoulingReader/readme_en.md"
+        }
+    },
+    "1111coupon": {
+        "name": "1111coupon",
+        "showName": {
+            "cn": "双十一淘宝红包",
+            "en": "taoKouling reader"
+        },
+        "describe": {
+            "cn": "直接打开双十一红包页面，每天可领，⬇️ 还有更多 ⬇️",
+            "en": "Open the 1111 coupon page directly, can get it every day"
+        },
+        "scriptPath": "https://s.click.taobao.com/bRdjbeu",
+        "minPath": "./bookmarks/1111coupon/1111coupon.js",
+        "mdPath": {
+            "cn": "./bookmarks/1111coupon/readme.md",
+            "en": "./bookmarks/1111coupon/readme_en.md"
         }
     }
 }

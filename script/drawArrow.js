@@ -9,7 +9,14 @@ function vAdd() {
     }
 }
 
+hOfHsl = Math.floor(360 * Math.random());
+sOfHsl = '100%';
+lOfHsl = '50%';
+frameTime = 1000 / 120;
+strokeWidthIndex = 1;
+strokeWidth = 1;
 function drawArrowPath(fromDomSelector, fillColor, classList) {
+
 
     var winW = document.getElementsByTagName("html")[0].clientWidth;
     var winH = document.getElementsByTagName("html")[0].clientHeight;
@@ -54,6 +61,16 @@ function drawArrowPath(fromDomSelector, fillColor, classList) {
     // console.log(d);
     // var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
     var path = document.getElementById('arrow');
+    // var animation = document.getElementById('arrowAnimation');
+    // if (animation.getAttribute('to') != '') {
+    //     path.setAttribute('d', animation.getAttribute('to'));
+    //     animation.setAttribute('dur', `${frameTime}s`);
+    // }
+    // if (path.getTotalLength() != 0) {
+    //     animation.setAttribute('to', d);
+    // } else {
+    //     path.setAttribute('d', d);
+    // }
     path.setAttribute('d', d);
     classList.map(c => path.classList.add(c));
 
@@ -72,45 +89,51 @@ function drawArrowPath(fromDomSelector, fillColor, classList) {
     let P2 = [q[0] - l1[0], q[1] - l1[1]];
     let P3 = [q[2] - l1[0], q[3] - l1[1]];
     let moRootName = 'moPoint';
+    let ramNum = String(Math.floor(Math.random() * 10000));
     setDomCssText('html',
         `--${moRootName}-P1:${P1};  --${moRootName}-P2:${P2};  --${moRootName}-P3:${P3};
-        --demo-mo-x:${moRootName}x; --demo-mo-y:${moRootName}y;--demo-mo-opacity:${moRootName}opacity;`);
+        --btn-left:${btnRect.left}px; --btn-top:${btnRect.top}px;
+        --demo-mo-x:${moRootName}x-${ramNum};--demo-mo-margin-x:${moRootName}x-margin-${ramNum}; --demo-mo-y:${moRootName}y-${ramNum};--demo-mo-opacity:${moRootName}opacity-${ramNum};`);
 
-    // setStyleDom('moveBtn', `    
-    // @keyframes ${moRootName}x{
-    // 0%  {transform:translateX(${P1[0]}px)}
-    // 50% {transform:translateX(${P2[0]}px)}
-    // 100%{transform:translateX(${P3[0]}px)}
-    // }
-    // @keyframes ${moRootName}y{
-    //     0%  {transform:translateY(${P1[1]}px)}
-    //     64%{transform:translateY(${P3[1]}px)}
-    //     100%{transform:translateY(${P3[1]}px)}
-    //     }
-    // `);
+    let moveY = P3[1]; // + btnRect.height / 3;
+    console.log(moveY);
 
-    setStyleDom('moveBtn', `    
-    @keyframes ${moRootName}x{
-    0%  {margin-left:${P1[0] - btnRect.width / 2}px;}
-    16% {margin-left:${P2[0] / 2 - btnRect.width / 2}px;}
-    64%{margin-left:${P3[0] - btnRect.width / 2}px;}
-    100%{margin-left:${P3[0] - btnRect.width / 2}px;}
+    setStyleDom('moveBtn', `
+    @keyframes ${moRootName}x-margin-${ramNum}{
+    0%  {margin-left:${P1[0]}px;}
+    16% {margin-left:${P2[0] / 2}px;}
+    64%{margin-left:${P3[0]}px;}
+    100%{margin-left:${P3[0]}px;}
     }
-    @keyframes ${moRootName}y{
-        0%  {transform:translateY(${P1[1]}px)}
-        64%{transform:translateY(${P3[1] - btnRect.height / 3}px)}
-        100%{transform:translateY(${P3[1] - btnRect.height / 3}px)}
+    @keyframes ${moRootName}x-${ramNum}{
+        0%  {margin-left:${P1[0]}px;}
+        16% {margin-left:${P2[0] / 2}px;}
+        64%{margin-left:${P3[0]}px;}
+        100%{margin-left:${P3[0]}px;}
+        }
+    @keyframes ${moRootName}y-${ramNum}{
+        0%  {transform:translateY(${P1[1]}px );}
+        64%{transform:translateY(${moveY}px );}
+        100%{transform:translateY(${moveY}px );}
     }
 
-    @keyframes ${moRootName}opacity{
+    @keyframes ${moRootName}opacity-${ramNum}{
         0%  {opacity:0}
         24%{opacity:0.8}
         80%{opacity:0.8}
         100%{opacity:0}
     }
+
+  
     `);
 
-
+    /**
+       #detail #bookmarkBtn:after {
+            -webkit-animation: var(--demo-mo-margin-x) 3s ease infinite, var(--demo-mo-y) 3s infinite, var(--demo-mo-opacity) 3s infinite;
+                    animation: var(--demo-mo-margin-x) 3s ease infinite, var(--demo-mo-y) 3s infinite, var(--demo-mo-opacity) 3s infinite;
+            -webkit-animation-play-state: running;
+                    animation-play-state: running;}
+                     */
 }
 
 function setDomCssText(domSelector = 'html', cssText) {
@@ -132,32 +155,46 @@ function setDomCssText(domSelector = 'html', cssText) {
     })
 }
 
+
+
+
+
 function refleshPath() {
+    console.log('refleshPath', Date.now());
     drawArrowPath('#bookmarkBtn', 'hsla(' + ((hOfHsl++ % 100) / 100 * 360) + ',' + sOfHsl + ',' + lOfHsl + ',1)', ['hue']);
 };
 
-
-hOfHsl = Math.floor(360 * Math.random());
-strokeWidthIndex = 1;
-strokeWidth = 1;
-sOfHsl = '100%';
-lOfHsl = '50%';
+// var refleshingPath = throttle(refleshPath, 1000 / 120);
+var refleshingPath = refleshPath;
 
 
-window.onresize = function () {
-    refleshPath();
-};
-document.getElementById('detail').onscroll = function () {
-    refleshPath();
-};
-
-var observer = new MutationObserver(mutations => {
-    refleshPath();
+window.addEventListener('load', function winLoadPath() {
+    refleshingPath();
+});
+window.addEventListener('resize', function winResizePath() {
+    refleshingPath();
 });
 
-observer.observe(document.querySelector('main'), {
-    attributes: true,
-    childList: true,
-    characterData: true,
-    subtree: true,
+document.querySelector('.v-page').addEventListener('scroll', function detailScrollPath(e) {
+    detailScrollTop = e.target.scrollTop;
+    if (typeof lastDetailScrollTop != 'undefined' && Math.abs(lastDetailScrollTop - detailScrollTop) >= 1) {
+        refleshingPath();
+    }
+    lastDetailScrollTop = detailScrollTop;
 });
+
+if (typeof refleshingPathObserverBoo == 'undefined') {
+    var observer = new MutationObserver(mutations => {
+
+        refleshingPathObserverBoo = true;
+        refleshingPath();
+    });
+
+    observer.observe(document.getElementById('detail'), {
+        attributes: true,
+        childList: true,
+        characterData: true,
+        subtree: true,
+    });
+}
+

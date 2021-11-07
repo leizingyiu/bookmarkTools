@@ -1,5 +1,5 @@
 
-var LastModified = "2021/11/04 22:20:02"
+var LastModified = "2021/11/08 00:26:56"
 
 // console.log('main script');
 //console.warn = () => { };
@@ -29,6 +29,7 @@ console.log(lang);
 main();
 
 function main() {
+    console.log('main start');
     let indexContent = {
         'btn': {
             "cn": "书签工具  （点我随机跳一个书签",
@@ -39,9 +40,8 @@ function main() {
             "en": "or try to drag that to the bookmark bar ?"
         },
         "article": {
-            "cn": `<p style="font-weight:300;">
-            记录收藏一些，平时自己写的，或者收集回来的，书签工具 <br><br>
-            点击按钮可访问源码
+            "cn": `<p style="font-weight:300;">记录收藏一些，平时自己写的，或者收集回来的，书签工具 <br>
+            <br>点击按钮可访问源码
             </p>`,
             "en": `<p style="font-weight:300;">
             Collect some records, usually write by yourself, or collect back, bookmark tool <br><br>
@@ -59,11 +59,6 @@ function main() {
                 keys = Object.keys(json);
                 if (keys.indexOf(bookmark) != -1) {
                     loadDetail(json[bookmark]);
-                    // loadBtn(json[bookmark].scriptPath);
-                    // loadMd(json[bookmark].mdpath[lang]);
-                    // setUrl('bookmark', bookmark);
-                    // document.querySelector('#bookmarkBtn').innerText = json[bookmark].showName[lang];
-                    // document.querySelector("#bookmarkContainer dd").innerText = json[bookmark].describe[lang];
                 }
             })
     } else {
@@ -91,8 +86,11 @@ function main() {
     }
     loadMenu();
     console.log('begin load demo');
-    loadDemo();
+    loadDemoBookmarkList();
     console.log('end load demo');
+    addDemoBtn();
+
+    console.log('main end');
 
     return void 0;
 }
@@ -110,12 +108,14 @@ function setUrl(name, value) {
 }
 
 function loadDetail(json) {
-    console.log(json);
+    console.log('loadDetail start');
     setUrl('bookmark', json['name']);
 
     let showName = Object.keys(json['showName'])[0] != '0' ? json['showName'][lang] : json['showName'];
     document.querySelector('#bookmarkBtn').innerText = showName;
-    document.querySelector('#bookmarkBtn').setAttribute('showName', showName)
+    document.querySelector('#bookmarkBtn').setAttribute('showName', showName);
+    setStyleDom('demoBtnTxt', `:root{--demo-btn-txt:'${showName}';}`);
+
 
     let describe = Object.keys(json['describe'])[0] != '0' ? json['describe'][lang] : json['describe'];
 
@@ -135,9 +135,13 @@ function loadDetail(json) {
         document.querySelector('#bookmarkBtn').style.cursor = 'move!important';
     }
 
+    console.log('loadDetail end');
+
 }
 
 function loadMenu() {
+    console.trace();
+
     // console.trace();
     // console.log('load menu');
     const menuText = {
@@ -198,6 +202,7 @@ function loadMenu() {
     }
 
 
+    /** load items */
     fetch(rootPath + '\\items.json')
         .then(r => r.json())
         .then(json => {
@@ -248,11 +253,12 @@ function loadMenu() {
 
     return void 0;
 }
-function loadDemo() {
-    console.log('loading demo');
+
+function loadDemoBookmarkList() {
+    console.trace();
     var bookmarkNames = '';
 
-    var demoBtnTxt = { "cn": "书签JS", "en": "bookmark script" }[lang];
+    var demoBtnTxt = { "cn": "书签工具", "en": "bookmark script" }[lang];
 
     let demoTitle = { 'cn': '你的书签栏 | ', 'en': "your bookmarks | " };
     fetch(rootPath + '\\items.json')
@@ -276,146 +282,94 @@ function loadDemo() {
 
             setStyleDom('demoContent', ` :root{
                 --demo-content:'${bookmarkNames}';
-                --demo-btn-txt:'${demoBtnTxt}';
-            }`)
+            }`);
+            setStyleDom('demoBtnTxt', `            :root{     --demo-btn-txt:'${demoBtnTxt}';}
+            `)
         });
 
-    setStyleDom('demoBtn', `
-#detail:before{
-    content:var(--demo-content);
-        position: absolute;
-        top: 0;
-        font-size:1rem;
-        line-height:1rem;
-        padding: 1rem;
-        background: hsla(0deg,100%,100%,0.5);
-        border-bottom:solid 1px #aaa;
-        width: 100%;
-        z-index: -2;
-        opacity: 1;
-        transition: opacity 0.5s ease;
-        letter-spacing:0.05em;
-        font-weight:300;
-        thisCssFrom:loadDemo;
-        word-break: keep-all;
-        white-space: nowrap;
-}
-#detail:after {
-    content:'';
-    display:block;
-    height:calc( 3rem + 2px );
-    width:20vw;
-    position:absolute;
-    top:0;
-    right:0;
-    background: rgb(255,255,255);
-    background: linear-gradient(-90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
-}
+    setStyleDom('demoListStyle', `
+                #detail:before{
+                    content:var(--demo-content);
+                    position: absolute;
+                    top: 0;
+                    font-size:1rem;
+                    line-height:1rem;
+                    padding: 1rem;
+                    background: hsla(0deg,100%,100%,0.5);
+                    border-bottom:solid 1px #aaa;
+                    width: 100%;
+                    z-index: -2;
+                    opacity: 1;
+                    transition: opacity 0.5s ease;
+                    letter-spacing:0.05em;
+                    font-weight:300;
+                    thisCssFrom:loadDemo;
+                    word-break: keep-all;
+                    white-space: nowrap;
+                }
+                #detail:after {
+                    content:'';
+                    display:block;
+                    height:calc( 3rem + 2px );
+                    width:20vw;
+                    position:absolute;
+                    top:0;
+                    right:0;
+                    background: rgb(255,255,255);
+                    background: linear-gradient(-90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+                    transition: opacity 0.5s ease;
 
-    #detail #bookmarkBtn:after{
-       animation: var(--demo-mo-x) 3s ease infinite ,var(--demo-mo-y)  3s infinite  ,var(--demo-mo-opacity) 3s infinite;
-       animation-play-state:running;
-     
+                }
+                #detail:hover:before,#detail:hover:after {
+                    opacity:0;
+                }
+                `);
 
-       content:attr(showname);
-       font-size: 1em;
-       display:block;
-       position:absolute;
-       left: 50%;
-       top: 50%;
-       width: max-content;
-       padding:inherit;
-       border:inherit;
-       transform: translate(-50%, -50%);
-       border-radius:inherit;
-       opacity:1;
-       transition:opacity 0.5s ease;
-       background: radial-gradient(circle, rgba(255,255,255,1) 0%,rgba(255,255,255,0.64) 50%, rgba(255,255,255,0) 100%);
-       color:rgba(0,0,0,1);
-       background-color:rgba(255, 255, 255, 0.8);
-       border-color:rgba(0, 0, 0, 0.3);
-       transition:color 0.2s ease, border-color 1s ease ,background-color 1s ease !important;
-       box-shadow: 0px 4px 12px 0px rgba(0 0 0 / 8%),
-       0px 8px 32px 0px rgba(0 0 0 / 4%);
-       
-       z-index:-1;
-       
-    }
-    #detail:hover #bookmarkBtn:after{
-        animation-play-state:paused;
-        border-color:rgba(0, 0, 0, 0)!important;
-        background-color:rgba(255, 255, 255, 0)!important;
-        color:rgba(0,0,0,0);
-        background-image: radial-gradient(circle, rgba(255, 255, 255,0) 0%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 100%);
-        box-shadow: 0px 0px 12px 0px rgb(0 0 0 / 0%),
-        0px 0px 32px 0px rgb(0 0 0 / 0%);
-    }
-    
-    #detail:hover:before,#detail:hover:after {
-        opacity:0;
-    }    
-    `)
-    // let setDemoStyle = function () {
-    //     let detailbox = document.querySelector('#detail').getBoundingClientRect();
-    //     console.log(detailbox);
-    //     setDomCssText('#demo', `
-    //     left:${detailbox.left}px;
-    //     width:${detailbox.width}px;
-    //     `);
-    // };
+    // setStyleDom('demoBtnStyle', `
 
+    //             #detail #bookmarkBtn:after{
+    //             animation: var(--demo-mo-x) 3s ease infinite ,var(--demo-mo-y)  3s infinite  ,var(--demo-mo-opacity) 3s infinite;
+    //             animation-play-state:running;
 
-    // setStyleDom('demoStyle',
-    //     `
-    //     #demo{
-    //         position:fixed;
-    //         top:0;
-    //         font-size:14px;
-    //         font-weight:300;
-    //     }
+    //             content:var(--demo-btn-txt);
+    //             font-size: 1em;
+    //             display:block;
+    //             position:absolute;
+    //             left: 0%;
+    //             top: 0%;
+    //             width: max-content;
+    //             padding: 0.25em;
+    //             border: dashed 2px rgba(0, 0, 0, 0.3);
+    //             border-radius: 0.25em;
+    //             opacity:1;
+    //             transition:opacity 0.5s ease;
+    //             background: radial-gradient(circle, rgba(255,255,255,1) 0%,rgba(255,255,255,0.64) 50%, rgba(255,255,255,0) 100%);
+    //             color:rgba(0,0,0,1);
+    //             background-color:rgba(255, 255, 255, 0.8);
+    //             border-color:rgba(0, 0, 0, 0.3);
+    //             transition:color 0.2s ease, border-color 1s ease ,background-color 1s ease !important;
+    //             box-shadow: 0px 4px 12px 0px rgba(0 0 0 / 8%),
+    //             0px 8px 32px 0px rgba(0 0 0 / 4%);
 
-    //     #demo p:after{
-    //     content:var(--demo-content);
-    //     position: fixed;
-    //     top: 0;
-    //     padding: 1em;
-    //     background: hsla(0deg,100%,100%,0.5);
-    //     width: 100%;
-    //     z-index: -999;
-    //     opacity: 1;
-    //     transition: opacity 0.5s ease;
-    //     thisCssFrom:loadDemo;
-    //     }
+    //             z-index:-1;
 
-    //     #demo.hide  {
-    //     opacity: 0;
-    //     display:none;
-    //     thisCssFrom:loadDemo;
-    //     }
-    //     `);
+    //             }
+    //             #detail:hover #bookmarkBtn:after{
+    //             animation-play-state:paused;
+    //             border-color:rgba(0, 0, 0, 0)!important;
+    //             background-color:rgba(255, 255, 255, 0)!important;
+    //             color:rgba(0,0,0,0);
+    //             background-image: radial-gradient(circle, rgba(255, 255, 255,0) 0%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 100%);
+    //             box-shadow: 0px 0px 12px 0px rgb(0 0 0 / 0%),
+    //             0px 0px 32px 0px rgb(0 0 0 / 0%);
+    //             }
+    //             `);
 
-    // setDemoStyle();
-
-    // // Firefox和Chrome早期版本中带有前缀
-    // var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver
-    // // 选择目标节点
-    // var target = document.querySelector('main *');
-    // // 创建观察者对象
-    // var observer = new MutationObserver(function (mutations) {
-    //     mutations.forEach(function (mutation) {
-    //         console.log(mutation.type);
-    //         setDemoStyle();
-    //     });
-    // });
-    // // 配置观察选项:
-    // var config = { attributes: true, childList: true, characterData: true }
-    // // 传入目标节点和观察选项
-    // observer.observe(target, config);
-    // // 随后,你还可以停止观察
-    // // observer.disconnect();
 
 }
 function loadBtn(minUrl, readUrl = minUrl) {
+    console.trace();
+
     fetch(minUrl)
         .then(r => r.text())
         .then(t => {
@@ -425,11 +379,12 @@ function loadBtn(minUrl, readUrl = minUrl) {
             clickAndDrag(btn, t, readUrl);
         });
 
+
     return void 0;
 }
 
 function loadMd(url) {
-    console.log(url);
+    console.trace();
     fetch(url)
         .then(r => r.text())
         .then(t => {
@@ -441,6 +396,8 @@ function loadMd(url) {
 }
 
 function clickAndDrag(dom, dragUrl, clickUrl) {
+    console.trace();
+
     dom.setAttribute('dragUrl', dragUrl);
     dom.setAttribute('clickUrl', clickUrl);
     // console.log(dragUrl, '\n', clickUrl);
@@ -469,6 +426,8 @@ function clickAndDrag(dom, dragUrl, clickUrl) {
 }
 
 function openWin(url, tar) {
+    console.trace();
+
     if (url.indexOf('javascript:') == 0) {
         console.log(url);
         url = url.replace('javascript:', '');
@@ -488,6 +447,8 @@ function openWin(url, tar) {
 
 
 function setStyleDom(id, innerHTML) {
+    console.trace();
+
     if (document.querySelector(`#${id}`) == null) {
         let style = document.createElement('style');
         style.id = id;
@@ -498,7 +459,7 @@ function setStyleDom(id, innerHTML) {
     }
 }
 function setDomCssText(domSelector = 'html', cssText) {
-    console.log(cssText);
+    console.trace();
 
     let txtArr = cssText.split(';');
     txtArr.map(txt => {
@@ -514,4 +475,110 @@ function setDomCssText(domSelector = 'html', cssText) {
             dom.style.cssText += `${name}:${value};`;
         };
     })
+}
+
+function addDemoBtn() {
+    console.trace();
+
+    let demoContainerId = 'demoContainer';
+    let demoBtnId = 'demoBtn';
+    let demoContainer, demoBtn;
+    if (document.querySelector(`#${demoContainerId}`) == null) {
+
+        demoContainer = document.createElement('div');
+        demoContainer.id = demoContainerId;
+
+        demoBtn = document.createElement('a');
+        demoBtn.id = demoBtnId;
+
+        demoContainer.style.cssText = `
+        position:fixed; top:0;  left:0;
+        width:100vw;    height:100vh;
+        z-index:-99999;
+        `;
+        document.body.appendChild(demoContainer);
+        demoContainer.appendChild(demoBtn);
+    } else {
+        demoContainer = document.getElementById(demoContainerId);
+        demoBtn = document.getElementById(demoBtnId);
+
+        return void 0;
+
+    }
+
+
+    let target = document.getElementById('bookmarkBtn');
+
+
+    setStyleDom('newDemoBtnMove', `
+    #demoContainer {
+        -webkit-animation: var(--demo-mo-x) 3s ease infinite, var(--demo-mo-opacity) 3s infinite;
+                animation: var(--demo-mo-x) 3s ease infinite, var(--demo-mo-opacity) 3s infinite;
+        -webkit-animation-play-state: running;
+                animation-play-state: running;}
+    #demoBtn {
+        -webkit-animation: var(--demo-mo-y) 3s infinite;
+                animation:  var(--demo-mo-y) 3s infinite;
+        -webkit-animation-play-state: running;
+                animation-play-state: running;
+            }
+  
+    `);
+
+    document.getElementById('detail').addEventListener('mouseenter', function () {
+        console.log('mouse enter detail');
+        document.querySelector('#demoBtn').style.opacity = 0;
+
+    }, true);
+    document.getElementById('detail').addEventListener('mouseout', function () {
+        console.log('mouse leave detail');
+
+        document.querySelector('#demoBtn').style.opacity = 1;
+
+    }, true);
+
+    demoBtn.setAttribute('style', `
+        display:block;
+        width: -webkit-max-content;
+        width: -moz-max-content;
+        width: max-content;
+        position: relative;
+        left:var(--btn-left);
+        top:var(--btn-top);
+        border: dashed 2px rgba(0, 0, 0, 0.3);
+        font-size: 1.5em;
+        font-weight: 300;
+        letter-spacing: 0.1em;
+        border-radius: 0.25em;
+        padding: 0.25em;
+        cursor: move;
+        background-color: rgba(255, 255, 255, 0.8);
+        transition: border 0.2s ease, box-shadow 0.2s ease;
+    
+        box-shadow: 0px 4px 12px 0px rgb(0 0 0 / 8%),
+            0px 8px 32px 0px rgb(0 0 0 / 4%);
+    
+        max-width: 100%;
+        box-sizing: border-box;
+        transition:opacity 0.5s linear;
+        `);
+    demoBtn.setAttribute('settingTime', Date.now());
+    demoBtn.innerText = target.innerText;
+
+    if (typeof setDomCssTextActiveBoolean == 'undefined') {
+        let observer = new MutationObserver(function setDemoText(mutations) {
+            setDomCssTextActiveBoolean = true;
+            demoBtn.innerText = target.innerText;
+        });
+
+        observer.observe(target, {
+            attributes: true,
+            childList: true,
+            characterData: true,
+            subtree: true,
+        });
+    }
+
+
+
 }

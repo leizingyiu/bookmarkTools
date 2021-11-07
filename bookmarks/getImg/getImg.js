@@ -1,5 +1,5 @@
 javascript: console.log(`获取图片书签by leizingyiu
-Last modified : "2021/10/29 14:35:52"
+Last modified : "2021/11/07 21:09:44"
 `);
 (function () {
 
@@ -222,8 +222,8 @@ Last modified : "2021/10/29 14:35:52"
                 mySrcList = mySrcList.concat(imgSrcList, bgUrlList, aHrefLink)
             } catch (err) { };
         });
-        mySrcList = mySrcList.reverse();
         mySrcList = [...new Set(mySrcList)];
+        mySrcList = mySrcList.reverse();
 
         var pageCodeBlock = makeImgsCodeBlock(mySrcList.reverse(), pageSetUp['divId'], pageSetUp['imgClass'], pageSetUp['otherHtml'], pageSetUp['style'], pageSetUp['scripts']);
 
@@ -245,7 +245,7 @@ Last modified : "2021/10/29 14:35:52"
     };
     function imgLinkArray(obj, replaceBoo, replaceSomeWeb) {
         var result = [];
-        var reg = /(\S+)(jpg|png|jpeg|gif)(.+)/gi;
+        var reg = /(\S+)(jpg|png|jpeg|gif|webp|bmp)(.+)/gi;
         var regData = /^data.*/g;
         for (var i = 0; i < obj.images.length; i++) {
             if (obj.images[i].hasAttribute("src")) {
@@ -271,7 +271,7 @@ Last modified : "2021/10/29 14:35:52"
         let all = obj.querySelectorAll('*');
         let bg = '';
         let reg = /(?:['"])[^'"]+/g;
-        let reg2 = /(\S+)(jpg|png|jpeg|gif)(.+)/gi;
+        let reg2 = /(\S+)(jpg|png|jpeg|gif|webp|bmp)(.+)/gi;
         for (let j = 0; j < all.length; j++) {
             console.log(all[j].style);
             console.log(all[j].style.backgroundImage);

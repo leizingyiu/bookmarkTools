@@ -1,10 +1,13 @@
 <!-- 
-    Last modified: "2021/11/05 00:47:31"
+    Last modified: "2021/11/07 18:43:33"
  -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+    <script>
+
+    </script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -61,10 +64,12 @@
         top: 0;
         left: 0;
         z-index: -999;enable-background: accumulate;">
-        <path id='arrow' stroke-dasharray="2500,500" stroke-dashoffset="3000" stroke-linejoin="round">
+        <path id='arrow' stroke-dasharray="2500,500" stroke-dashoffset="3000" stroke-linejoin="round" d='M0 0 , Z'>
             <animate attributeName="stroke-dashoffset" to="0" dur="3s" begin="0s" fill="freeze"
                 repeatCount="indefinite">
             </animate>
+            <!-- <animate attributeName="d" to="" dur="0.2s" begin="0s" fill="freeze" repeatCount="0" id='arrowAnimation'> -->
+            <!-- </animate> -->
         </path>
 
 
@@ -100,11 +105,48 @@
         let logDebug = location.href.indexOf('leizingyiu.net') == -1;
         logDebug = true;
         console.log = logDebug ? console.log : () => void 0;
+
+
+
+        // let throttle = function (func, wait) {
+        //     var lastTime = 0
+        //     return function (...args) {
+        //         var now = Date.now()
+        //         var coolingDown = now - lastTime < wait
+        //         if (coolingDown) {
+        //             return
+        //         }
+        //         lastTime = Date.now()
+        //         func.apply(null, args)
+        //     }
+        // }
+
+        // let debounce = function (func, wait) {
+        //     var timer;
+
+        //     return function (...args) {
+        //         if (timer) {
+        //             clearTimeout(timer)
+        //         }
+        //         timer = setTimeout(function () {
+        //             clearTimeout(timer)
+        //             timer = null
+        //             func.apply(null, args)
+        //         }, wait)
+        //     }
+        // };
+
     </script>
-    <script src="./script/polyfill.min.js"></script>
+    <!-- <script src="./script/polyfill.min.js"></script> -->
     <script src="./script/marked.min.js"></script>
     <script src="./script/script.js"></script>
     <script src="./script/drawArrow.js"></script>
+    <!-- <script src="./script/moveDemoBtn.js"></script> -->
+
+
+    <script>
+
+    </script>
 </body>
 
 </html>

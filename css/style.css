@@ -1,15 +1,11 @@
 /* 
-Last modified: "2021/11/05 12:53:05"
+Last modified: "2021/11/08 00:58:54"
  */
 
- @keyframes btnUpToBookmarkBar {
-     
- }
+
 :root {
     --padding-size: 1rem;
---html-bg-color:hlsa(0deg,0%,0%,0.01)
---html-bg-color-transparent:hlsa(0deg,0%,0%,0)
-
+    --html-bg-color: hlsa(0deg, 0%, 0%, 0.01); --html-bg-color-transparent:hlsa(0deg, 0%, 0%, 0)
 }
 
 html {
@@ -47,6 +43,8 @@ main ul#toolsList {
     text-align: right;
     transition: all 0.2s linear;
     position: relative;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
     height: fit-content;
     max-height: calc(100% - var(--padding-size));
     margin: auto 0;
@@ -153,41 +151,43 @@ main ul#toolsList li#footer a:hover:after {
     transform: scale(0%, 100%);
 }
 
-.v-viewport{
+.v-viewport {
     max-height: 100%;
     margin: auto;
     display: flex;
     height: 100%;
-    overflow-y: scroll;
+overflow: hidden;
     word-wrap: break-word;
     white-space: pre-wrap;
 }
-.v-page{
-    height: fit-content;
-    overflow: visible;
+
+.v-page {
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: 100%;
+    overflow-y: scroll;
     margin: auto;
     padding: auto;
     display: block;
     width: 100%;
     word-wrap: break-word;
-} 
+}
 
 main #detail {
-    position:relative;
+    position: relative;
     flex-grow: 99;
     max-width: 60vw;
-    overflow-y: scroll;
     max-height: 100%;
     margin: auto;
+background-color: rgba(0, 0, 0, 0);
 
-    
 }
 
 main #detail #bookmarkContainer {
-    position:unset;
+    position: unset;
 }
 
-main #detail #bookmarkContainer>dt {    
+main #detail #bookmarkContainer>dt {
     position: relative;
     text-align: center;
 }
@@ -201,6 +201,8 @@ main #detail #bookmarkContainer::after {
 
 main #detail a#bookmarkBtn {
     display: inline-block;
+    width: -webkit-max-content;
+    width: -moz-max-content;
     width: max-content;
     position: relative;
     border: dashed 2px rgba(0, 0, 0, 0.3);
@@ -215,6 +217,9 @@ main #detail a#bookmarkBtn {
 
     box-shadow: 0px 4px 12px 0px rgb(0 0 0 / 8%),
         0px 8px 32px 0px rgb(0 0 0 / 4%);
+
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 main #detail a#bookmarkBtn:hover {
@@ -234,16 +239,18 @@ main #detail a#bookmarkBtn::before {
     left: 0%;
     background: #fff;
     z-index: -999;
-    filter: blur(0.5em);
+    -webkit-filter: blur(0.5em);
+            filter: blur(0.5em);
 }
 
 
 main #detail #bookmarkContainer>dd {
     text-align: center;
     letter-spacing: 0.1em;
+    position: relative;
 }
 
-main #detail #bookmarkContainer>dd::after{
+main #detail #bookmarkContainer>dd::after {
     content: "拖拽到书签栏保存，点击查看源码 / Drag and drop to the bookmark bar to save, click to view the source code";
     font-size: 10px;
     display: block;
@@ -260,6 +267,8 @@ main #detail #bookmarkContainer>dd::after{
 
 main #detail article {
     padding: 0 2em 2em;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
     width: fit-content;
     margin: auto;
     min-width: 72%;
@@ -267,6 +276,7 @@ main #detail article {
 }
 
 @media screen and (max-width: 800px) {
+    
     body {
         width: 100%;
     }
@@ -284,8 +294,11 @@ main #detail article {
         padding: 0;
         flex-grow: 0;
         text-align: left;
-        flex-shrink:0;
+        flex-shrink: 0;
         background-color: rgba(0, 0, 0, 0.04);
+        height: auto;
+
+        padding-bottom: 90pt;
     }
 
     main ul#toolsList>li {
@@ -331,7 +344,7 @@ main #detail article {
         transform: none;
     }
 
-    main #detail #bookmarkContainer>dd::after{
+    main #detail #bookmarkContainer>dd::after {
         content: "请在电脑打开 /  pls open this page on computer";
     }
 
@@ -382,9 +395,53 @@ main #detail article {
 }
 
 
-@supports (bottom: env(safe-area-inset-bottom)){
-    body,.fixedBottom{
+@supports (bottom: env(safe-area-inset-bottom)) {
+
+    body,
+    .fixedBottom {
         padding-bottom: constant(safe-area-inset-bottom);
         padding-bottom: env(safe-area-inset-bottom);
     }
+}
+
+
+
+#detail:before {
+    content: var(--demo-content);
+    position: absolute;
+    top: 0;
+    font-size: 1rem;
+    line-height: 1rem;
+    padding: 1rem;
+    background: hsla(0deg, 100%, 100%, 0.8);
+    border-bottom: solid 1px #aaa;
+    width: 100%;
+    max-width: 100vw;
+    overflow: hidden;
+    box-sizing: border-box;
+    z-index: 1;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+    letter-spacing: 0.05em;
+    font-weight: 300;
+    thisCssFrom: loadDemo;
+    word-break: keep-all;
+    white-space: nowrap;
+}
+
+#detail:after {
+    content: '';
+    display: block;
+    height: calc(3rem + 2px);
+    width: 20vw;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: rgb(255, 255, 255);
+    background: linear-gradient(-90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+#detail:hover:before,
+#detail:hover:after {
+    opacity: 0;
 }

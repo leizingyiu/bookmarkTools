@@ -106,11 +106,11 @@
     "1111coupon": {
         "name": "1111coupon",
         "showName": {
-            "cn": "双十一淘宝红包",
+            "cn": "双十一荭包",
             "en": "1111TaobaoPromo"
         },
         "describe": {
-            "cn": "直接打开双十一红包页面，每天可领，⬇️ 还有更多 ⬇️",
+            "cn": "直接打开双十一红包页面，每天可领",
             "en": "Open the 1111 coupon page directly, can get it every day"
         },
         "scriptPath": "./bookmarks/1111coupon/1111coupon.min.js",

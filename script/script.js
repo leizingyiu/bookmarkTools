@@ -1,5 +1,5 @@
 
-var LastModified = "2021/11/08 00:26:56"
+var LastModified = "2021/11/08 13:46:51"
 
 // console.log('main script');
 //console.warn = () => { };
@@ -26,13 +26,14 @@ console.log(lang);
 
 
 
+
 main();
 
 function main() {
     console.log('main start');
     let indexContent = {
         'btn': {
-            "cn": "书签工具  （点我随机跳一个书签",
+            "cn": "书签工具<small style='font-size:0.7em'>（点我随机跳一个书签</small>",
             "en": "bookmark tools   （Click me to jump to a bookmark randomly"
         },
         "dd": {
@@ -89,6 +90,10 @@ function main() {
     loadDemoBookmarkList();
     console.log('end load demo');
     addDemoBtn();
+
+    if (isIOS()) {
+        document.body.classList.add('.ios');
+    }
 
     console.log('main end');
 
@@ -321,7 +326,7 @@ function loadDemoBookmarkList() {
 
                 }
                 #detail:hover:before,#detail:hover:after {
-                    opacity:0;
+                    opacity:0.08;
                 }
                 `);
 
@@ -374,7 +379,7 @@ function loadBtn(minUrl, readUrl = minUrl) {
         .then(r => r.text())
         .then(t => {
             let btn = document.getElementById('bookmarkBtn');
-            t = t.match(/(^javascript)|(^data)/) ? t : 'javascript:' + t;
+            t = t.match(/(^javascript)|(^data)|(^http)/) ? t : 'javascript:' + t;
             //* console.log(t, '\n', readUrl);*/
             clickAndDrag(btn, t, readUrl);
         });
@@ -582,3 +587,10 @@ function addDemoBtn() {
 
 
 }
+
+function isIOS() {
+    var u = navigator.userAgent;
+    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+    return isiOS;
+}
+

@@ -1,1 +1,1 @@
-javascript: window.location.href = 'https://s.click.taobao.com/bRdjbeu';
+https://s.click.taobao.com/bRdjbeu

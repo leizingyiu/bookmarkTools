@@ -1,5 +1,5 @@
 javascript: console.log(`获取图片书签by leizingyiu
-Last modified : "2021/10/25 00:52:01"
+Last modified : "2021/11/23 11:58:55"
 `);
 (function () {
 
@@ -308,9 +308,9 @@ Last modified : "2021/10/25 00:52:01"
         let reg = /(url\(")(.*)("\))/g;
         let reg2 = /(\S+)(jpg|png|jpeg|gif)(.+)/gi;
         for (let j = 0; j < all.length; j++) {
-            bg = all[j].href.match(/(\.jpg)|(\.gif)|(\.png)|(\.jpeg)|(\.webp)/) ? all[j].href : '';
-            if (bg != "" || bg != undefined) {
-                result[result.length] = String(bg).replace(reg, "$2");
+            let img = all[j].href.match(/(\.jpg)|(\.gif)|(\.png)|(\.jpeg)|(\.webp)/) ? all[j].href : '';
+            if (img != "" || img != undefined) {
+                result[result.length] = String(img).replace(reg, "$2");
                 result[result.length - 1] = replaceBoo == true ? result[result.length - 1].replace(reg2, "$1$2") : result[result.length - 1];
                 result[result.length - 1] = regReplaceForSomeWeb(result[result.length - 1], replaceSomeWeb)
             }

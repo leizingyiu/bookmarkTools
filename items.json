@@ -16,6 +16,23 @@
             "en": "./bookmarks/getImg/readme_en.md"
         }
     },
+    "getImgSrcFromScrollingList": {
+        "name": "getImgSrcFromScrollingList",
+        "showName": {
+            "cn": "获取动态加载的图片",
+            "en": "Get Img Src From Scrolling List"
+        },
+        "describe": {
+            "cn": "获取页面上的动态加载的图片",
+            "en": "Get dynamically loaded images on the page"
+        },
+        "scriptPath": "./bookmarks/getImgSrcFromScrollingList/getImgSrcFromScrollingList.js",
+        "minPath": "./bookmarks/getImgSrcFromScrollingList/getImgSrcFromScrollingList.min.js",
+        "mdPath": {
+            "cn": "./bookmarks/getImgSrcFromScrollingList/readme.md",
+            "en": "./bookmarks/getImgSrcFromScrollingList/readme_en.md"
+        }
+    },
     "notePad": {
         "name": "notePad",
         "showName": {
@@ -119,5 +136,6 @@
             "cn": "./bookmarks/1111coupon/readme.md",
             "en": "./bookmarks/1111coupon/readme_en.md"
         }
-    }
+    },
+    "1111coupon": {}
 }

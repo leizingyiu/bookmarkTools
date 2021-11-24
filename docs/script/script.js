@@ -1,6 +1,6 @@
 
-var LastModified = "2021/11/08 00:26:56"
-
+var LastModified = "2021/11/23 14:56:12"
+    ;
 // console.log('main script');
 //console.warn = () => { };
 
@@ -26,13 +26,14 @@ console.log(lang);
 
 
 
+
 main();
 
 function main() {
     console.log('main start');
     let indexContent = {
         'btn': {
-            "cn": "书签工具  （点我随机跳一个书签",
+            "cn": "书签工具<small style='font-size:0.7em'>（点我随机跳一个书签</small>",
             "en": "bookmark tools   （Click me to jump to a bookmark randomly"
         },
         "dd": {
@@ -89,6 +90,10 @@ function main() {
     loadDemoBookmarkList();
     console.log('end load demo');
     addDemoBtn();
+
+    if (isIOS()) {
+        document.body.classList.add('.ios');
+    }
 
     console.log('main end');
 
@@ -184,70 +189,94 @@ function loadMenu() {
         });
     }
 
-    {/** load footer  */
-        let footerLi = document.createElement('li');
-        let dl = document.createElement('dl');
-        let dt = document.createElement('dt');
-        let dd = document.createElement('dd');
+    {     /** load items */
+        fetch(rootPath + '\\items.json')
+            .then(r => r.json())
+            .then(json => {
+                console.log(json);
 
-        footerLi.id = 'footer';
-        dt.innerHTML = `Designed & Powerd by Leizingyiu</br>
-        Copyright© <a href="https://leizingyiu.net" >Leizingyiu.net</a></br>
-        Last Update: ${LastModified}`;
-        dd.innerHTML = '粤ICP备2020086793号';
-        document.getElementById('toolsList').appendChild(footerLi);
-        footerLi.appendChild(dl);
-        dl.appendChild(dt);
-        dl.appendChild(dd);
+                let keys = Object.keys(json);
+                for (var k of keys) {
+                    if (k == 'LastModified') {
+                        continue;
+                    }
+                    let li = document.createElement('li');
+                    let dl = document.createElement('dl');
+                    let dt = document.createElement('dt');
+                    let dd = document.createElement('dd');
+
+                    dt.innerText = json[k].showName[lang];
+                    dd.innerText = json[k].describe[lang];
+
+                    dl.setAttribute('scriptName', json[k].name);
+                    dl.setAttribute('scriptShowName', json[k].showName[lang]);
+                    dl.setAttribute('scriptDescribe', json[k].describe[lang]);
+
+                    dl.setAttribute('scriptPath', json[k].scriptPath);
+                    dl.setAttribute('mdPath', json[k].mdPath[lang])
+                    if (json[k].hasOwnProperty('pointerCursor') && json[k].pointerCursor == true) {
+                        dl.setAttribute('pointerCursor', 'true');
+                    }
+                    dl.onclick = function () {
+                        var thisJson = {
+                            "name": this.getAttribute('scriptName'),
+                            "showName": this.getAttribute('scriptShowName'),
+                            "describe": this.getAttribute('scriptDescribe'),
+                            "scriptPath": this.getAttribute('scriptPath'),
+                            "mdPath": this.getAttribute('mdPath'),
+                            "pointerCursor": this.hasAttribute('pointerCursor') && this.getAttribute('pointerCursor') == true
+                        };
+
+                        loadDetail(thisJson);
+                    }
+
+                    document.getElementById('toolsList').insertBefore(li,
+                        document.getElementById('footer'));
+                    li.appendChild(dl);
+                    dl.appendChild(dt);
+                    dl.appendChild(dd);
+                }
+
+            });
+    }
+
+    console.log(LastModified);
+
+
+    {/** load footer  */
+
+        fetch(rootPath + '\\items.json')
+            .then(r => r.json())
+            .then(json => {
+                console.log(json);
+                let keys = Object.keys(json);
+                for (var k of keys) {
+                    if (k == 'LastModified') {
+                        LastModified = json['LastModified'];
+
+                        let footerLi = document.createElement('li');
+                        let dl = document.createElement('dl');
+                        let dt = document.createElement('dt');
+                        let dd = document.createElement('dd');
+
+                        footerLi.id = 'footer';
+                        dt.innerHTML = `Designed & Powerd by Leizingyiu</br>
+                        Copyright© <a href="https://leizingyiu.net" >Leizingyiu.net</a></br>
+                        Last Update: ${LastModified}`;
+                        dd.innerHTML = '粤ICP备2020086793号';
+                        document.getElementById('toolsList').appendChild(footerLi);
+                        footerLi.appendChild(dl);
+                        dl.appendChild(dt);
+                        dl.appendChild(dd);
+
+
+                    }
+                }
+            });
     }
 
 
-    /** load items */
-    fetch(rootPath + '\\items.json')
-        .then(r => r.json())
-        .then(json => {
-            console.log(json);
 
-            let keys = Object.keys(json);
-            for (var k of keys) {
-                let li = document.createElement('li');
-                let dl = document.createElement('dl');
-                let dt = document.createElement('dt');
-                let dd = document.createElement('dd');
-
-                dt.innerText = json[k].showName[lang];
-                dd.innerText = json[k].describe[lang];
-
-                dl.setAttribute('scriptName', json[k].name);
-                dl.setAttribute('scriptShowName', json[k].showName[lang]);
-                dl.setAttribute('scriptDescribe', json[k].describe[lang]);
-
-                dl.setAttribute('scriptPath', json[k].scriptPath);
-                dl.setAttribute('mdPath', json[k].mdPath[lang])
-                if (json[k].hasOwnProperty('pointerCursor') && json[k].pointerCursor == true) {
-                    dl.setAttribute('pointerCursor', 'true');
-                }
-                dl.onclick = function () {
-                    var thisJson = {
-                        "name": this.getAttribute('scriptName'),
-                        "showName": this.getAttribute('scriptShowName'),
-                        "describe": this.getAttribute('scriptDescribe'),
-                        "scriptPath": this.getAttribute('scriptPath'),
-                        "mdPath": this.getAttribute('mdPath'),
-                        "pointerCursor": this.hasAttribute('pointerCursor') && this.getAttribute('pointerCursor') == true
-                    };
-
-                    loadDetail(thisJson);
-                }
-
-                document.getElementById('toolsList').insertBefore(li,
-                    document.getElementById('footer'));
-                li.appendChild(dl);
-                dl.appendChild(dt);
-                dl.appendChild(dd);
-            }
-
-        });
 
 
 
@@ -321,7 +350,7 @@ function loadDemoBookmarkList() {
 
                 }
                 #detail:hover:before,#detail:hover:after {
-                    opacity:0;
+                    opacity:0.08;
                 }
                 `);
 
@@ -374,7 +403,7 @@ function loadBtn(minUrl, readUrl = minUrl) {
         .then(r => r.text())
         .then(t => {
             let btn = document.getElementById('bookmarkBtn');
-            t = t.match(/(^javascript)|(^data)/) ? t : 'javascript:' + t;
+            t = t.match(/(^javascript)|(^data)|(^http)/) ? t : 'javascript:' + t;
             //* console.log(t, '\n', readUrl);*/
             clickAndDrag(btn, t, readUrl);
         });
@@ -582,3 +611,10 @@ function addDemoBtn() {
 
 
 }
+
+function isIOS() {
+    var u = navigator.userAgent;
+    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+    return isiOS;
+}
+

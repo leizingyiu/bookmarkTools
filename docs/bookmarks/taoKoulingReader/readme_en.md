@@ -6,7 +6,7 @@ When you see Taobao discounts on your computer, you can:
 
 - Copy text
 - Click the bookmark, paste the text in the pop-up box, and confirm
-- The bookmark will jump to Taoxiang, and a bunch of codes will appear,
+- The bookmark will jump to the blank page of Taoxiang, click the bookmark again, and a bunch of codes will appear.
 - Continue to click the bookmark, you can jump to the Taobao page
 
 #### If it is a Weibo with Taobao activity, or a quick site link with Taobao password

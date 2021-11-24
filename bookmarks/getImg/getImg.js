@@ -1,5 +1,5 @@
 javascript: console.log(`获取图片书签by leizingyiu
-Last modified : "2021/11/23 15:27:16"
+Last modified : "2021/11/24 11:15:49"
 `);
 (function () {
 
@@ -198,7 +198,11 @@ Last modified : "2021/11/23 15:27:16"
         },
         'googleusercontent.com': {
             'reg': /(=[wh])\d*$/,
-            'result': '$1'+'9999'
+            'result': '$1' + '9999'
+        },
+        'media.niftygateway.com': {
+            'reg': /(upload\/).*(\/v\d{8,})/,
+            'result': '$1$2'
         }
     };
 

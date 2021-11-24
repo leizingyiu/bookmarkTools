@@ -1,5 +1,5 @@
 /* 
-Last modified: "2021/11/08 13:39:33"
+Last modified: "2021/11/24 13:02:42"
  */
 
 
@@ -456,7 +456,7 @@ main #detail article {
     background: linear-gradient(-90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
 }
 
-#detail:hover:before,
+/* #detail:hover:before,
 #detail:hover:after {
     opacity: 0;
-}
+} */

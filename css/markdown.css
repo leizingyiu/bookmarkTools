@@ -156,11 +156,11 @@
 .markdown-body ol {
   margin: 1em 0 1em 2em;
 }
-.markdown-body ul li,
+/* .markdown-body ul li,
 .markdown-body ol li {
   margin-top: 0.5em;
   margin-bottom: 0.5em;
-}
+} */
 .markdown-body ul ul,
 .markdown-body ul ol,
 .markdown-body ol ol,

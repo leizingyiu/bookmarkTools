@@ -1,5 +1,5 @@
 
-var LastModified = "2021/11/23 14:56:12"
+var LastModified = "2021/11/24 13:08:41"
     ;
 // console.log('main script');
 //console.warn = () => { };
@@ -68,6 +68,8 @@ function main() {
         .then(r=>r.json())
         .then(j=>{
             let keys=Object.keys(j);
+            let keyid=Math.floor(Math.random()*keys.length);
+            keyid=keyid==0?keyid+1
             let k=keys[Math.floor(Math.random()*keys.length)];
             console.log(j,k);
             console.log(j[k]);
@@ -293,10 +295,13 @@ function loadDemoBookmarkList() {
     fetch(rootPath + '\\items.json')
         .then(r => r.json())
         .then(json => {
-            console.log(json);
+            console.log(json + '_______________________________');
 
             let keys = Object.keys(json);
             for (var k of keys) {
+                if (json[k].hasOwnProperty('showName') == false) {
+                    continue;
+                }
                 bookmarkNames += ' 🌏' + json[k].showName[lang]
             }
             bookmarkNames = demoTitle[lang] + bookmarkNames;
@@ -307,7 +312,9 @@ function loadDemoBookmarkList() {
                 if (keys.indexOf(bookmark) != -1) {
                     demoBtnTxt = json[bookmark].showName[lang];
                 }
-            }
+            };
+
+            console.log('demoContent!!');
 
             setStyleDom('demoContent', ` :root{
                 --demo-content:'${bookmarkNames}';
@@ -346,11 +353,12 @@ function loadDemoBookmarkList() {
                     right:0;
                     background: rgb(255,255,255);
                     background: linear-gradient(-90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
-                    transition: opacity 0.5s ease;
+                    transition: opacity 0.8s ease 0.3s;
 
                 }
                 #detail:hover:before,#detail:hover:after {
                     opacity:0.08;
+                    transition: opacity 0.3s ease !important;
                 }
                 `);
 
@@ -477,6 +485,7 @@ function openWin(url, tar) {
 
 function setStyleDom(id, innerHTML) {
     console.trace();
+    console.log([id, innerHTML]);
 
     if (document.querySelector(`#${id}`) == null) {
         let style = document.createElement('style');

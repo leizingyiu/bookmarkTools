@@ -1,5 +1,5 @@
 {
-    "LastModified": "2021/11/24 13:20:17",
+    "LastModified": "2021/12/01 18:01:34",
     "getImg": {
         "name": "getImg",
         "showName": {
@@ -15,6 +15,23 @@
         "mdPath": {
             "cn": "./bookmarks/getImg/readme.md",
             "en": "./bookmarks/getImg/readme_en.md"
+        }
+    },
+    "copyNext": {
+        "name": "copyNext",
+        "showName": {
+            "cn": "逐个拷贝",
+            "en": "copyNext"
+        },
+        "describe": {
+            "cn": "一次复制分批粘贴",
+            "en": "Copy once, paste in batches"
+        },
+        "scriptPath": "./bookmarks/copyNext/copyNext.js",
+        "minPath": "./bookmarks/copyNext/copyNext.min.js",
+        "mdPath": {
+            "cn": "./bookmarks/copyNext/readme.md",
+            "en": "./bookmarks/copyNext/readme_en.md"
         }
     },
     "getImgSrcFromScrollingList": {

@@ -1,5 +1,9 @@
 ### Pick out all the pictures from the infinite scrolling list!
 
+<p style='text-align:center'>
+<video   width='80%' autoplay muted controls src='https://pic.leizingyiu.net/bookmark%20tools_getImgSrcFromScrollingList.mp4'></video>
+</p>
+
 For some pages with infinite scrolling, in order to optimize the performance, the scrolled frames will be taken down for recycling, and placed at the back of the page. The old bottle of new wine will reappear in front of you.
 At this time, getImage.js may only get the image of the current display area.
 This bookmarking script is designed to deal with this situation!

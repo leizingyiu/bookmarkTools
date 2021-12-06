@@ -1,5 +1,9 @@
 ### 把图片从页面上全部提取出来!
 
+<p style='text-align:center'>
+<video   width='80%' autoplay muted controls src='https://pic.leizingyiu.net/bookmark%20tools_getImg.mp4'></video>
+</p>
+
 而且把一些图片还原成原图，譬如 微博 和 淘宝 ！  
 尤其是 花瓣，可以在列表页直接获取原图！  
 <s>(希望花瓣别屏蔽吧哈哈哈哈哈哈哈哈哈哈</s>

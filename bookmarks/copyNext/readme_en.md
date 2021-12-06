@@ -1,5 +1,9 @@
 ### Copy=load the magazine, paste=fire!
 
+<p style='text-align:center'>
+<video   width='80%' autoplay muted controls src='https://pic.leizingyiu.net/bookmark%20tools_copyNext.mp4'></video>
+</p>
+
 When you need to paste many pieces of text in batches,
 I don’t want to choose to copy back and forth,
 So I got this.

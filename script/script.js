@@ -1,5 +1,5 @@
 
-var LastModified = "2021/11/24 13:08:41"
+var LastModified = "2021/12/06 12:52:25"
     ;
 // console.log('main script');
 //console.warn = () => { };
@@ -50,7 +50,20 @@ function main() {
             </p>`
         }
     };
-    if (Object.keys(searchJson).indexOf('bookmark') != -1) {
+    if (Object.keys(searchJson).indexOf('bookmark') != -1 && searchJson.bookmark == 'random') {
+        fetch(rootPath + '\\items.json')
+            .then(r => r.json())
+            .then(j => {
+                let keys = Object.keys(j);
+                let keyid = Math.floor(Math.random() * keys.length);
+                keyid = keyid == 0 ? keyid + 1 : keyid;
+                let k = keys[Math.floor(Math.random() * keys.length)];
+                console.log(j, k);
+                console.log(j[k]);
+                goUrl('bookmark', k);
+            })
+
+    } else if (Object.keys(searchJson).indexOf('bookmark') != -1) {
         console.log(searchJson, Object.keys(searchJson).indexOf('bookmark'));
 
         let bookmark = searchJson.bookmark;
@@ -63,26 +76,8 @@ function main() {
                 }
             })
     } else {
-        clickAndDrag(document.getElementById('bookmarkBtn'), window.location, `javascript:
-        fetch(rootPath + '\\items.json')
-        .then(r=>r.json())
-        .then(j=>{
-            let keys=Object.keys(j);
-            let keyid=Math.floor(Math.random()*keys.length);
-            keyid=keyid==0?keyid+1
-            let k=keys[Math.floor(Math.random()*keys.length)];
-            console.log(j,k);
-            console.log(j[k]);
-            loadDetail(j[k]); 
-        })
-        `);
-        /* loadBtn(j[k].scriptPath);
-            loadMd(j[k].mdpath[lang]);
-            setUrl('bookmark',k);
-            document.querySelector('#bookmarkBtn').innerText = j[k].showName[lang];
-            document.querySelector("#bookmarkContainer dd").innerText = j[k].describe[lang];
-            */
         document.querySelector('#bookmarkBtn').innerHTML = indexContent.btn[lang];
+        document.querySelector('#bookmarkBtn').href = rootPath + '?bookmark=random';
         document.querySelector('#bookmarkBtn').setAttribute('showName', indexContent.btn[lang])
         document.querySelector('#bookmarkContainer dd').innerHTML = indexContent.dd[lang];
         document.querySelector('#detail article').innerHTML = indexContent.article[lang];
@@ -111,6 +106,13 @@ function setUrl(name, value) {
         url: url,
         title: document.title
     }, document.title, url);
+    return void 0;
+}
+function goUrl(name, value) {
+    let searchJ = getQueryJson();
+    searchJ[name] = value;
+    let url = location.pathname + '?' + jsonToSearch(searchJ);
+    window.location = url;
     return void 0;
 }
 

@@ -1,5 +1,9 @@
 ### 把图片从无限滚动的列表里面全部扒出来!
 
+<p style='text-align:center'>
+<video   width='80%' autoplay muted controls src='https://pic.leizingyiu.net/bookmark%20tools_getImgSrcFromScrollingList.mp4'></video>
+</p>
+
 有些无限滚动的页面（ 譬如花瓣，譬如 opensea ），为了性能优化，会把滚动了上去的框框，拿下来循环使用，放再页面后面，老瓶装新酒，重新再出现在你面前；  
 这时候 getImage.js 很可能只拿到当前显示区域的图片；  
 这个书签脚本就是为了应对这种情况！

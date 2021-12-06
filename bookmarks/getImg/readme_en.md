@@ -1,5 +1,9 @@
 ### Extract all the pictures from the page!
 
+<p style='text-align:center'>
+<video   width='80%' autoplay muted controls src='https://pic.leizingyiu.net/bookmark%20tools_getImg.mp4'></video>
+</p>
+
 And restore some pictures to original pictures, such as Weibo and Taobao!  
 Especially for Huaban, you can get the original picture directly on the list page!  
 (Hope the Huaban are not shielded hahahahahahahahahaha

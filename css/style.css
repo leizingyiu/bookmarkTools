@@ -1,5 +1,5 @@
 /* 
-Last modified: "2021/11/24 13:02:42"
+Last modified: "2021/12/06 17:15:27"
  */
 
 
@@ -209,7 +209,7 @@ main #detail #bookmarkContainer::after {
 }
 
 main #detail #bookmarkContainer dt{
-        margin: 15% 0;
+        margin: 10% 0;
 }
 main #detail a#bookmarkBtn {
     display: inline-block;
@@ -254,6 +254,17 @@ main #detail a#bookmarkBtn::before {
             filter: blur(0.5em);
 }
 
+main #detail a#bookmarkBtn::after {
+    content: '"拖拽到书签栏保存，点击查看源码 / Drag and drop to the bookmark bar to save, click to view the source code"';
+    position: absolute;
+    display: block;
+    width: 300%;
+    max-width: 48vw;
+    left: 50%;
+    transform: translate(-50%,0);
+    top: 133%;
+    font-size: 0.5rem;
+}
 
 main #detail #bookmarkContainer>dd {
     text-align: center;
@@ -261,7 +272,7 @@ main #detail #bookmarkContainer>dd {
     position: relative;
 }
 
-main #detail #bookmarkContainer>dd::after {
+/* main #detail #bookmarkContainer>dd::after {
     content: "拖拽到书签栏保存，点击查看源码 / Drag and drop to the bookmark bar to save, click to view the source code";
     font-size: 10px;
     display: block;
@@ -272,7 +283,7 @@ main #detail #bookmarkContainer>dd::after {
     width: 100%;
     position: absolute;
     box-sizing: border-box;
-}
+} */
 
 
 

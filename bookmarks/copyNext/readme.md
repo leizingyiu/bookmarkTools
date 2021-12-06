@@ -1,8 +1,8 @@
-### 复制=弹夹上膛，粘贴=点射!
-
 <p style='text-align:center'>
 <video   width='80%' autoplay muted controls src='https://pic.leizingyiu.net/bookmark%20tools_copyNext.mp4'></video>
 </p>
+
+### 复制=弹夹上膛，粘贴=点射!
 
 需要分批粘贴很多段文本的时候，  
 不想来回选择复制，  

@@ -1,8 +1,14 @@
 
-var LastModified = "2021/12/06 12:52:25"
+var LastModified = "2021/12/06 15:37:05"
     ;
 // console.log('main script');
 //console.warn = () => { };
+
+if (window.location.href.indexOf('leizingyiu.net') != -1) {
+    console.isDebug = false;
+    console.log = () => { };
+    console.trace = ()=>{ }
+}
 
 function getQueryJson() {
     /** https://www.cnblogs.com/wangshucheng/p/11203097.html */
@@ -33,12 +39,12 @@ function main() {
     console.log('main start');
     let indexContent = {
         'btn': {
-            "cn": "书签工具<small style='font-size:0.7em'>（点我随机跳一个书签</small>",
-            "en": "bookmark tools   （Click me to jump to a bookmark randomly"
+            "cn": "书签工具<br><small style='font-size:0.6em;line-height:1.2em'>（拖我去书签栏</small><br><small style='font-size:0.6em;line-height:1.2em;cursor:pointer;'>（或者点我随机跳一个书签</small>",
+            "en": "bookmark tools<br><small style='font-size:0.5em;line-height:1.2em'>(Drag me to the bookmarks bar</small><br><small style='font-size:0.5em;line-height:1.2em;cursor:pointer;'>(Or click me to jump to a bookmark randomly</small>"
         },
         "dd": {
-            "cn": "或者拖去书签栏试试？",
-            "en": "or try to drag that to the bookmark bar ?"
+            "cn": "获取图片、放大淘宝选项、解锁选中限制……不驻留后台不占用内存！",
+            "en": "Get pictures, zoom in on Taobao options, unlock selected restrictions... Do not stay in the background and do not take up memory!?"
         },
         "article": {
             "cn": `<p style="font-weight:300;">记录收藏一些，平时自己写的，或者收集回来的，书签工具 <br>
@@ -56,7 +62,6 @@ function main() {
             .then(j => {
                 let keys = Object.keys(j);
                 let keyid = Math.floor(Math.random() * keys.length);
-                keyid = keyid == 0 ? keyid + 1 : keyid;
                 let k = keys[Math.floor(Math.random() * keys.length)];
                 console.log(j, k);
                 console.log(j[k]);

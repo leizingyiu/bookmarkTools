@@ -9,6 +9,13 @@ function vAdd() {
     }
 }
 
+if (window.location.href.indexOf('leizingyiu.net') != -1) {
+    console.isDebug = false;
+    console.log = () => { };
+    console.trace = () => { }
+}
+
+
 hOfHsl = Math.floor(360 * Math.random());
 sOfHsl = '100%';
 lOfHsl = '50%';

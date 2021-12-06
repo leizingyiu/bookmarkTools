@@ -1,5 +1,5 @@
 javascript: console.log(`获取图片书签by leizingyiu
-Last modified : "2021/11/24 13:34:59"
+Last modified : "2021/12/06 12:29:11"
 `);
 (function () {
 
@@ -169,7 +169,7 @@ Last modified : "2021/11/24 13:34:59"
 
     var replaceSomeWeb = {
         'huabanimg.com': {
-            'reg': /_fw\d*\/format\/.*/g,
+            'reg': /_fw\d*(\/format\/.*)*/g,
             'result': ''
         },
         'sinaimg.cn': {

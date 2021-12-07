@@ -1,5 +1,5 @@
 
-var LastModified = "2021/12/06 15:37:05"
+var LastModified = "2021/12/07 13:48:29"
     ;
 // console.log('main script');
 //console.warn = () => { };
@@ -7,7 +7,7 @@ var LastModified = "2021/12/06 15:37:05"
 if (window.location.href.indexOf('leizingyiu.net') != -1) {
     console.isDebug = false;
     console.log = () => { };
-    console.trace = ()=>{ }
+    console.trace = () => { }
 }
 
 function getQueryJson() {
@@ -61,7 +61,6 @@ function main() {
             .then(r => r.json())
             .then(j => {
                 let keys = Object.keys(j);
-                let keyid = Math.floor(Math.random() * keys.length);
                 let k = keys[Math.floor(Math.random() * keys.length)];
                 console.log(j, k);
                 console.log(j[k]);
@@ -213,10 +212,13 @@ function loadMenu() {
                     let dl = document.createElement('dl');
                     let dt = document.createElement('dt');
                     let dd = document.createElement('dd');
-
-                    dt.innerText = json[k].showName[lang];
-                    dd.innerText = json[k].describe[lang];
-
+                    try {
+                        dt.innerText = json[k].showName[lang];
+                        dd.innerText = json[k].describe[lang];
+                    } catch (err) {
+                        console.log(err);
+                        continue;
+                    }
                     dl.setAttribute('scriptName', json[k].name);
                     dl.setAttribute('scriptShowName', json[k].showName[lang]);
                     dl.setAttribute('scriptDescribe', json[k].describe[lang]);
@@ -235,6 +237,11 @@ function loadMenu() {
                             "mdPath": this.getAttribute('mdPath'),
                             "pointerCursor": this.hasAttribute('pointerCursor') && this.getAttribute('pointerCursor') == true
                         };
+                        [...document.querySelectorAll('.now')].map(i => {
+                            i.classList.remove('now');
+                        });
+                        this.classList.add('now');
+                        this.parentNode.classList.add('now');
 
                         loadDetail(thisJson);
                     }
@@ -246,8 +253,23 @@ function loadMenu() {
                     dl.appendChild(dd);
                 }
 
+
+                if (Object.keys(searchJson).indexOf('bookmark') != -1 && document.querySelector(`[scriptname=${searchJson.bookmark}]`) != null) {
+                    let dom = document.querySelector(`[scriptname=${searchJson.bookmark}]`)
+                    dom.classList.add('now');
+                    dom.parentNode.classList.add('now');
+                } else {
+                    document.querySelector(`#header`).classList.add('now');
+                };
+
+
             });
     }
+
+
+
+
+
 
     console.log(LastModified);
 
@@ -332,7 +354,7 @@ function loadDemoBookmarkList() {
 
     setStyleDom('demoListStyle', `
                 #detail:before{
-                    content:var(--demo-content);
+                    // content:var(--demo-content);
                     position: absolute;
                     top: 0;
                     font-size:1rem;
@@ -548,7 +570,6 @@ function addDemoBtn() {
         demoBtn = document.getElementById(demoBtnId);
 
         return void 0;
-
     }
 
 
@@ -572,7 +593,7 @@ function addDemoBtn() {
 
     document.getElementById('detail').addEventListener('mouseenter', function () {
         console.log('mouse enter detail');
-        document.querySelector('#demoBtn').style.opacity = 0;
+        document.querySelector('#demoBtn').style.opacity = 0.2;
 
     }, true);
     document.getElementById('detail').addEventListener('mouseout', function () {
@@ -596,6 +617,7 @@ function addDemoBtn() {
         letter-spacing: 0.1em;
         border-radius: 0.25em;
         padding: 0.25em;
+        text-align:center;
         cursor: move;
         background-color: rgba(255, 255, 255, 0.8);
         transition: border 0.2s ease, box-shadow 0.2s ease;
@@ -608,7 +630,7 @@ function addDemoBtn() {
         transition:opacity 0.5s linear;
         `);
     demoBtn.setAttribute('settingTime', Date.now());
-    demoBtn.innerText = target.innerText;
+    demoBtn.innerHTML = target.innerHTML;
 
     if (typeof setDomCssTextActiveBoolean == 'undefined') {
         let observer = new MutationObserver(function setDemoText(mutations) {

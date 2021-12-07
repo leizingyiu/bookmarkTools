@@ -1,13 +1,16 @@
 <!-- 
-    Last modified: "2021/12/06 15:34:25"
+    Last modified: "2021/12/07 13:12:44"
  -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <script>
-        console.isDebug = false;
-        console.log = () => { };
+    if (window.location.href.indexOf('leizingyiu.net') != -1) {
+    console.isDebug = false;
+    console.log = () => { };
+    console.trace = () => { }
+}
     </script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

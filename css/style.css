@@ -1,5 +1,5 @@
 /* 
-Last modified: "2021/12/06 17:15:27"
+Last modified: "2021/12/07 14:18:49"
  */
 
 
@@ -9,7 +9,7 @@ Last modified: "2021/12/06 17:15:27"
 }
 
 html {
-    font-size: 16px;
+    font-size: 1.4vmin;
     background-color: var(--html-bg-color);
 }
 
@@ -39,17 +39,17 @@ main ul#toolsList {
     justify-content: center;
     flex-direction: column; */
     letter-spacing: 0.1em;
-    padding: var(--padding-size);
+    /* padding: var(--padding-size); */
     text-align: right;
     transition: all 0.2s linear;
     position: relative;
-    height: -webkit-fit-content;
-    height: -moz-fit-content;
-    height: fit-content;
-    max-height: calc(100% - var(--padding-size));
+    height: -webkit-fill-available;
+    height: fill-availabel;
+    /* height: fit-content; */
+    /* max-height: calc(100% - var(--padding-size)); */
     margin: auto 0;
 
-    background-color: rgba(0, 0, 0, 0.02);
+    background-color: rgba(0, 0, 0, 0.03);
 
 }
 
@@ -60,14 +60,24 @@ main ul#toolsList>li {
     cursor: pointer;
     transition: all 0.2s linear;
     line-height: 2em;
+    opacity: 0.6;
+}
+main ul#toolsList>li .now ,main ul#toolsList>li.now,main ul#toolsList>#header.now  {
+    background: linear-gradient(270deg, white,rgba(255,255,255,0.8) 50%, transparent);
+opacity: 1!important;
 }
 
 main ul#toolsList:hover>li {
     opacity: 0.5;
 }
+main ul#toolsList:hover>li.now {
+    opacity: 1!important;
+}
 
 main ul#toolsList>li:hover {
     opacity: 1;
+    background: linear-gradient(270deg, rgba(255,255,255,0.4) 0%,rgba(255,255,255,0.2) 50%, transparent);
+
 }
 
 main ul#toolsList dl {
@@ -199,14 +209,14 @@ main #detail #bookmarkContainer>dt {
     position: relative;
     text-align: center;
 }
-
+/* 
 main #detail #bookmarkContainer::after {
     display: block;
     height: 0%;
     padding-top: 0%;
     content: '';
     padding-bottom: 4em;
-}
+} */
 
 main #detail #bookmarkContainer dt{
         margin: 10% 0;
@@ -258,12 +268,13 @@ main #detail a#bookmarkBtn::after {
     content: '"拖拽到书签栏保存，点击查看源码 / Drag and drop to the bookmark bar to save, click to view the source code"';
     position: absolute;
     display: block;
-    width: 300%;
+    width: 30000%;
     max-width: 48vw;
     left: 50%;
     transform: translate(-50%,0);
     top: 133%;
     font-size: 0.5rem;
+    pointer-events: none;
 }
 
 main #detail #bookmarkContainer>dd {
@@ -298,7 +309,9 @@ main #detail article {
 }
 
 @media screen and (max-width: 800px) {
-    
+    html{
+        font-size: 16px;
+    }
     body {
         width: 100%;
     }
@@ -338,7 +351,9 @@ main #detail article {
         width: 100%;
         position: relative;
     }
-
+    main #detail a#bookmarkBtn::after{
+        max-width: 92vw;
+    }
     main div#detail:after {
         content: '';
         height: 3em;
@@ -354,7 +369,7 @@ main #detail article {
         top: auto;
         left: auto;
         transform: none;
-        padding: 6em 3em;
+        padding: 3em 3em;
     }
 
     main #detail #bookmarkContainer::after {
@@ -370,6 +385,15 @@ main #detail article {
 
     main #detail #bookmarkContainer>dd::after {
         content: "请在电脑打开 /  pls open this page on computer";
+        display: block;
+        font-size: 0.8rem;
+        opacity: 0.6;
+        margin-top: 1em;
+        border-bottom: double 4px black;
+        position:absolute;
+        left: 50%;
+        transform: translate(-50%,0);
+        width:fit-content;
     }
 
     main #detail article {
@@ -433,7 +457,7 @@ main #detail article {
 
 
 #detail:before {
-    content: var(--demo-content);
+    /* content: var(--demo-content); */
     position: absolute;
     top: 0;
     font-size: 1rem;

@@ -25,49 +25,49 @@ strokeWidth = 1;
 function drawArrowPath(fromDomSelector, fillColor, classList) {
 
 
-    var winW = document.getElementsByTagName("html")[0].clientWidth;
-    var winH = document.getElementsByTagName("html")[0].clientHeight;
+    let winW = document.getElementsByTagName("html")[0].clientWidth;
+    let winH = document.getElementsByTagName("html")[0].clientHeight;
 
-    var bodyRect = document.body.getBoundingClientRect();
-    var bodyX = bodyRect.x;
-    var bodyY = bodyRect.y;
-    var scrollY = document.getElementById('detail').scrollTop;
+    let bodyRect = document.body.getBoundingClientRect();
+    let bodyX = bodyRect.x;
+    let bodyY = bodyRect.y;
+    let scrollY = document.getElementById('detail').scrollTop;
 
-    var btnRect = document.querySelector(fromDomSelector).getBoundingClientRect();
-    var btnMidX = btnRect.left + btnRect.width / 2;
-    var btnMidY = btnRect.bottom - btnRect.height / 2;
+    let btnRect = document.querySelector(fromDomSelector).getBoundingClientRect();
+    let btnMidX = btnRect.left + btnRect.width / 2;
+    let btnMidY = btnRect.bottom - btnRect.height / 2;
 
 
-    var m = [btnMidX, btnMidY];
-    var l1 = [btnMidX, btnMidY];
-    var q = [btnMidX + (winW - btnMidX + bodyX) / 3 + scrollY / 1.5, btnMidY * 0.8,
+    let m = [btnMidX, btnMidY];
+    let l1 = [btnMidX, btnMidY];
+    let q = [btnMidX + (winW - btnMidX + bodyX) / 3 + scrollY / 1.5, btnMidY * 0.8,
         btnMidX, btnRect.height / 2]
 
 
-    var L = [q[0] - q[2], q[1] - q[3]].map(i => i / 12);
+    let L = [q[0] - q[2], q[1] - q[3]].map(i => i / 12);
 
     function rotate(a, v) {
 
-        var x = v[0], y = v[1];
+        let x = v[0], y = v[1];
 
-        var sin = Math.sin(Math.PI * a / 180);
-        var cos = Math.cos(Math.PI * a / 180);
-        var newX = x * cos + y * sin;
-        var newY = x * (0 - sin) + y * cos;
+        let sin = Math.sin(Math.PI * a / 180);
+        let cos = Math.cos(Math.PI * a / 180);
+        let newX = x * cos + y * sin;
+        let newY = x * (0 - sin) + y * cos;
 
         return [newX, newY];
     }
 
-    var p1 = rotate(30, L);
-    var p2 = rotate(-90, L);
+    let p1 = rotate(30, L);
+    let p2 = rotate(-90, L);
 
     //console.log(m, l1, q);
 
-    var d = ('M ' + m.join(' ') + " L " + l1.join(' ') + ' Q ' + q.join(' ') + ' l ' + p1 + ' l ' + p2 + 'L ' + [q[2], q[3]]);
+    let d = ('M ' + m.join(' ') + " L " + l1.join(' ') + ' Q ' + q.join(' ') + ' l ' + p1 + ' l ' + p2 + 'L ' + [q[2], q[3]]);
 
     // console.log(d);
     // var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-    var path = document.getElementById('arrow');
+    let path = document.getElementById('arrow');
     // var animation = document.getElementById('arrowAnimation');
     // if (animation.getAttribute('to') != '') {
     //     path.setAttribute('d', animation.getAttribute('to'));

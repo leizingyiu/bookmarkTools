@@ -1,5 +1,5 @@
 
-var LastModified = "2021/12/07 13:48:29"
+var LastModified = "2021/12/08 20:49:36"
     ;
 // console.log('main script');
 //console.warn = () => { };
@@ -92,8 +92,18 @@ function main() {
     console.log('end load demo');
     addDemoBtn();
 
-    if (isIOS()) {
-        document.body.classList.add('.ios');
+
+    let u = navigator.userAgent;
+    let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+    let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+
+
+
+    if (isiOS) {
+        document.body.classList.add('ios');
+    }
+    if (isAndroid) {
+        document.body.classList.add('android');
     }
 
     console.log('main end');

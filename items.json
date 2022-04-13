@@ -1,5 +1,5 @@
 {
-    "LastModified": "2021/12/06 13:36:20",
+    "LastModified": "2021/12/08 20:58:18",
     "getImg": {
         "name": "getImg",
         "showName": {
@@ -138,6 +138,24 @@
             "en": "./bookmarks/taoKoulingReader/readme_en.md"
         }
     },
+    "lrcFromPage": {
+        "name": "lrcFromPage",
+        "showName": {
+            "cn": "获取歌词lrc",
+            "en": "get lrc"
+        },
+        "describe": {
+            "cn": "从网易音乐页面获取歌词",
+            "en": "Get lyrics from NetEase music page"
+        },
+        "scriptPath": "./bookmarks/lrcFromPage/lrcFromPage.js",
+        "minPath": "./bookmarks/lrcFromPage/lrcFromPage.min.js",
+        "mdPath": {
+            "cn": "./bookmarks/lrcFromPage/readme.md",
+            "en": "./bookmarks/lrcFromPage/readme_en.md"
+        }
+    },
+    
     "1111coupon": {
         "name": "1111coupon",
         "showName": {

@@ -1,5 +1,5 @@
 /* 
-Last modified: "2021/12/08 20:51:54"
+Last modified: "2021/12/08 21:05:53"
  */
 
 
@@ -9,7 +9,7 @@ Last modified: "2021/12/08 20:51:54"
 }
 
 html {
-    font-size: 1.4vmin;
+    font-size: 2vmin;
     background-color: var(--html-bg-color);
 }
 

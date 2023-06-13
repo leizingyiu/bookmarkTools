@@ -1,5 +1,5 @@
 javascript: console.log(`获取图片书签by leizingyiu
-Last modified : "2021/12/06 12:29:11"
+Last modified : "2022/12/18 23:08:40"
 `);
 (function () {
 
@@ -35,7 +35,7 @@ Last modified : "2021/12/06 12:29:11"
                 color: #fff;
             }
             img.daImgByYiu {
-                max-height: 50vh;   margin: 1vh;   transition: auto;  transition: 0.5s; cursor: pointer;
+                max-height: 25vh;   margin: 1vh;   transition: auto;  transition: 0.5s; cursor: pointer;
             }
 
             img.daImgByYiu:hover {
@@ -300,9 +300,26 @@ Last modified : "2021/12/06 12:29:11"
         };
         return result;
     }
+    
     function ahrefImgLinkArray(obj, replaceBoo, replaceSomeWeb) {
         let result = [];
         let all = obj.querySelectorAll('a');
+        let reg = /(url\(")(.*)("\))/g;
+        let reg2 = /(\S+)(jpg|png|jpeg|gif)(.+)/gi;
+        for (let j = 0; j < all.length; j++) {
+            bg = all[j].href.match(/(\.jpg)|(\.gif)|(\.png)|(\.jpeg)|(\.webp)/) ? all[j].href : '';
+            if (bg != "" || bg != undefined) {
+                result[result.length] = String(bg).replace(reg, "$2");
+                result[result.length - 1] = replaceBoo == true ? result[result.length - 1].replace(reg2, "$1$2") : result[result.length - 1];
+                result[result.length - 1] = regReplaceForSomeWeb(result[result.length - 1], replaceSomeWeb)
+            };
+        };
+        return result;
+    }
+
+    function videoPosterLinkArray(obj, replaceBoo, replaceSomeWeb) {
+        let result = [];
+        let all = obj.querySelectorAll('video');
         let reg = /(url\(")(.*)("\))/g;
         let reg2 = /(\S+)(jpg|png|jpeg|gif)(.+)/gi;
         for (let j = 0; j < all.length; j++) {

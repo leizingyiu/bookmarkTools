@@ -1,5 +1,5 @@
 {
-    "LastModified": "2021/12/08 20:58:18",
+    "LastModified": "2024/08/16 16:26:06",
     "getImg": {
         "name": "getImg",
         "showName": {
@@ -155,7 +155,6 @@
             "en": "./bookmarks/lrcFromPage/readme_en.md"
         }
     },
-    
     "1111coupon": {
         "name": "1111coupon",
         "showName": {
@@ -173,5 +172,21 @@
             "en": "./bookmarks/1111coupon/readme_en.md"
         }
     },
-    "1111coupon": {}
+    "xinpianchang": {
+        "name": "xinpianchang",
+        "showName": {
+            "cn": "去新片场",
+            "en": "toXPC"
+        },
+        "describe": {
+            "cn": "方便本地文件去新片场的网址",
+            "en": "It is convenient for local files to go to the URL of the new studio"
+        },
+        "scriptPath": "./bookmarks/xinpianchang/goXinpianchang.min.js",
+        "minPath": "./bookmarks/xinpianchang/goXinpianchang.js",
+        "mdPath": {
+            "cn": "./bookmarks/xinpianchang/readme.md",
+            "en": "./bookmarks/xinpianchang/readme_en.md"
+        }
+    }
 }

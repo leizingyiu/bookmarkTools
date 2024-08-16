@@ -1,0 +1,1 @@
+Drag a bunch of new studio DEMOs into the browser to open, then click the bookmark, switch tabs, click the bookmark again, switch tabs again...<br>You can quickly find the original pages of a bunch of new studio demos Got it

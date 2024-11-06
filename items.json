@@ -17,6 +17,24 @@
             "en": "./bookmarks/getImg/readme_en.md"
         }
     },
+    "getImgsNew": {
+        "name": "getImgsNew",
+        "showName": {
+            "cn": "获取图片 new",
+            "en": "Get Images new"
+        },
+        "describe": {
+            "cn": "获取页面上的图片-2",
+            "en": "get images from page-2"
+        },
+        "scriptPath": "./bookmarks/getImgsNew/getImgsNew.js",
+        "minPath": "./bookmarks/getImgsNew/getImgsNew.min.js",
+        "mdPath": {
+            "cn": "./bookmarks/getImgsNew/readme.md",
+            "en": "./bookmarks/getImgsNew/readme_en.md"
+        }
+    },
+
     "copyNext": {
         "name": "copyNext",
         "showName": {
